@@ -128,11 +128,11 @@
       transition: box-shadow .3s;
     }
     nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.4); }
+    .nav-logo-wrap { display: flex; align-items: baseline; gap: .55rem; }
     .nav-logo {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 19px; font-weight: 700;
       color: var(--white); text-decoration: none; letter-spacing: -.5px;
-      display: flex; align-items: baseline; gap: .55rem;
     }
     .nav-logo span { color: var(--nova); }
     .nav-powered {
@@ -489,7 +489,10 @@
 
   <!-- ── NAV ── -->
   <nav id="navbar">
-    <a class="nav-logo" href="#">Nova <span>AI</span><span class="nav-powered">· powered by <a href="https://revolucao.school" target="_blank">(R)evolução School</a></span></a>
+    <div class="nav-logo-wrap">
+      <a class="nav-logo" href="#">Nova <span>AI</span></a>
+      <span class="nav-powered">· powered by <a href="https://revolucao.school" target="_blank">(R)evolução School</a></span>
+    </div>
     <button class="btn-cta" onclick="openModal()">Entrar grátis →</button>
   </nav>
 
