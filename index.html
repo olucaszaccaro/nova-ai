@@ -132,8 +132,17 @@
       font-family: 'Space Grotesk', sans-serif;
       font-size: 19px; font-weight: 700;
       color: var(--white); text-decoration: none; letter-spacing: -.5px;
+      display: flex; align-items: baseline; gap: .55rem;
     }
     .nav-logo span { color: var(--nova); }
+    .nav-powered {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px; font-weight: 500;
+      color: var(--dim); letter-spacing: .2px;
+      white-space: nowrap;
+    }
+    .nav-powered a { color: var(--sub); text-decoration: none; transition: color .2s; }
+    .nav-powered a:hover { color: var(--nova); }
     .btn-cta {
       background: var(--nova); color: var(--space);
       border: none; border-radius: 50px;
@@ -480,7 +489,7 @@
 
   <!-- ── NAV ── -->
   <nav id="navbar">
-    <a class="nav-logo" href="#">Nova <span>AI</span></a>
+    <a class="nav-logo" href="#">Nova <span>AI</span><span class="nav-powered">· powered by <a href="https://revolucao.school" target="_blank">(R)evolução School</a></span></a>
     <button class="btn-cta" onclick="openModal()">Entrar grátis →</button>
   </nav>
 
