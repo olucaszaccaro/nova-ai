@@ -2,7 +2,11 @@
 
 > **North Star:** Build the most accessible AI education brand in Portuguese, using free content to create a loyal audience, then convert them into paying students.
 
-> **Positioning Decision (locked):** Market outcomes, teach Claude. The hook is always "save time / do more with AI." Claude is the tool used throughout — positioned in content as "the easiest and most powerful AI for non-technical people." As Claude's brand grows in Brazil, this becomes a durable competitive moat.
+> **Positioning Decision (locked):** Market outcomes, teach Claude. The hook is always "para de brincar com IA — aprende a usar do jeito certo." Claude is the primary tool used throughout — positioned as "the most powerful AI for non-technical people." Other AIs (Suno for music, Midjourney/Ideogram for images) appear only when Claude is the weaker choice. As Claude's brand grows in Brazil, this becomes a durable competitive moat.
+
+> **Tagline (approved):** "Para de brincar com IA. Aprende a usar do jeito certo."
+> **Hero headline:** "Você não está usando 5% do potencial da IA. Vem aprender o restante."
+> **Sub-headline:** "IA não é só um chat para conversar. É uma ferramenta para criar qualquer coisa. Em 5 dias, você vai descobrir como."
 
 ---
 
@@ -18,33 +22,46 @@ This is pure Hormozi: the free course is not a teaser — it's a complete, genui
 
 Be precise. The more specific, the more the content resonates.
 
-**Primary Avatar:** Brazilian professional, 25–40 years old, who hears about AI everywhere but has no idea where to start. They're scared of being left behind. They're not technical. They have a job, a business, or a side hustle they want to make more efficient. They have 30–60 minutes a day to learn something if it actually works.
+**Primary Avatar:** Any Brazilian person, 20–45 years old, who hears about AI everywhere but has no idea where to start. They're not technical. They may be a professional, an entrepreneur, a student, a creator, or just a curious person who wants to use AI beyond the basic chat. They've opened ChatGPT, asked something, and closed it. They have 30–60 minutes a day to learn something if it actually works.
 
-**Their #1 fear:** "AI will replace me and I'm already behind."
-**Their #1 dream:** "I want to be the person at work who knows how to use AI."
+**Expanded scope — NOT just office professionals.** The course speaks to anyone who wants to:
+- Create things they couldn't create before (music, sites, images, tools)
+- Solve personal and professional problems faster
+- Automate repetitive tasks in their life or work
+- Actually understand how AI works instead of just scratching the surface
+
+**Their #1 frustration:** "I know AI is powerful but I don't know how to use it properly."
+**Their #1 dream:** "I want to be the person who actually gets things done with AI."
 **Their objection:** "I'm not a tech person — this isn't for me."
+**The answer to that objection:** Lucas isn't a programmer either. He uses AI to create apps, music, websites, and tools — without a line of code.
 
-**Positioning line (steal and adapt GGLabs):**
-> "There are only two types of people: those who already use AI, and those who still will. Choose your side."
+**Positioning line:**
+> "Para de brincar com IA. Aprende a usar do jeito certo."
+
+**Secondary line:**
+> "Você não está usando 5% do potencial da IA. Vem aprender o restante."
 
 ---
 
 ## 3. Niche Positioning
 
-Don't teach "AI." That's too broad and too competitive.
+**Positioning: "IA para qualquer pessoa que quer usar IA de forma efetiva."**
 
-Pick ONE initial niche and dominate it:
+This is intentionally broad in audience, but narrow in promise: we teach HOW to use AI properly, not just that AI exists. The differentiator is depth and fundamentals, not a specific professional segment.
 
-| Option | Target | Hook |
-|--------|--------|------|
-| **AI for work productivity** | Employees / managers | "Save 2 hours every day using free AI tools" |
-| **AI for small business owners** | Entrepreneurs | "Run your business with AI instead of hiring 3 people" |
-| **AI for content creators** | Influencers / creators | "Create a week of content in 1 hour with AI" |
+The hook is NOT "AI for work" or "AI for entrepreneurs" — it's "stop playing with AI and learn to use it right." This lands across all demographics because the pain is universal: people know AI is powerful but feel like they're barely touching its potential.
 
-**Recommended starting niche: AI for everyday professionals (Option 1)**
-Broadest appeal, lowest resistance, fastest wins — and wins = testimonials = social proof = growth.
+**Content angles by audience segment (rotate to maximize reach):**
 
-You can expand to more niches later. Hormozi: "Niche down to blow up."
+| Segment | Hook angle |
+|---------|-----------|
+| Professionals | "A IA faz em 5 min o que você leva 2h para fazer" |
+| Parents | "Criei um app para meu filho — sem saber programar" |
+| Creators | "Criei uma música em 3 minutos — sem saber tocar nada" |
+| Students | "Como usar IA para aprender qualquer coisa 3x mais rápido" |
+| Curious generalists | "Você não está usando 5% do potencial da IA" |
+
+Post across all segments. Don't optimize for one. The free course speaks to all of them.
 
 ---
 
@@ -94,23 +111,37 @@ YOUTUBE             →   Depth, SEO, long-term asset
 
 ### Free Course Design
 
-**Title:** "IA do Zero: 5 Dias para Transformar Seu Trabalho com Inteligência Artificial"
+**Name:** Start.ai
+**Tagline:** "Para de brincar com IA. Aprende a usar do jeito certo."
+**Promise:** "Em 5 dias, você vai descobrir como usar IA de verdade — não como chat, mas como ferramenta para criar, resolver e construir qualquer coisa."
 
-**Format:** 5 short video modules, 10–15 min each. Lives in a Notion hub (like GGLabs) or YouTube playlist.
+**Format:** 5 short video modules, 10–15 min each. Lives in a Notion hub or YouTube playlist (unlisted).
 
 **Access:** Join WhatsApp group → receive link automatically.
 
+**4 Pillars that anchor the course:**
+- 🧠 **Entender** — Como IA realmente funciona (tokens, contexto, modelos, skills, agentes, Claude vs outras IAs)
+- ✨ **Criar** — Textos, músicas, imagens, vídeos, sites, ferramentas digitais simples
+- 💡 **Resolver** — Problemas do trabalho, da vida pessoal, do dia a dia
+- ⚡ **Automatizar** — Tarefas repetitivas, fluxos com IA, seu AI Playbook
+
 **Module structure:**
 
-| Day | Module | Quick Win |
+| Dia | Módulo | Quick Win |
 |-----|--------|-----------|
-| 1 | Por que a IA muda tudo (e o que você vai perder se não aprender agora) | Mindset shift — they feel urgency |
-| 2 | ChatGPT na prática: os 5 prompts que todo profissional precisa | First time using AI — immediate result |
-| 3 | Automatize seu trabalho: tarefas que a IA faz por você | They save 30 min on the first try |
-| 4 | IA para criar conteúdo, emails e apresentações | Something they can use at work tomorrow |
-| 5 | O próximo nível: como montar seu sistema de IA pessoal | Desire for more → natural bridge to paid course |
+| 1 | **Entender IA de verdade** — tokens, contexto, modelos, por que você está usando errado | Mindset shift — they finally understand what AI actually is |
+| 2 | **Criar qualquer coisa** — textos, músicas, imagens, ferramentas simples com Claude | They create something they never thought they could make |
+| 3 | **Resolver problemas** — use cases pessoais e profissionais, prompt certo para cada situação | They solve a real problem from their own life in the session |
+| 4 | **Automatizar sua rotina** — fluxos repetitivos, construir seu AI Playbook pessoal | They identify 3 things to automate and start one |
+| 5 | **Seu sistema de IA** — como integrar tudo, próximos passos, o que vem depois | They leave with a personal AI system and want the next level |
 
-**Key design principle:** Module 5 ends with a cliffhanger. They've had their first wins. Now they want the system. That's the paid course.
+**Key design principle:** Module 5 ends with a cliffhanger. They've had their first wins across all 4 pillars. Now they want the complete system. That's Rise.ai.
+
+**Rules for module content:**
+- Primary tool: Claude. Secondary tools (Suno, Midjourney/Ideogram) only when Claude is weaker.
+- Examples must span beyond office/work: personal life, creativity, fun, family — not just productivity.
+- Never say "criar apps para publicar na App Store." Say "criar ferramentas digitais simples para uso próprio."
+- Teach fundamentals (tokens, contexto, skills, agentes) — this is the core differentiator.
 
 ---
 
@@ -245,17 +276,22 @@ The gap between perceived value and actual price is what makes the offer irresis
 
 GGLabs is research-focused ("fronteira da pesquisa e do mercado"). That's a strength but also a narrow positioning.
 
-**Your opening:** Be more accessible.
+**Your opening:** Be more accessible AND more fundamental.
 > GGLabs = AI for practitioners and researchers
-> You = AI for everyone who's not technical
+> You = AI for anyone who wants to use it properly — beyond the chat
 
-**Possible differentiators to choose from:**
-- More hand-holding, more beginner-friendly
-- More focused on one specific outcome (work productivity, business, content creation)
-- More Brazilian culture in the approach (more informal, more "you can do this" energy)
-- More community-driven — students teach each other
+**Core differentiators (all three, not just one):**
 
-Pick ONE and make it your throughline in every piece of content.
+1. **Fundamentos reais** — Most AI courses teach prompt tips. Start.ai teaches how AI actually works: tokens, contexto, skills, agentes, modelos. Students leave understanding the tool, not just copying templates.
+
+2. **Claude-first** — While everyone teaches ChatGPT, we position Claude as the primary tool. As Claude's reputation grows in Brazil, this becomes a moat. We teach the best AI — not the most popular one.
+
+3. **Além do escritório** — The course is for any person, not just professionals. Use cases span work, personal life, creativity, family, fun. This makes the content more shareable and the brand more human.
+
+4. **Lucas como prova viva** — Not a programmer. Economista. Criou app para o filho. Criou músicas. Construiu sites. Ganhou prêmios em inovação. If he can do it, anyone can. The persona IS the differentiator.
+
+**The one-line version:**
+> "Não ensino prompts. Ensino a usar IA do jeito certo."
 
 ---
 

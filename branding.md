@@ -24,7 +24,11 @@ Why it works:
 - Short, globally understood, bilingual without trying
 - The top course shares the academy name = brand is the destination
 
-**Tagline:** The AI school for people, not programmers.
+**Tagline:** Para de brincar com IA. Aprende a usar do jeito certo.
+
+**Hero headline:** Você não está usando 5% do potencial da IA. Vem aprender o restante.
+
+**Sub-headline:** IA não é só um chat para conversar. É uma ferramenta para criar qualquer coisa. Em 5 dias, você vai descobrir como.
 
 ---
 
@@ -45,8 +49,8 @@ Why it works:
 ## Course Ladder
 
 ### Start.ai — FREE
-Your first steps in AI.
-5 modules, 10–15 min each. From zero to real results in one week. This is the lead magnet that builds the audience and earns trust.
+Para de brincar com IA. Aprende a usar do jeito certo.
+5 módulos, 10–15 min cada. Em 5 dias, você aprende a Entender, Criar, Resolver e Automatizar com IA. Foco em Claude. Gratuito. This is the lead magnet that builds the audience and earns trust.
 
 ### Rise.ai — PAID (Core Product)
 Build your AI system.
@@ -62,12 +66,13 @@ For students who want to go all in — automation, AI agents, business applicati
 
 ### Bio
 ```
-Economize 2h/dia usando IA ⚡
-Ensino Claude para quem não é técnico
-Fundador da Nova AI 🌟
+Economista. Palestrante. 5x premiado em inovação.
+Para de brincar com IA. Aprende a usar do jeito certo.
 🎓 Start.ai — curso gratuito ↓
 ```
-Link: novaai.com.br/start (or Linktree equivalent)
+Link: links.revolucao.school (or novaai.com.br/start)
+
+**Nota:** O usuário atualiza a bio do Instagram manualmente. O texto acima é a versão aprovada.
 
 ### Name field
 Lucas Zaccaro · Nova AI
@@ -80,10 +85,11 @@ Lucas Zaccaro · Nova AI
 5. 🌟 Nova AI — about the academy
 
 ### Content post style
-- Background: Space dark (#0B0818) or Deep Purple (#3C3489)
-- Text: Star Gold (#EF9F27) or Light Warm (#FAEEDA)
-- Occasional gold background (#EF9F27) with dark text for variety
+- Background: Space dark (#080D06) or Dark Green (#1A2F0A) — same as brand color system
+- Text/Accents: Nova Green (#96D034) or Light Lime (#C5F06A)
+- Body text: Soft White (#F0FAE0) on dark
 - Clean, minimal, high contrast — 1 idea per post
+- Visual style: thumb-stopping dark background + vivid lime green. Distinct from the blue/purple AI education landscape.
 
 ### Link in bio structure
 1. 🎓 Curso Gratuito — Start.ai (primary, always first)
@@ -100,6 +106,18 @@ Lucas Zaccaro · Nova AI
 - [ ] novaai.com.br — domain
 - [ ] Nova AI — YouTube channel name
 - [ ] Nova AI — WhatsApp channel name
+
+---
+
+## Positioning Rules (ALWAYS FOLLOW)
+
+1. **Nunca citar CAIXA ou Caixa Econômica Federal** em nenhum conteúdo público. Usar: "trabalho com inovação", "grande instituição financeira", ou omitir.
+2. **Lucas como prova viva:** economista (não programador) que cria apps, músicas, sites e ferramentas com IA.
+3. **Público amplo:** o curso não é só para profissionais de escritório. É para qualquer pessoa.
+4. **Não prometer App Store:** usar "ferramentas digitais simples para uso próprio" em vez de "criar apps".
+5. **Claude como ferramenta principal.** Outras IAs (Suno, Ideogram, etc.) aparecem apenas quando Claude é a escolha mais fraca para aquele caso.
+6. **Fundamentos como diferencial:** tokens, contexto, skills, agentes. Não só dicas de prompt.
+7. **5x premiado em inovação (1 internacional)** — sempre usar essa formulação, nunca "4x".
 
 ---
 
