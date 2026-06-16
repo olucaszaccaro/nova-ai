@@ -51,11 +51,12 @@
     ══════════════════════════════════════════ */
     #loginScreen {
       min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
+      align-items: center; justify-content: center;
       padding: 24px;
       background: radial-gradient(ellipse at 30% 40%, rgba(26,47,10,0.9), var(--space) 70%);
       position: relative; overflow: hidden;
     }
+    #loginScreen.active { display: flex; }
     #loginScreen::before {
       content:''; position:absolute; inset:0; pointer-events:none;
       background-image:
