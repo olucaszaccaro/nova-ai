@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nova AI — A escola de IA para pessoas, não programadores</title>
-  <meta name="description" content="Aprenda Inteligência Artificial do zero com Claude. Curso gratuito Start.ai. Comunidade no WhatsApp.">
-  <meta property="og:title" content="Nova AI — Aprenda IA de verdade">
-  <meta property="og:description" content="Aprenda IA na prática. Economize 2h por dia. Sem precisar ser técnico.">
+  <title>Nova AI — Para de brincar com IA. Aprende a usar do jeito certo.</title>
+  <meta name="description" content="Você não está usando 5% do potencial da IA. Vem aprender o restante. Curso gratuito Start.ai com Claude.">
+  <meta property="og:title" content="Nova AI — Você não está usando 5% do potencial da IA.">
+  <meta property="og:description" content="IA não é só um chat para conversar. É uma ferramenta para criar qualquer coisa. Em 5 dias, você vai descobrir como.">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -248,10 +248,13 @@
 
     /* ── PILLARS ── */
     .pillars {
-      display: grid; grid-template-columns: repeat(3,1fr);
+      display: grid; grid-template-columns: repeat(4,1fr);
       gap: 1px; background: var(--muted);
       border-radius: var(--rl); overflow: hidden;
       margin-top: 3rem;
+    }
+    @media (max-width: 700px) {
+      .pillars { grid-template-columns: repeat(2,1fr); }
     }
     .pillar { background: var(--space); padding: 2rem 1.75rem; }
     .pillar-icon { font-size: 1.6rem; margin-bottom: 1rem; }
@@ -509,12 +512,13 @@
     </div>
 
     <h1 class="hero-anim-2">
-      Aprenda IA ou<br><span class="green">fique para trás.</span>
+      Você não está usando<br><span class="green">5% do potencial da IA.</span>
     </h1>
 
     <p class="hero-sub hero-anim-3">
-      Ensino Inteligência Artificial para pessoas que não são técnicas.<br>
-      Resultado real desde o primeiro dia.
+      IA não é só um chat para conversar.<br>
+      É uma ferramenta para criar qualquer coisa.<br>
+      Em 5 dias, você vai descobrir como.
     </p>
 
     <button class="btn-cta large pulse hero-anim-4" onclick="openModal()">
@@ -544,13 +548,13 @@
     <div class="container">
       <p class="eyebrow reveal">A realidade</p>
       <p class="pain-quote reveal reveal-d1">
-        Só existem dois tipos de pessoas hoje:<br>
-        as que <em>já usam IA</em> no trabalho.<br>
-        E as que estão sendo <em>ultrapassadas</em> por elas.
+        A maioria das pessoas abre o ChatGPT,<br>
+        faz uma pergunta e fecha.<br>
+        Isso <em>não é usar IA</em> —<br>é <em>desperdiçar IA.</em>
       </p>
-      <div class="rule reveal reveal-d2">Em qual grupo você quer estar?</div>
-      <p class="sub reveal reveal-d3" style="max-width:560px">
-        Não é sobre ser técnico. Não é sobre programação. É sobre aprender a usar a ferramenta certa, do jeito certo — antes que todo mundo aprenda.
+      <div class="rule reveal reveal-d2">Existe um jeito certo de usar. E ele muda tudo.</div>
+      <p class="sub reveal reveal-d3" style="max-width:580px">
+        Não é sobre ser técnico. Não é sobre programação. É sobre parar de usar IA como se fosse o Google — e começar a criar, resolver e construir com ela.
       </p>
     </div>
   </section>
@@ -560,24 +564,29 @@
     <div class="container-lg">
       <div class="container" style="padding:0">
         <p class="eyebrow reveal">A solução</p>
-        <h2 class="reveal reveal-d1">A escola de IA feita<br>para <span class="green">pessoas comuns.</span></h2>
-        <p class="sub reveal reveal-d2" style="max-width:520px;margin-top:.75rem">A Nova AI existe para colocar você no primeiro grupo. Com o método certo, a ferramenta certa — e sem linguagem técnica.</p>
+        <h2 class="reveal reveal-d1">Para de brincar com IA.<br><span class="green">Aprende a usar do jeito certo.</span></h2>
+        <p class="sub reveal reveal-d2" style="max-width:520px;margin-top:.75rem">Você vai sair do Start.ai sabendo criar, resolver e automatizar — não só conversar. Com Claude como ferramenta principal, sem precisar saber programar.</p>
       </div>
       <div class="pillars" style="margin-top:3rem">
         <div class="pillar reveal">
-          <div class="pillar-icon">🤖</div>
-          <h3>Com a melhor IA</h3>
-          <p>Não ensinamos qualquer ferramenta. Ensinamos Claude — a IA mais poderosa e mais fácil para quem não é técnico.</p>
+          <div class="pillar-icon">🧠</div>
+          <h3>Entender</h3>
+          <p>O que separa quem conversa com IA de quem usa IA de verdade. Tokens, prompts, modelos, skills — os fundamentos que destravam tudo.</p>
         </div>
         <div class="pillar reveal reveal-d2">
-          <div class="pillar-icon">⚡</div>
-          <h3>Na prática</h3>
-          <p>Sem teoria desnecessária. Cada aula tem uma aplicação real que você pode usar no mesmo dia, no seu trabalho.</p>
+          <div class="pillar-icon">✨</div>
+          <h3>Criar</h3>
+          <p>Músicas, imagens, vídeos, textos, sites, ferramentas digitais simples. Coisas que antes exigiriam habilidades que você não tem.</p>
         </div>
         <div class="pillar reveal reveal-d3">
-          <div class="pillar-icon">🎯</div>
-          <h3>Para você</h3>
-          <p>Feito para profissionais, empreendedores e criadores que querem resultados — não para programadores.</p>
+          <div class="pillar-icon">💡</div>
+          <h3>Resolver</h3>
+          <p>IA como parceiro para qualquer problema — do trabalho, de casa, do dia a dia. Sem limitar ao escritório.</p>
+        </div>
+        <div class="pillar reveal reveal-d4">
+          <div class="pillar-icon">⚡</div>
+          <h3>Automatizar</h3>
+          <p>Pare de fazer manualmente o que a IA pode fazer por você. Tarefas repetitivas, fluxos, rotinas — tempo que você recupera todo dia.</p>
         </div>
       </div>
     </div>
@@ -599,11 +608,11 @@
           <span class="badge-free">GRATUITO</span>
         </div>
         <div class="modules">
-          <div class="module reveal"><div class="day-num">1</div><div><p class="mod-title">Por que a IA muda tudo — e o que você perde se não agir agora</p><p class="mod-sub">Entenda o momento em que vivemos e por que agir agora importa.</p></div></div>
-          <div class="module reveal reveal-d1"><div class="day-num">2</div><div><p class="mod-title">Os 5 prompts que todo profissional precisa saber</p><p class="mod-sub">Sua primeira vitória real com IA — ainda neste dia.</p></div></div>
-          <div class="module reveal reveal-d2"><div class="day-num">3</div><div><p class="mod-title">Automatize seu trabalho: tarefas que a IA faz por você</p><p class="mod-sub">Economize 30 minutos na primeira semana. Garantido.</p></div></div>
-          <div class="module reveal reveal-d3"><div class="day-num">4</div><div><p class="mod-title">IA para criar conteúdo, e-mails e apresentações</p><p class="mod-sub">Algo que você pode usar no trabalho amanhã de manhã.</p></div></div>
-          <div class="module reveal reveal-d4"><div class="day-num">5</div><div><p class="mod-title">Construa seu sistema de IA pessoal</p><p class="mod-sub">Saia com um plano claro para continuar evoluindo.</p></div></div>
+          <div class="module reveal"><div class="day-num">1</div><div><p class="mod-title">Como a IA realmente funciona — e por que isso muda tudo</p><p class="mod-sub">Tokens, modelos, skills, Claude vs outras IAs. Os fundamentos que ninguém explica.</p></div></div>
+          <div class="module reveal reveal-d1"><div class="day-num">2</div><div><p class="mod-title">O jeito certo de pedir — prompts que entregam resultados</p><p class="mod-sub">Por que a maioria recebe respostas medíocres — e como mudar isso agora.</p></div></div>
+          <div class="module reveal reveal-d2"><div class="day-num">3</div><div><p class="mod-title">Criar com IA: músicas, imagens, textos, ferramentas digitais</p><p class="mod-sub">IA não é só para escrever emails. Descubra o que é possível criar.</p></div></div>
+          <div class="module reveal reveal-d3"><div class="day-num">4</div><div><p class="mod-title">Resolver e automatizar: IA para qualquer problema da sua vida</p><p class="mod-sub">Do trabalho à casa. Tarefas que você nunca mais vai fazer do mesmo jeito.</p></div></div>
+          <div class="module reveal reveal-d4"><div class="day-num">5</div><div><p class="mod-title">Construa seu sistema de IA pessoal</p><p class="mod-sub">Saia com um plano claro, ferramentas configuradas e pronto para continuar sozinho.</p></div></div>
         </div>
       </div>
 
@@ -658,12 +667,12 @@
         <div>
           <p class="eyebrow reveal">Quem ensina</p>
           <p class="about-name reveal reveal-d1">Lucas Zaccaro</p>
-          <p class="about-role reveal reveal-d1">Fundador da Nova AI</p>
+          <p class="about-role reveal reveal-d1">Economista. Gestor de inovação. Palestrante. Fundador da Nova AI.</p>
           <p class="about-text reveal reveal-d2">
-            Acredito que Inteligência Artificial não é só para programadores e engenheiros. É para qualquer pessoa que quer trabalhar melhor, produzir mais e não ficar para trás.
+            Não sou programador. Sou economista, trabalho com inovação há mais de uma década e já palestrei no Campus Party, Startup Summit e Agile Trends. Fui premiado 5 vezes por inovação — uma delas internacionalmente.
           </p>
           <p class="about-text reveal reveal-d3" style="margin-top:1rem">
-            Criei a Nova AI com um objetivo simples: ensinar Inteligência Artificial de um jeito que qualquer pessoa consiga aprender — mesmo sem nenhum conhecimento técnico. Prático, direto e com resultados reais desde o início.
+            Mas o que realmente mudou minha vida foi aprender a usar IA de verdade: não para conversar, mas para criar músicas, automatizar tarefas, construir soluções digitais e resolver problemas que antes me tomariam horas. Isso é o que o Start.ai ensina. Focado no que funciona.
           </p>
           <div class="stats">
             <div class="reveal reveal-d1">
