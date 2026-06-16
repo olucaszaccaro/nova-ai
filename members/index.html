@@ -859,10 +859,13 @@ document.getElementById('signinBtn').addEventListener('click', async () => {
   try {
     const { data, error } = await sb.auth.signInWithPassword({ email, password });
     if (error) throw error;
-    // Se login OK mas onAuthStateChange demorar, garantir redirect
-    if (data?.session) {
-      // onAuthStateChange vai disparar, mas garantimos o estado do botão
-      // (o redirect acontece via onAuthStateChange)
+    // onAuthStateChange vai disparar e chamar goHome()
+    // mas garantimos o redirect aqui também caso demore
+    if (data?.session?.user) {
+      const metaName = data.session.user.user_metadata?.name || data.session.user.email?.split('@')[0] || 'Aluno';
+      state.user = { id: data.session.user.id, name: metaName };
+      setBtn('signinBtn', false, 'Entrar no curso');
+      goHome();
     }
   } catch(e) {
     setBtn('signinBtn', false, 'Entrar no curso');
@@ -904,9 +907,12 @@ document.getElementById('signupBtn').addEventListener('click', async () => {
       // Email confirmation required
       showMsg('signupSuccess', `✓ Conta criada! Verifique seu email (${email}) para confirmar e depois entre abaixo.`, 'success');
     } else {
-      // Session created immediately — show success then redirect via onAuthStateChange
+      // Session imediata — redirecionar direto sem esperar onAuthStateChange
+      state.user = { id: data.user.id, name };
       state.isNewUser = true;
-      showMsg('signupSuccess', `✓ Conta criada com sucesso! Entrando...`, 'success');
+      goHome();
+      setTimeout(() => showToast('🎉', `Bem-vindo, ${name.split(' ')[0]}!`, 'Sua conta foi criada com sucesso.'), 400);
+      state.isNewUser = false;
     }
   } catch(e) {
     setBtn('signupBtn', false, 'Criar minha conta');
@@ -927,23 +933,38 @@ document.getElementById('homeLogout').addEventListener('click', async () => {
 /* ═══════════════════════════════════════════════════════════
    AUTH STATE LISTENER
 ═══════════════════════════════════════════════════════════ */
-sb.auth.onAuthStateChange(async (event, session) => {
+sb.auth.onAuthStateChange((event, session) => {
   if (session?.user) {
-    // Load profile name
-    const { data: profile } = await sb.from('profiles').select('name').eq('id', session.user.id).single();
-    const name = profile?.name || session.user.user_metadata?.name || session.user.email?.split('@')[0] || 'Aluno';
-    state.user = { id: session.user.id, name };
+    // Use metadata name immediately — no await, never blocks redirect
+    const metaName = session.user.user_metadata?.name || session.user.email?.split('@')[0] || 'Aluno';
+    state.user = { id: session.user.id, name: metaName };
+
+    const wasNewUser = state.isNewUser;
+    state.isNewUser = false;
+
     goHome();
-    // Toast de boas-vindas
-    if (state.isNewUser) {
-      state.isNewUser = false;
-      setTimeout(() => showToast('🎉', `Bem-vindo, ${name.split(' ')[0]}!`, 'Sua conta foi criada com sucesso.'), 400);
-    } else if (event === 'SIGNED_IN') {
-      setTimeout(() => showToast('✅', `Olá, ${name.split(' ')[0]}!`, 'Login realizado com sucesso.'), 400);
-    }
-    // Reset signin button if it was loading
+
+    // Reset signin button in case it was loading
     const signinBtn = document.getElementById('signinBtn');
     if (signinBtn) setBtn('signinBtn', false, 'Entrar no curso');
+
+    // Toast de boas-vindas
+    if (wasNewUser) {
+      setTimeout(() => showToast('🎉', `Bem-vindo, ${metaName.split(' ')[0]}!`, 'Sua conta foi criada com sucesso.'), 400);
+    } else if (event === 'SIGNED_IN') {
+      setTimeout(() => showToast('✅', `Olá, ${metaName.split(' ')[0]}!`, 'Login realizado com sucesso.'), 400);
+    }
+
+    // Load real profile name in background (non-blocking)
+    sb.from('profiles').select('name').eq('id', session.user.id).single().then(({ data: profile }) => {
+      if (profile?.name && state.user?.id === session.user.id) {
+        state.user.name = profile.name;
+        const nameEl = document.getElementById('homeUserName');
+        const avatarEl = document.getElementById('homeAvatar');
+        if (nameEl) nameEl.textContent = profile.name;
+        if (avatarEl) avatarEl.textContent = getInitial(profile.name);
+      }
+    }).catch(() => {});
   } else {
     state.user = null;
     state.completed = [];
