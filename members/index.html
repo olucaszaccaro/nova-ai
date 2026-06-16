@@ -482,6 +482,27 @@
     @media(max-width:768px) { .sidebar{display:none;} .main{margin-left:0;} .mobile-header{display:flex;} .main-header{padding:14px 20px;} .lesson-content{padding:20px 20px 40px;} .comments-section{padding:0 20px 60px;} .lesson-title{font-size:1.5rem;} }
     @media(prefers-reduced-motion:reduce) { .node.current{animation:none;} *{transition-duration:.01ms!important;} }
     :focus-visible { outline:2px solid var(--green); outline-offset:2px; }
+
+    /* ── TOAST ── */
+    #toastContainer {
+      position:fixed; top:20px; right:20px; z-index:9999;
+      display:flex; flex-direction:column; gap:10px; pointer-events:none;
+    }
+    .toast {
+      display:flex; align-items:center; gap:10px;
+      background:rgba(26,47,10,0.95); border:1px solid rgba(150,208,52,0.35);
+      backdrop-filter:blur(20px); border-radius:12px; padding:14px 18px;
+      font-size:0.85rem; color:var(--white); min-width:260px; max-width:340px;
+      box-shadow:0 8px 32px rgba(0,0,0,0.4);
+      animation:toastIn 0.3s cubic-bezier(.34,1.56,.64,1) forwards;
+      pointer-events:all;
+    }
+    .toast.toast-out { animation:toastOut 0.25s ease forwards; }
+    .toast-icon { font-size:1.1rem; flex-shrink:0; }
+    .toast-text strong { display:block; font-family:'Outfit',sans-serif; font-weight:700; font-size:0.88rem; margin-bottom:1px; }
+    .toast-text span { font-size:0.75rem; color:var(--muted); }
+    @keyframes toastIn { from{opacity:0;transform:translateX(20px);} to{opacity:1;transform:translateX(0);} }
+    @keyframes toastOut { to{opacity:0;transform:translateX(20px);} }
   </style>
 </head>
 <body>
@@ -701,6 +722,8 @@
   </main>
 </div>
 
+<div id="toastContainer"></div>
+
 <script>
 /* ═══════════════════════════════════════════════════════════
    CONFIG — SUBSTITUA COM SEUS DADOS DO SUPABASE
@@ -742,7 +765,7 @@ const lessons = [
 /* ═══════════════════════════════════════════════════════════
    STATE
 ═══════════════════════════════════════════════════════════ */
-let state = { user: null, currentLesson: 0, completed: [] };
+let state = { user: null, currentLesson: 0, completed: [], isNewUser: false };
 
 function getCompletedKey() { return `startai_progress_${state.user?.id || 'guest'}`; }
 function loadCompleted() { state.completed = JSON.parse(localStorage.getItem(getCompletedKey()) || '[]'); }
@@ -779,6 +802,18 @@ function showMsg(id, msg, type = 'error') {
   el.className = `auth-msg ${type} visible`;
 }
 function hideMsg(id) { document.getElementById(id).className = 'auth-msg'; }
+
+function showToast(icon, title, subtitle, durationMs = 4000) {
+  const tc = document.getElementById('toastContainer');
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.innerHTML = `<div class="toast-icon">${icon}</div><div class="toast-text"><strong>${title}</strong>${subtitle ? `<span>${subtitle}</span>` : ''}</div>`;
+  tc.appendChild(t);
+  setTimeout(() => {
+    t.classList.add('toast-out');
+    setTimeout(() => t.remove(), 260);
+  }, durationMs);
+}
 
 /* ═══════════════════════════════════════════════════════════
    SCREEN ROUTING
@@ -822,13 +857,19 @@ document.getElementById('signinBtn').addEventListener('click', async () => {
 
   setBtn('signinBtn', true, 'Entrando...');
   try {
-    const { error } = await sb.auth.signInWithPassword({ email, password });
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
     if (error) throw error;
-    // onAuthStateChange will handle the redirect
+    // Se login OK mas onAuthStateChange demorar, garantir redirect
+    if (data?.session) {
+      // onAuthStateChange vai disparar, mas garantimos o estado do botão
+      // (o redirect acontece via onAuthStateChange)
+    }
   } catch(e) {
     setBtn('signinBtn', false, 'Entrar no curso');
-    const msg = e.message?.includes('Invalid login') ? 'Email ou senha incorretos.'
-               : e.message?.includes('Email not confirmed') ? 'Confirme seu email antes de entrar.'
+    const msg = e.message?.includes('Invalid login') || e.message?.includes('invalid_credentials')
+               ? 'Email ou senha incorretos.'
+               : e.message?.includes('Email not confirmed')
+               ? 'Confirme seu email antes de entrar.'
                : e.message || 'Erro ao entrar. Tente novamente.';
     showMsg('signinError', msg);
   }
@@ -862,11 +903,15 @@ document.getElementById('signupBtn').addEventListener('click', async () => {
     if (!data.session) {
       // Email confirmation required
       showMsg('signupSuccess', `✓ Conta criada! Verifique seu email (${email}) para confirmar e depois entre abaixo.`, 'success');
+    } else {
+      // Session created immediately — show success then redirect via onAuthStateChange
+      state.isNewUser = true;
+      showMsg('signupSuccess', `✓ Conta criada com sucesso! Entrando...`, 'success');
     }
-    // If no confirmation needed, onAuthStateChange handles redirect
   } catch(e) {
     setBtn('signupBtn', false, 'Criar minha conta');
-    const msg = e.message?.includes('already registered') ? 'Este email já tem uma conta. Faça login.'
+    const msg = e.message?.includes('already registered') || e.message?.includes('User already registered')
+               ? 'Este email já tem uma conta. Faça login.'
                : e.message || 'Erro ao criar conta. Tente novamente.';
     showMsg('signupError', msg);
   }
@@ -889,6 +934,16 @@ sb.auth.onAuthStateChange(async (event, session) => {
     const name = profile?.name || session.user.user_metadata?.name || session.user.email?.split('@')[0] || 'Aluno';
     state.user = { id: session.user.id, name };
     goHome();
+    // Toast de boas-vindas
+    if (state.isNewUser) {
+      state.isNewUser = false;
+      setTimeout(() => showToast('🎉', `Bem-vindo, ${name.split(' ')[0]}!`, 'Sua conta foi criada com sucesso.'), 400);
+    } else if (event === 'SIGNED_IN') {
+      setTimeout(() => showToast('✅', `Olá, ${name.split(' ')[0]}!`, 'Login realizado com sucesso.'), 400);
+    }
+    // Reset signin button if it was loading
+    const signinBtn = document.getElementById('signinBtn');
+    if (signinBtn) setBtn('signinBtn', false, 'Entrar no curso');
   } else {
     state.user = null;
     state.completed = [];
