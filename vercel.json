@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/startai",
+      "destination": "/"
+    },
+    {
+      "source": "/curso",
+      "destination": "/members/index.html"
+    }
+  ]
+}
