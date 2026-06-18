@@ -285,7 +285,75 @@
     .grad-3 { background:linear-gradient(135deg,#1a1005,#2e1a08,#1a1a05); }
     .grad-4 { background:linear-gradient(135deg,#0a1a08,#142d0a,#1a2d05); }
 
-    .stats-row { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+    .stats-row { display:flex; flex-direction:column; gap:16px; }
+
+    /* ── ROCKET JOURNEY CARD ── */
+    .journey-card {
+      background:var(--dg); border:1px solid var(--border); border-radius:18px;
+      padding:22px 24px; overflow:hidden; position:relative;
+    }
+    .journey-header {
+      display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;
+    }
+    .journey-title { font-size:0.72rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; }
+    .journey-pct { font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; color:var(--green); }
+    .journey-track {
+      position:relative; height:72px; display:flex; align-items:center;
+    }
+    /* Star trail */
+    .journey-trail {
+      position:absolute; top:50%; left:0; right:0; height:2px;
+      background:linear-gradient(90deg, rgba(150,208,52,0.5), rgba(150,208,52,0.1));
+      transform:translateY(-50%); border-radius:2px;
+    }
+    /* Planets */
+    .journey-planets {
+      position:absolute; top:0; left:0; right:0; height:100%;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 4px;
+    }
+    .journey-planet {
+      width:40px; height:40px; border-radius:50%; border:2px solid rgba(255,255,255,0.1);
+      display:flex; align-items:center; justify-content:center; flex-direction:column;
+      position:relative; transition:transform 0.3s; z-index:1; background:var(--dark);
+      cursor:default; flex-shrink:0;
+    }
+    .journey-planet.done {
+      background:radial-gradient(circle at 40% 35%, rgba(150,208,52,0.5), rgba(80,140,20,0.8));
+      border-color:rgba(150,208,52,0.6);
+      box-shadow:0 0 12px rgba(150,208,52,0.3);
+    }
+    .journey-planet.next {
+      border-color:rgba(150,208,52,0.35); background:rgba(150,208,52,0.06);
+      animation:planet-pulse 2s ease-in-out infinite;
+    }
+    @keyframes planet-pulse {
+      0%,100% { box-shadow:0 0 0 0 rgba(150,208,52,0.15); }
+      50% { box-shadow:0 0 0 6px rgba(150,208,52,0.0); }
+    }
+    .planet-emoji { font-size:1.1rem; line-height:1; }
+    .planet-num { font-size:0.52rem; color:rgba(240,250,224,0.45); margin-top:1px; }
+    .journey-planet.done .planet-num { color:rgba(240,250,224,0.7); }
+
+    /* Rocket */
+    .journey-rocket {
+      position:absolute; z-index:3; top:50%; transform:translateY(-50%);
+      width:32px; height:32px; display:flex; align-items:center; justify-content:center;
+      font-size:1.5rem; transition:left 0.6s cubic-bezier(0.34,1.56,0.64,1);
+      filter:drop-shadow(0 0 6px rgba(150,208,52,0.6));
+    }
+
+    /* Streak + completion row */
+    .stats-mini-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .stat-mini {
+      background:var(--dg); border:1px solid var(--border); border-radius:14px;
+      padding:16px 18px; display:flex; align-items:center; gap:14px;
+    }
+    .stat-mini-icon { font-size:1.6rem; line-height:1; }
+    .stat-value { font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; line-height:1; }
+    .stat-label { font-size:0.72rem; color:var(--muted); margin-top:3px; }
+
+    /* Legacy compat */
     .stat-card {
       background:var(--dg); border:1px solid var(--border); border-radius:14px;
       padding:20px 22px; display:flex; align-items:center; gap:16px;
@@ -295,8 +363,6 @@
       background:rgba(150,208,52,0.1); border:1px solid rgba(150,208,52,0.2);
       display:flex; align-items:center; justify-content:center; color:var(--green); flex-shrink:0;
     }
-    .stat-value { font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; line-height:1; }
-    .stat-label { font-size:0.72rem; color:var(--muted); margin-top:3px; }
 
     .community-home-card { color:var(--white); text-decoration:none;
       display:flex; align-items:center; justify-content:space-between;
@@ -908,6 +974,37 @@
       .completion-title { font-size: 1.5rem; }
       .nps-btn { width: 34px; height: 34px; font-size: 0.72rem; }
     }
+
+    /* ── CONSENT CHECKBOXES ── */
+    .consent-block { display:flex; flex-direction:column; gap:11px; margin:18px 0 4px; }
+    .consent-item { display:flex; align-items:flex-start; gap:10px; }
+    .consent-item input[type="checkbox"] { display:none; }
+    .consent-check {
+      width:18px; height:18px; min-width:18px; border-radius:5px;
+      border:1.5px solid rgba(150,208,52,0.35);
+      background:rgba(240,250,224,0.04);
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; transition:background 0.15s, border-color 0.15s;
+      margin-top:1px;
+    }
+    .consent-item input[type="checkbox"]:checked + .consent-check {
+      background:var(--green); border-color:var(--green);
+    }
+    .consent-check svg { display:none; }
+    .consent-item input[type="checkbox"]:checked + .consent-check svg { display:block; }
+    .consent-label {
+      font-size:0.75rem; color:rgba(240,250,224,0.65); line-height:1.55; cursor:pointer;
+    }
+    .consent-label a, .consent-label button.consent-link {
+      color:var(--green); text-decoration:underline; text-underline-offset:2px;
+      background:none; border:none; cursor:pointer; font-size:inherit;
+      font-family:inherit; padding:0;
+    }
+    .consent-label a:hover, .consent-label button.consent-link:hover { color:var(--lime); }
+    .consent-required-badge {
+      font-size:0.6rem; font-weight:700; color:rgba(239,68,68,0.7);
+      text-transform:uppercase; letter-spacing:0.06em; margin-left:4px;
+    }
   </style>
   <script async src="https://tally.so/widgets/embed.js"></script>
 </head>
@@ -970,6 +1067,26 @@
       <div class="login-field">
         <label for="suPassword">Senha</label>
         <input type="password" id="suPassword" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+      </div>
+      <div class="consent-block">
+        <div class="consent-item">
+          <input type="checkbox" id="termsCheck">
+          <label class="consent-check" for="termsCheck">
+            <svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1 3.5L4 6.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </label>
+          <span class="consent-label">
+            Li e aceito os <button class="consent-link" onclick="openTermsModal('termos')">Termos de Uso e Política de Privacidade</button><span class="consent-required-badge"> obrigatório</span>
+          </span>
+        </div>
+        <div class="consent-item">
+          <input type="checkbox" id="marketingCheck">
+          <label class="consent-check" for="marketingCheck">
+            <svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1 3.5L4 6.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </label>
+          <span class="consent-label" onclick="document.getElementById('marketingCheck').click()">
+            Aceito receber novidades e conteúdos da Nova AI por email (opcional)
+          </span>
+        </div>
       </div>
       <button class="login-btn" id="signupBtn">Criar minha conta</button>
       <div class="auth-msg error" id="signupError"></div>
@@ -1051,21 +1168,6 @@
       <div class="hero-photo-col">
         <div class="hero-photo-wrap">
           <img src="../lucas.png" alt="Lucas Zaccaro" class="hero-photo">
-          <div class="hero-photo-caption">Lucas Zaccaro · Nova AI</div>
-          <div class="hero-social-row">
-            <a href="https://www.instagram.com/lucas.zaccaro" target="_blank" rel="noopener" class="hero-social-link" title="Instagram">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-            </a>
-            <a href="https://www.tiktok.com/@lucas.zaccaro" target="_blank" rel="noopener" class="hero-social-link" title="TikTok">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.35a8.16 8.16 0 004.77 1.52V7.41a4.85 4.85 0 01-1-.72z"/></svg>
-            </a>
-            <a href="https://youtube.com/@lucaszaccaro" target="_blank" rel="noopener" class="hero-social-link" title="YouTube">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
-            </a>
-            <a href="https://www.linkedin.com/in/lucaszaccaro" target="_blank" rel="noopener" class="hero-social-link" title="LinkedIn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            </a>
-          </div>
         </div>
       </div>
     </div>
@@ -1695,15 +1797,21 @@ document.getElementById('signupBtn').addEventListener('click', async () => {
   if (!name)          { showMsg('signupError', 'Digite seu nome.'); return; }
   if (!email)         { showMsg('signupError', 'Digite seu email.'); return; }
   if (password.length < 6) { showMsg('signupError', 'A senha precisa ter pelo menos 6 caracteres.'); return; }
+  if (!document.getElementById('termsCheck').checked) {
+    showMsg('signupError', 'Você precisa aceitar os Termos de Uso para criar sua conta.');
+    return;
+  }
+
+  const acceptedMarketing = document.getElementById('marketingCheck').checked;
 
   setBtn('signupBtn', true, 'Criando conta...');
   try {
-    const { data, error } = await sb.auth.signUp({ email, password, options:{ data:{ name } } });
+    const { data, error } = await sb.auth.signUp({ email, password, options:{ data:{ name, accepted_terms: true, accepted_marketing: acceptedMarketing, terms_accepted_at: new Date().toISOString() } } });
     if (error) throw error;
 
     // Save profile name
     if (data.user) {
-      await sb.from('profiles').upsert({ id: data.user.id, name });
+      await sb.from('profiles').upsert({ id: data.user.id, name, accepted_marketing: acceptedMarketing });
     }
 
     setBtn('signupBtn', false, 'Criar minha conta');
@@ -1879,12 +1987,57 @@ function renderHome() {
     row.appendChild(card);
   });
 
-  // Stats
+  // Stats — rocket journey
   const streak = getStreak();
+  const totalLessons = lessons.length;
+  const doneLessons = state.completed.length;
+  const planetEmojis = ['🌍','🌕','♂️','🪐','⭐'];
+  const planetNames  = ['Terra','Lua','Marte','Saturno','Estrela'];
+
+  // Build planets HTML
+  let planetsHtml = '';
+  for (let i = 0; i < totalLessons; i++) {
+    const isDone = isCompleted(i);
+    const isNext = !isDone && (i === 0 || isCompleted(i-1));
+    const cls = isDone ? 'done' : isNext ? 'next' : '';
+    planetsHtml += `<div class="journey-planet ${cls}" title="${planetNames[i] || 'Planeta ' + (i+1)}">
+      <span class="planet-emoji">${planetEmojis[i] || '🌐'}</span>
+      <span class="planet-num">Aula ${i+1}</span>
+    </div>`;
+  }
+
+  // Rocket position: left% based on progress
+  // 0 done → near left edge (4%); all done → right edge (94%)
+  const rocketPct = doneLessons === 0 ? 2 : doneLessons === totalLessons ? 94 : Math.round(4 + (doneLessons / totalLessons) * 88);
+
+  // Completion badge
+  const allDone = doneLessons === totalLessons;
+  const streakFireCount = Math.min(streak, 5);
+  const streakFires = '🔥'.repeat(streakFireCount) || '–';
+
   document.getElementById('homeStatsRow').innerHTML = `
-    <div class="stat-card"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="stat-value">${pct}%</div><div class="stat-label">do curso concluído</div></div></div>
-    <div class="stat-card"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="stat-value">${state.completed.length}</div><div class="stat-label">aulas concluídas</div></div></div>
-    <div class="stat-card stat-card-streak"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div><div class="stat-value">${streak}</div><div class="stat-label">dia${streak===1?'':'s'} seguido${streak===1?'':'s'}</div></div></div>`;
+    <div class="journey-card">
+      <div class="journey-header">
+        <span class="journey-title">Sua jornada intergaláctica</span>
+        <span class="journey-pct">${pct}%</span>
+      </div>
+      <div class="journey-track">
+        <div class="journey-trail"></div>
+        <div class="journey-planets">${planetsHtml}</div>
+        <div class="journey-rocket" style="left:${rocketPct}%">🚀</div>
+      </div>
+      ${allDone ? '<div style="text-align:center;margin-top:14px;font-size:0.78rem;color:var(--green);font-weight:600;">🎉 Missão completa! Você chegou às estrelas!</div>' : ''}
+    </div>
+    <div class="stats-mini-row">
+      <div class="stat-mini">
+        <span class="stat-mini-icon">✅</span>
+        <div><div class="stat-value">${doneLessons}<span style="font-size:0.85rem;font-weight:500;color:var(--muted)"> / ${totalLessons}</span></div><div class="stat-label">aulas concluídas</div></div>
+      </div>
+      <div class="stat-mini">
+        <span class="stat-mini-icon" title="${streak} dia${streak===1?'':'s'} seguido${streak===1?'':'s'}">${streak > 0 ? streakFires : '💤'}</span>
+        <div><div class="stat-value">${streak}</div><div class="stat-label">dia${streak===1?'':'s'} em sequência</div></div>
+      </div>
+    </div>`;
 
 }
 
