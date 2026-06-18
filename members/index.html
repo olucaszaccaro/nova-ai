@@ -1649,8 +1649,15 @@ document.getElementById('supportSubmitBtn').addEventListener('click', () => {
   }).catch(() => {});
 
   // Abre WhatsApp com mensagem pré-preenchida
+  // Usa <a>.click() em vez de window.open() para evitar bloqueio de popup
   const text = encodeURIComponent(`Olá! Sou ${name}, aluno do Start.AI.\n\n${message}`);
-  window.open(`https://wa.me/${SUPPORT_WHATSAPP}?text=${text}`, '_blank');
+  const waLink = document.createElement('a');
+  waLink.href = `https://wa.me/${SUPPORT_WHATSAPP}?text=${text}`;
+  waLink.target = '_blank';
+  waLink.rel = 'noopener noreferrer';
+  document.body.appendChild(waLink);
+  waLink.click();
+  document.body.removeChild(waLink);
 
   document.getElementById('supportMessage').value = '';
   document.getElementById('supportCard').classList.remove('open');
