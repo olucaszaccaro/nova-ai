@@ -530,6 +530,26 @@
       </div>
       <button class="login-btn" id="signinBtn">Entrar no curso</button>
       <div class="auth-msg error" id="signinError"></div>
+      <div style="text-align:center;margin-top:12px;">
+        <button id="forgotLink" style="background:none;border:none;cursor:pointer;font-size:0.75rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px;">Esqueceu a senha?</button>
+      </div>
+    </div>
+
+    <!-- RECUPERAR SENHA -->
+    <div class="auth-form" id="forgotForm">
+      <p style="font-size:0.82rem;color:var(--muted);margin-bottom:18px;line-height:1.6;">
+        Digite seu email e enviaremos um link para você criar uma nova senha.
+      </p>
+      <div class="login-field">
+        <label for="forgotEmail">Email</label>
+        <input type="email" id="forgotEmail" placeholder="seu@email.com" autocomplete="email">
+      </div>
+      <button class="login-btn" id="forgotBtn">Enviar link de recuperação</button>
+      <div class="auth-msg error" id="forgotError"></div>
+      <div class="auth-msg success" id="forgotSuccess"></div>
+      <div style="text-align:center;margin-top:14px;">
+        <button id="backToSignin" style="background:none;border:none;cursor:pointer;font-size:0.75rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px;">← Voltar para o login</button>
+      </div>
     </div>
 
     <!-- SIGN UP -->
@@ -554,6 +574,28 @@
     <div class="login-footer">
       Ainda não tem acesso?<br>
       <a href="https://chat.whatsapp.com/F5000nSwSezL2sIER5dEtN" target="_blank" rel="noopener">Entre na comunidade gratuita →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 1b: RESET PASSWORD ═══════════════════════════ -->
+<div id="resetScreen" class="screen">
+  <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(ellipse at 30% 40%,rgba(26,47,10,0.9),var(--space) 70%);">
+    <div class="login-box">
+      <div class="login-logo"><span>Start.AI</span></div>
+      <p style="font-size:0.88rem;font-weight:600;font-family:'Outfit',sans-serif;margin-bottom:6px;">Nova senha</p>
+      <p style="font-size:0.78rem;color:var(--muted);margin-bottom:22px;line-height:1.6;">Escolha uma senha segura com pelo menos 6 caracteres.</p>
+      <div class="login-field">
+        <label for="resetPassword">Nova senha</label>
+        <input type="password" id="resetPassword" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+      </div>
+      <div class="login-field">
+        <label for="resetConfirm">Confirmar senha</label>
+        <input type="password" id="resetConfirm" placeholder="Repita a senha" autocomplete="new-password">
+      </div>
+      <button class="login-btn" id="resetBtn">Salvar nova senha</button>
+      <div class="auth-msg error" id="resetError"></div>
+      <div class="auth-msg success" id="resetSuccess"></div>
     </div>
   </div>
 </div>
@@ -823,7 +865,25 @@ function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
-function goLogin()  { showScreen('loginScreen'); }
+function goLogin()  { showScreen('loginScreen'); showSigninTab(); }
+function goReset()  { showScreen('resetScreen'); window.scrollTo(0,0); }
+
+function showSigninTab() {
+  document.getElementById('tabSignin').classList.add('active');
+  document.getElementById('tabSignup').classList.remove('active');
+  document.getElementById('signinForm').classList.add('active');
+  document.getElementById('signupForm').classList.remove('active');
+  document.getElementById('forgotForm').classList.remove('active');
+  document.getElementById('tabSignin').style.display = '';
+  document.getElementById('tabSignup').style.display = '';
+}
+function showForgotForm() {
+  document.getElementById('signinForm').classList.remove('active');
+  document.getElementById('signupForm').classList.remove('active');
+  document.getElementById('forgotForm').classList.add('active');
+  document.getElementById('tabSignin').classList.remove('active');
+  document.getElementById('tabSignup').classList.remove('active');
+}
 function goHome()   { loadCompleted(); renderHome(); showScreen('homeScreen'); window.scrollTo(0,0); }
 function goLesson(idx) { state.currentLesson = idx; renderLesson(); showScreen('lessonScreen'); window.scrollTo(0,0); }
 
@@ -835,17 +895,23 @@ document.getElementById('tabSignin').addEventListener('click', () => {
   document.getElementById('tabSignup').classList.remove('active');
   document.getElementById('signinForm').classList.add('active');
   document.getElementById('signupForm').classList.remove('active');
+  document.getElementById('forgotForm').classList.remove('active');
 });
 document.getElementById('tabSignup').addEventListener('click', () => {
   document.getElementById('tabSignup').classList.add('active');
   document.getElementById('tabSignin').classList.remove('active');
   document.getElementById('signupForm').classList.add('active');
   document.getElementById('signinForm').classList.remove('active');
+  document.getElementById('forgotForm').classList.remove('active');
 });
+document.getElementById('forgotLink').addEventListener('click', showForgotForm);
+document.getElementById('backToSignin').addEventListener('click', showSigninTab);
 
 // Enter key
 ['siEmail','siPassword'].forEach(id => document.getElementById(id).addEventListener('keydown', e => e.key==='Enter' && document.getElementById('signinBtn').click()));
 ['suName','suEmail','suPassword'].forEach(id => document.getElementById(id).addEventListener('keydown', e => e.key==='Enter' && document.getElementById('signupBtn').click()));
+document.getElementById('forgotEmail').addEventListener('keydown', e => e.key==='Enter' && document.getElementById('forgotBtn').click());
+['resetPassword','resetConfirm'].forEach(id => document.getElementById(id).addEventListener('keydown', e => e.key==='Enter' && document.getElementById('resetBtn').click()));
 
 /* ═══════════════════════════════════════════════════════════
    AUTH — SIGN IN
@@ -925,6 +991,52 @@ document.getElementById('signupBtn').addEventListener('click', async () => {
 });
 
 /* ═══════════════════════════════════════════════════════════
+   AUTH — FORGOT PASSWORD
+═══════════════════════════════════════════════════════════ */
+document.getElementById('forgotBtn').addEventListener('click', async () => {
+  hideMsg('forgotError'); hideMsg('forgotSuccess');
+  const email = document.getElementById('forgotEmail').value.trim();
+  if (!email) { showMsg('forgotError', 'Digite seu email.'); return; }
+
+  setBtn('forgotBtn', true, 'Enviando...');
+  try {
+    const { error } = await sb.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.href
+    });
+    if (error) throw error;
+    showMsg('forgotSuccess', `✓ Email enviado para ${email}. Verifique sua caixa de entrada e clique no link para redefinir sua senha.`, 'success');
+    setBtn('forgotBtn', false, 'Enviar link de recuperação');
+  } catch(e) {
+    setBtn('forgotBtn', false, 'Enviar link de recuperação');
+    showMsg('forgotError', e.message || 'Erro ao enviar email. Tente novamente.');
+  }
+});
+
+/* ═══════════════════════════════════════════════════════════
+   AUTH — RESET PASSWORD
+═══════════════════════════════════════════════════════════ */
+document.getElementById('resetBtn').addEventListener('click', async () => {
+  hideMsg('resetError'); hideMsg('resetSuccess');
+  const password = document.getElementById('resetPassword').value;
+  const confirm  = document.getElementById('resetConfirm').value;
+
+  if (password.length < 6)  { showMsg('resetError', 'A senha precisa ter pelo menos 6 caracteres.'); return; }
+  if (password !== confirm)  { showMsg('resetError', 'As senhas não coincidem.'); return; }
+
+  setBtn('resetBtn', true, 'Salvando...');
+  try {
+    const { error } = await sb.auth.updateUser({ password });
+    if (error) throw error;
+    showMsg('resetSuccess', '✓ Senha atualizada com sucesso! Redirecionando...', 'success');
+    setBtn('resetBtn', false, 'Salvar nova senha');
+    setTimeout(() => goHome(), 1500);
+  } catch(e) {
+    setBtn('resetBtn', false, 'Salvar nova senha');
+    showMsg('resetError', e.message || 'Erro ao atualizar senha. Tente novamente.');
+  }
+});
+
+/* ═══════════════════════════════════════════════════════════
    AUTH — LOGOUT
 ═══════════════════════════════════════════════════════════ */
 document.getElementById('homeLogout').addEventListener('click', async () => {
@@ -935,6 +1047,12 @@ document.getElementById('homeLogout').addEventListener('click', async () => {
    AUTH STATE LISTENER
 ═══════════════════════════════════════════════════════════ */
 sb.auth.onAuthStateChange((event, session) => {
+  // Link de recuperação de senha: mostrar formulário de nova senha
+  if (event === 'PASSWORD_RECOVERY') {
+    goReset();
+    return;
+  }
+
   if (session?.user) {
     // Use metadata name immediately — no await, never blocks redirect
     const metaName = session.user.user_metadata?.name || session.user.email?.split('@')[0] || 'Aluno';
