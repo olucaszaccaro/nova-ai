@@ -14,7 +14,8 @@
   <title>Start.AI — Área de Membros</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20,400,1,0&display=swap" rel="stylesheet">
+  <style>.material-symbols-rounded{font-family:'Material Symbols Rounded';font-weight:normal;font-style:normal;font-size:1em;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';-webkit-font-smoothing:antialiased;vertical-align:middle;}</style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -289,58 +290,108 @@
 
     /* ── ROCKET JOURNEY CARD ── */
     .journey-card {
-      background:var(--dg); border:1px solid var(--border); border-radius:18px;
-      padding:22px 24px; overflow:hidden; position:relative;
+      background:linear-gradient(145deg,#060e08 0%,#0a1a0e 60%,#07120a 100%);
+      border:1px solid rgba(150,208,52,0.18); border-radius:18px;
+      padding:22px 24px 26px; overflow:hidden; position:relative;
+    }
+    /* Starfield */
+    .journey-card::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background-image:
+        radial-gradient(1px 1px at 12% 25%,rgba(255,255,255,0.55) 0,transparent 100%),
+        radial-gradient(1px 1px at 34% 15%,rgba(255,255,255,0.35) 0,transparent 100%),
+        radial-gradient(1.5px 1.5px at 55% 40%,rgba(255,255,255,0.45) 0,transparent 100%),
+        radial-gradient(1px 1px at 72% 22%,rgba(255,255,255,0.4) 0,transparent 100%),
+        radial-gradient(1px 1px at 88% 35%,rgba(255,255,255,0.3) 0,transparent 100%),
+        radial-gradient(1px 1px at 22% 72%,rgba(255,255,255,0.25) 0,transparent 100%),
+        radial-gradient(1px 1px at 65% 80%,rgba(255,255,255,0.3) 0,transparent 100%),
+        radial-gradient(1px 1px at 80% 75%,rgba(255,255,255,0.2) 0,transparent 100%),
+        radial-gradient(1px 1px at 46% 65%,rgba(255,255,255,0.35) 0,transparent 100%),
+        radial-gradient(1.5px 1.5px at 8% 55%,rgba(255,255,255,0.2) 0,transparent 100%);
     }
     .journey-header {
-      display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;
+      display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:24px; position:relative; z-index:1;
     }
-    .journey-title { font-size:0.72rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; }
-    .journey-pct { font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; color:var(--green); }
+    .journey-title { font-size:0.68rem; font-weight:600; color:rgba(150,208,52,0.7); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:3px; }
+    .journey-sub { font-size:0.75rem; color:rgba(240,250,224,0.45); }
+    .journey-pct { font-family:'Outfit',sans-serif; font-size:1.8rem; font-weight:800; color:var(--green); line-height:1; }
+
+    /* Track area */
     .journey-track {
-      position:relative; height:72px; display:flex; align-items:center;
+      position:relative; height:80px; z-index:1;
     }
-    /* Star trail */
-    .journey-trail {
-      position:absolute; top:50%; left:0; right:0; height:2px;
-      background:linear-gradient(90deg, rgba(150,208,52,0.5), rgba(150,208,52,0.1));
-      transform:translateY(-50%); border-radius:2px;
+    /* Path line (background) */
+    .journey-path-bg {
+      position:absolute; top:28px; left:20px; right:20px; height:2px;
+      background:rgba(255,255,255,0.07); border-radius:2px;
     }
-    /* Planets */
-    .journey-planets {
-      position:absolute; top:0; left:0; right:0; height:100%;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:0 4px;
+    /* Path fill (progress) */
+    .journey-path-fill {
+      position:absolute; top:28px; left:20px; height:2px;
+      background:linear-gradient(90deg,rgba(150,208,52,0.8),rgba(197,240,106,0.4));
+      border-radius:2px; transition:width 0.6s ease;
+      box-shadow:0 0 6px rgba(150,208,52,0.4);
     }
-    .journey-planet {
-      width:40px; height:40px; border-radius:50%; border:2px solid rgba(255,255,255,0.1);
-      display:flex; align-items:center; justify-content:center; flex-direction:column;
-      position:relative; transition:transform 0.3s; z-index:1; background:var(--dark);
-      cursor:default; flex-shrink:0;
+    /* Nodes row */
+    .journey-nodes {
+      position:absolute; top:0; left:0; right:0;
+      display:flex; align-items:flex-start; justify-content:space-between;
     }
-    .journey-planet.done {
-      background:radial-gradient(circle at 40% 35%, rgba(150,208,52,0.5), rgba(80,140,20,0.8));
-      border-color:rgba(150,208,52,0.6);
-      box-shadow:0 0 12px rgba(150,208,52,0.3);
+    .journey-node {
+      display:flex; flex-direction:column; align-items:center; gap:6px; flex:1;
     }
-    .journey-planet.next {
-      border-color:rgba(150,208,52,0.35); background:rgba(150,208,52,0.06);
-      animation:planet-pulse 2s ease-in-out infinite;
+    .journey-node-circle {
+      width:36px; height:36px; border-radius:50%;
+      border:1.5px solid rgba(255,255,255,0.1);
+      background:rgba(255,255,255,0.04);
+      display:flex; align-items:center; justify-content:center;
+      position:relative; z-index:2; transition:all 0.3s;
     }
-    @keyframes planet-pulse {
-      0%,100% { box-shadow:0 0 0 0 rgba(150,208,52,0.15); }
-      50% { box-shadow:0 0 0 6px rgba(150,208,52,0.0); }
+    .journey-node-circle .node-num {
+      font-family:'Outfit',sans-serif; font-size:0.75rem; font-weight:700;
+      color:rgba(240,250,224,0.3);
     }
-    .planet-emoji { font-size:1.1rem; line-height:1; }
-    .planet-num { font-size:0.52rem; color:rgba(240,250,224,0.45); margin-top:1px; }
-    .journey-planet.done .planet-num { color:rgba(240,250,224,0.7); }
+    .journey-node-circle .node-check {
+      font-size:14px; color:#fff; display:none;
+    }
+    .journey-node.done .journey-node-circle {
+      background:radial-gradient(circle at 38% 32%,rgba(197,240,106,0.9),rgba(80,160,20,0.85));
+      border-color:rgba(150,208,52,0.8);
+      box-shadow:0 0 14px rgba(150,208,52,0.35), 0 0 4px rgba(150,208,52,0.6) inset;
+    }
+    .journey-node.done .node-num { display:none; }
+    .journey-node.done .node-check { display:block; }
+    .journey-node.next .journey-node-circle {
+      border-color:rgba(150,208,52,0.55);
+      background:rgba(150,208,52,0.08);
+      animation:node-pulse 2.4s ease-in-out infinite;
+    }
+    .journey-node.next .node-num { color:rgba(150,208,52,0.8); }
+    @keyframes node-pulse {
+      0%,100% { box-shadow:0 0 0 0 rgba(150,208,52,0.2); }
+      50% { box-shadow:0 0 0 5px rgba(150,208,52,0); }
+    }
+    .journey-node-label {
+      font-size:0.6rem; color:rgba(240,250,224,0.3); text-align:center; white-space:nowrap;
+    }
+    .journey-node.done .journey-node-label,
+    .journey-node.next .journey-node-label { color:rgba(240,250,224,0.55); }
 
     /* Rocket */
-    .journey-rocket {
-      position:absolute; z-index:3; top:50%; transform:translateY(-50%);
-      width:32px; height:32px; display:flex; align-items:center; justify-content:center;
-      font-size:1.5rem; transition:left 0.6s cubic-bezier(0.34,1.56,0.64,1);
-      filter:drop-shadow(0 0 6px rgba(150,208,52,0.6));
+    .journey-rocket-wrap {
+      position:absolute; top:2px; z-index:3;
+      transform:translateX(-50%);
+      transition:left 0.7s cubic-bezier(0.34,1.56,0.64,1);
+      display:flex; flex-direction:column; align-items:center;
+    }
+    .journey-rocket-icon {
+      font-size:22px; color:var(--green);
+      filter:drop-shadow(0 0 5px rgba(150,208,52,0.7));
+      animation:rocket-hover 3s ease-in-out infinite;
+    }
+    @keyframes rocket-hover {
+      0%,100% { transform:translateY(0) rotate(-40deg); }
+      50% { transform:translateY(-3px) rotate(-40deg); }
     }
 
     /* Streak + completion row */
@@ -745,6 +796,21 @@
 
     /* ══ FAQ ACCORDION ══════════════════════════════════════ */
     .faq-list { display:flex; flex-direction:column; gap:10px; }
+    /* FAQ two-level */
+    .faq-outer {
+      background:var(--dg); border:1px solid var(--border); border-radius:14px; overflow:hidden;
+    }
+    .faq-outer-header {
+      display:flex; align-items:center; justify-content:space-between; padding:16px 18px;
+      cursor:pointer; user-select:none; gap:10px;
+    }
+    .faq-outer-header:hover { background:rgba(150,208,52,0.04); }
+    .faq-outer-left { display:flex; align-items:center; gap:10px; }
+    .faq-outer-chevron { color:var(--muted); transition:transform 0.25s; font-size:20px; }
+    .faq-outer.open .faq-outer-chevron { transform:rotate(180deg); color:var(--green); }
+    .faq-outer-body { display:none; padding:0 12px 12px; }
+    .faq-outer.open .faq-outer-body { display:block; }
+
     .faq-item {
       background: rgba(26,47,10,0.45);
       border: 1px solid var(--border);
@@ -1075,7 +1141,7 @@
             <svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1 3.5L4 6.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </label>
           <span class="consent-label">
-            Li e aceito os <button class="consent-link" onclick="openTermsModal('termos')">Termos de Uso e Política de Privacidade</button><span class="consent-required-badge"> obrigatório</span>
+            Li e aceito os <button class="consent-link" onclick="openTermsModal('termos')">Termos de Uso e Política de Privacidade</button>
           </span>
         </div>
         <div class="consent-item">
@@ -1084,7 +1150,7 @@
             <svg width="11" height="8" viewBox="0 0 11 8" fill="none"><path d="M1 3.5L4 6.5L10 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </label>
           <span class="consent-label" onclick="document.getElementById('marketingCheck').click()">
-            Aceito receber novidades e conteúdos da Nova AI por email (opcional)
+            Aceito receber novidades e conteúdos da Nova AI por email
           </span>
         </div>
       </div>
@@ -1167,7 +1233,7 @@
       <!-- Coluna direita: foto -->
       <div class="hero-photo-col">
         <div class="hero-photo-wrap">
-          <img src="../lucas.png" alt="Lucas Zaccaro" class="hero-photo">
+          <img src="/lucas.png" alt="Lucas Zaccaro" class="hero-photo">
         </div>
       </div>
     </div>
@@ -1199,49 +1265,59 @@
     </section>
 
     <section class="home-section">
-      <div class="section-label">Perguntas Frequentes</div>
-      <div class="faq-list">
-        <div class="faq-item">
-          <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            Quanto tempo leva para concluir o Start.AI?
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      <div class="faq-outer" id="faqOuter">
+        <div class="faq-outer-header" onclick="document.getElementById('faqOuter').classList.toggle('open')">
+          <div class="faq-outer-left">
+            <span class="material-symbols-rounded" style="font-size:18px;color:var(--green)">help</span>
+            <span class="section-label" style="margin:0">Perguntas Frequentes</span>
           </div>
-          <div class="faq-body">O curso é dividido em 5 aulas de aproximadamente 15 minutos cada, mais o tempo de prática dos exercícios. Você pode concluir em um dia ou no seu próprio ritmo — o acesso é permanente.</div>
+          <span class="material-symbols-rounded faq-outer-chevron">expand_more</span>
         </div>
-        <div class="faq-item">
-          <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            Preciso ter algum conhecimento técnico?
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        <div class="faq-outer-body">
+          <div class="faq-list" style="margin-top:12px">
+            <div class="faq-item">
+              <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Quanto tempo leva para concluir o Start.AI?
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="faq-body">O curso é dividido em 5 aulas de aproximadamente 15 minutos cada, mais o tempo de prática dos exercícios. Você pode concluir em um dia ou no seu próprio ritmo — o acesso é permanente.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Preciso ter algum conhecimento técnico?
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="faq-body">Não. O Start.AI foi feito para quem nunca usou IA de forma profissional. Não precisa saber programar, não precisa entender algoritmos — só precisa de curiosidade e vontade de aprender.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Os vídeos já estão disponíveis?
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="faq-body">As aulas estão sendo lançadas progressivamente. Enquanto os vídeos não ficam prontos, todo o conteúdo do curso está disponível em texto, exercícios e materiais práticos para você já começar.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                O certificado é reconhecido?
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="faq-body">O Start.AI é um curso gratuito de introdução à IA. Ao concluir todas as aulas, você recebe um certificado de conclusão emitido pela Nova AI / (R)evolução® School, que pode ser compartilhado no LinkedIn e outras redes.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Qual é o próximo passo depois do Start.AI?
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="faq-body">Quem conclui o Start.AI está pronto para dar um salto com o Rise.ai — nossa formação completa em IA aplicada ao trabalho. Você vai ver o link na tela de conclusão do curso!</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Posso acessar do celular?
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="faq-body">Sim! A plataforma é totalmente responsiva e funciona perfeitamente no celular, tablet e computador. Acesse de onde for mais confortável para você.</div>
+            </div>
           </div>
-          <div class="faq-body">Não. O Start.AI foi feito para quem nunca usou IA de forma profissional. Não precisa saber programar, não precisa entender algoritmos — só precisa de curiosidade e vontade de aprender.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            Os vídeos já estão disponíveis?
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </div>
-          <div class="faq-body">As aulas estão sendo lançadas progressivamente. Enquanto os vídeos não ficam prontos, todo o conteúdo do curso está disponível em texto, exercícios e materiais práticos para você já começar.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            O certificado é reconhecido?
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </div>
-          <div class="faq-body">O Start.AI é um curso gratuito de introdução à IA. Ao concluir todas as aulas, você recebe um certificado de conclusão emitido pela Nova AI / (R)evolução School, que pode ser compartilhado no LinkedIn e outras redes.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            Qual é o próximo passo depois do Start.AI?
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </div>
-          <div class="faq-body">Quem conclui o Start.AI está pronto para dar um salto com o Rise.ai — nossa formação completa em IA aplicada ao trabalho. Você vai ver o link na tela de conclusão do curso!</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            Posso acessar do celular?
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </div>
-          <div class="faq-body">Sim! A plataforma é totalmente responsiva e funciona perfeitamente no celular, tablet e computador. Acesse de onde for mais confortável para você.</div>
         </div>
       </div>
     </section>
@@ -1281,7 +1357,7 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
       </a>
     </div>
-    &copy; 2026 Nova AI · (R)evolução School &nbsp;·&nbsp;
+    &copy; 2026 Nova AI · (R)evolução&reg; School &nbsp;·&nbsp;
     <a id="openTermsLink">Termos de Uso &amp; Políticas</a>
   </footer>
 </div>
@@ -1489,7 +1565,7 @@
         <p>Para dúvidas sobre nossa Política de Cookies: lucas@revolucao.school</p>
       </div>
     </div>
-    <div class="modal-footer-note">Última atualização: junho de 2025 · Nova AI · (R)evolução School</div>
+    <div class="modal-footer-note">Última atualização: junho de 2025 · Nova AI · (R)evolução&reg; School</div>
   </div>
 </div>
 
@@ -1497,7 +1573,7 @@
 <canvas class="confetti-canvas" id="confettiCanvas"></canvas>
 <div id="completionScreen" class="screen">
   <div class="completion-box">
-    <span class="completion-trophy">🏆</span>
+    <span class="completion-trophy"><span class="material-symbols-rounded" style="font-size:3rem;color:#f59e0b;">emoji_events</span></span>
     <div class="completion-title">Você concluiu o Start.AI!</div>
     <p class="completion-sub">Parabéns! Você passou pelos 5 dias e descobriu como a IA pode transformar a sua rotina. Agora você faz parte de um grupo seleto que vai além do hype.</p>
 
@@ -1519,7 +1595,7 @@
     <div class="nps-block">
       <div class="nps-label">Em uma escala de 0 a 10, o quanto você indicaria o Start.AI para um amigo?</div>
       <div class="nps-buttons" id="npsButtons"></div>
-      <div class="nps-thanks" id="npsThanks">Obrigado pelo feedback! 💚</div>
+      <div class="nps-thanks" id="npsThanks">Obrigado pelo feedback!</div>
     </div>
 
     <div class="completion-actions">
@@ -1553,7 +1629,7 @@
     <div class="share-modal-sub">Salve a imagem abaixo e poste no Instagram ou LinkedIn!</div>
     <div class="share-card-preview">
       <div class="share-card-logo">Start.AI</div>
-      <div class="share-card-tag">by Nova AI · (R)evolução School</div>
+      <div class="share-card-tag">by Nova AI · (R)evolução&reg; School</div>
       <div class="share-card-badge">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96D034" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         <span class="share-card-badge-text">Curso Concluído</span>
@@ -1591,7 +1667,7 @@ const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
    COURSE DATA
 ═══════════════════════════════════════════════════════════ */
 const lessons = [
-  { day:1, pillar:'🧠 Entender', title:'Entender IA de verdade', duration:'~15 min', youtubeId:null,
+  { day:1, pillar:'Entender', title:'Entender IA de verdade', duration:'~15 min', youtubeId:null,
     description:'Descubra como a IA realmente funciona por dentro. Tokens, contexto, modelos, janela de atenção — e por que a forma como a maioria das pessoas usa IA desperdiça 90% do potencial. Sair dessa aula com um modelo mental correto muda tudo que vem depois.',
     exercise:'Abra o Claude e faça o mesmo pedido duas vezes: uma com uma frase curta e sem contexto, e outra com contexto rico (quem você é, o que precisa, qual o formato esperado). Compare os resultados e guarde o prompt que funcionou melhor.',
     resources:[{label:'Framework CRISP',url:'#',ready:false},{label:'Glossário de IA para não-técnicos',url:'#',ready:false},{label:'Comparativo de modelos',url:'#',ready:false}],
@@ -1601,7 +1677,7 @@ const lessons = [
       {title:'Comparativo de modelos 2025',type:'PDF · Tabela comparativa',url:'#',ready:false},
       {title:'Prompt de diagnóstico de contexto',type:'Prompt · Copie e use',url:'#',ready:false}
     ]},
-  { day:2, pillar:'✨ Criar', title:'Criar qualquer coisa', duration:'~15 min', youtubeId:null,
+  { day:2, pillar:'Criar', title:'Criar qualquer coisa', duration:'~15 min', youtubeId:null,
     description:'IA não é só um chat para conversar. É um estúdio criativo completo: textos, músicas, imagens, ferramentas digitais simples. Nessa aula você vai criar algo que antes parecia impossível sem anos de estudo — em menos de 10 minutos.',
     exercise:'Escolha UMA coisa para criar agora: uma música no Suno, uma imagem no Ideogram, ou uma ferramenta simples no Claude. Poste o resultado na comunidade do WhatsApp.',
     resources:[{label:'Prompts de criação por tipo',url:'#',ready:false},{label:'Lista de ferramentas criativas',url:'#',ready:false},{label:'Tutorial: Suno para iniciantes',url:'#',ready:false}],
@@ -1611,7 +1687,7 @@ const lessons = [
       {title:'Tutorial: Suno para iniciantes',type:'PDF · Passo a passo',url:'#',ready:false},
       {title:'Prompt: crie um post viral em 3 formatos',type:'Prompt · Copie e use',url:'#',ready:false}
     ]},
-  { day:3, pillar:'💡 Resolver', title:'Resolver problemas', duration:'~15 min', youtubeId:null,
+  { day:3, pillar:'Resolver', title:'Resolver problemas', duration:'~15 min', youtubeId:null,
     description:'O poder real da IA está em resolver problemas que você tem agora — do trabalho, da vida pessoal, do dia a dia. Nessa aula você aprende a usar a IA como um colaborador que pensa com você, não só como um gerador de texto.',
     exercise:'Pegue um problema real que você está enfrentando hoje. Descreva o problema para o Claude em detalhes e peça uma solução. Adapte a resposta para o seu contexto específico.',
     resources:[{label:'Biblioteca de prompts por situação',url:'#',ready:false},{label:'Templates de tomada de decisão',url:'#',ready:false},{label:'Roteiro: como descrever problemas',url:'#',ready:false}],
@@ -1621,7 +1697,7 @@ const lessons = [
       {title:'Roteiro: como descrever problemas para a IA',type:'PDF · Método passo a passo',url:'#',ready:false},
       {title:'Prompt: analise meu problema e me dê 3 soluções',type:'Prompt · Copie e use',url:'#',ready:false}
     ]},
-  { day:4, pillar:'⚡ Automatizar', title:'Automatizar sua rotina', duration:'~15 min', youtubeId:null,
+  { day:4, pillar:'Automatizar', title:'Automatizar sua rotina', duration:'~15 min', youtubeId:null,
     description:'Toda semana você faz dezenas de tarefas repetitivas. E se metade delas acontecessem sozinhas? Nessa aula você vai identificar suas maiores oportunidades de automação e montar o rascunho do seu AI Playbook pessoal.',
     exercise:'Liste 5 tarefas que você repete toda semana. Escolha a que consome mais tempo e crie um fluxo com a IA para automatizá-la. Documente em 3 linhas como funciona.',
     resources:[{label:'Template: AI Playbook pessoal',url:'#',ready:false},{label:'Checklist de automação com Claude',url:'#',ready:false},{label:'Exemplos por perfil',url:'#',ready:false}],
@@ -1631,7 +1707,7 @@ const lessons = [
       {title:'Exemplos de automação por perfil profissional',type:'PDF · 10 perfis + exemplos',url:'#',ready:false},
       {title:'Prompt: mapeie minha rotina e sugira automações',type:'Prompt · Copie e use',url:'#',ready:false}
     ]},
-  { day:5, pillar:'🚀 Sistema', title:'Seu sistema de IA', duration:'~15 min', youtubeId:null,
+  { day:5, pillar:'Sistema', title:'Seu sistema de IA', duration:'~15 min', youtubeId:null,
     description:'O último dia é sobre integração. Tudo que você aprendeu vira um sistema coerente. Você sai com seu mapa pessoal de IA e um plano claro para o que vem depois.',
     exercise:'Monte o mapa completo do seu sistema de IA: quais ferramentas você vai usar, para quê, e quais são os 3 próximos hábitos que você vai adotar. Compartilhe na comunidade.',
     resources:[{label:'Template: mapa do sistema de IA',url:'#',ready:false},{label:'Guia: o que vem depois do Start.AI',url:'#',ready:false},{label:'Rise.ai — o próximo nível',url:'#',ready:false}],
@@ -1824,7 +1900,7 @@ document.getElementById('signupBtn').addEventListener('click', async () => {
       state.user = { id: data.user.id, name };
       state.isNewUser = true;
       goHome();
-      setTimeout(() => showToast('🎉', `Bem-vindo, ${name.split(' ')[0]}!`, 'Sua conta foi criada com sucesso.'), 400);
+      setTimeout(() => showToast('<span class="material-symbols-rounded" style="font-size:1.1rem;color:var(--green)">celebration</span>', `Bem-vindo, ${name.split(' ')[0]}!`, 'Sua conta foi criada com sucesso.'), 400);
       state.isNewUser = false;
     }
   } catch(e) {
@@ -1915,10 +1991,10 @@ sb.auth.onAuthStateChange((event, session) => {
 
     // Toast de boas-vindas
     if (wasNewUser) {
-      setTimeout(() => showToast('🎉', `Bem-vindo, ${metaName.split(' ')[0]}!`, 'Sua conta foi criada com sucesso.'), 400);
+      setTimeout(() => showToast('<span class="material-symbols-rounded" style="font-size:1.1rem;color:var(--green)">celebration</span>', `Bem-vindo, ${metaName.split(' ')[0]}!`, 'Sua conta foi criada com sucesso.'), 400);
     } else if (event === 'SIGNED_IN' && state.justLoggedIn) {
       state.justLoggedIn = false;
-      setTimeout(() => showToast('✅', `Olá, ${metaName.split(' ')[0]}!`, 'Login realizado com sucesso.'), 400);
+      setTimeout(() => showToast('<span class="material-symbols-rounded" style="font-size:1.1rem;color:var(--green)">check_circle</span>', `Olá, ${metaName.split(' ')[0]}!`, 'Login realizado com sucesso.'), 400);
     }
 
     // Load real profile name in background (non-blocking)
@@ -1964,9 +2040,9 @@ function renderHome() {
   lessons.forEach((l, i) => {
     const done = isCompleted(i);
     const accessible = i===0 || isCompleted(i-1) || done;
-    const badge = done ? '<span class="card-state-badge done">✓ Concluída</span>'
+    const badge = done ? '<span class="card-state-badge done"><span class="material-symbols-rounded" style="font-size:12px;vertical-align:middle">check</span> Concluída</span>'
                 : accessible ? '<span class="card-state-badge current">Disponível</span>'
-                : '<span class="card-state-badge locked">🔒</span>';
+                : '<span class="card-state-badge locked"><span class="material-symbols-rounded" style="font-size:12px;vertical-align:middle">lock</span></span>';
     const card = document.createElement('div');
     card.className = `lesson-card ${accessible||done ? '' : 'locked'}`;
     card.innerHTML = `
@@ -1991,49 +2067,61 @@ function renderHome() {
   const streak = getStreak();
   const totalLessons = lessons.length;
   const doneLessons = state.completed.length;
-  const planetEmojis = ['🌍','🌕','♂️','🪐','⭐'];
-  const planetNames  = ['Terra','Lua','Marte','Saturno','Estrela'];
+  const lessonNames = ['Terra','Lua','Marte','Saturno','Estrela'];
 
-  // Build planets HTML
-  let planetsHtml = '';
+  // Build nodes HTML
+  let nodesHtml = '';
   for (let i = 0; i < totalLessons; i++) {
     const isDone = isCompleted(i);
     const isNext = !isDone && (i === 0 || isCompleted(i-1));
     const cls = isDone ? 'done' : isNext ? 'next' : '';
-    planetsHtml += `<div class="journey-planet ${cls}" title="${planetNames[i] || 'Planeta ' + (i+1)}">
-      <span class="planet-emoji">${planetEmojis[i] || '🌐'}</span>
-      <span class="planet-num">Aula ${i+1}</span>
+    nodesHtml += `<div class="journey-node ${cls}">
+      <div class="journey-node-circle">
+        <span class="node-num">${i+1}</span>
+        <span class="material-symbols-rounded node-check" style="font-size:16px;">check</span>
+      </div>
+      <span class="journey-node-label">${lessonNames[i]}</span>
     </div>`;
   }
 
-  // Rocket position: left% based on progress
-  // 0 done → near left edge (4%); all done → right edge (94%)
-  const rocketPct = doneLessons === 0 ? 2 : doneLessons === totalLessons ? 94 : Math.round(4 + (doneLessons / totalLessons) * 88);
+  // Rocket: position by node index, using flex percentages (node centers at 10%,30%,50%,70%,90%)
+  const nodePositions = [10,30,50,70,90];
+  const rocketPct = doneLessons === 0 ? 4
+    : doneLessons >= totalLessons ? 88
+    : nodePositions[doneLessons - 1] + 8;
 
-  // Completion badge
-  const streakFireCount = Math.min(streak, 5);
-  const streakFires = '🔥'.repeat(streakFireCount) || '–';
+  // Path fill width
+  const pathFillPct = doneLessons === 0 ? 0
+    : doneLessons >= totalLessons ? 100
+    : Math.round((doneLessons / totalLessons) * 100);
 
   document.getElementById('homeStatsRow').innerHTML = `
     <div class="journey-card">
       <div class="journey-header">
-        <span class="journey-title">Sua jornada intergaláctica</span>
+        <div>
+          <div class="journey-title">Jornada pelo universo Start.AI</div>
+          <div class="journey-sub">${doneLessons} de ${totalLessons} aulas concluídas</div>
+        </div>
         <span class="journey-pct">${pct}%</span>
       </div>
       <div class="journey-track">
-        <div class="journey-trail"></div>
-        <div class="journey-planets">${planetsHtml}</div>
-        <div class="journey-rocket" style="left:${rocketPct}%">🚀</div>
+        <div class="journey-path-bg"></div>
+        <div class="journey-path-fill" style="width:calc(${pathFillPct}% - 20px)"></div>
+        <div class="journey-nodes">${nodesHtml}</div>
+        <div class="journey-rocket-wrap" style="left:${rocketPct}%">
+          <span class="material-symbols-rounded journey-rocket-icon">rocket_launch</span>
+        </div>
       </div>
-      ${allDone ? '<div style="text-align:center;margin-top:14px;font-size:0.78rem;color:var(--green);font-weight:600;">🎉 Missão completa! Você chegou às estrelas!</div>' : ''}
+      ${allDone ? `<div style="margin-top:16px;padding:10px 14px;background:rgba(150,208,52,0.08);border:1px solid rgba(150,208,52,0.2);border-radius:10px;font-size:0.75rem;color:var(--green);font-weight:600;text-align:center;position:relative;z-index:1;">
+        <span class="material-symbols-rounded" style="font-size:16px;vertical-align:middle;margin-right:4px;">celebration</span>Missão completa! Você chegou às estrelas.</div>` : ''}
     </div>
     <div class="stats-mini-row">
       <div class="stat-mini">
-        <span class="stat-mini-icon">✅</span>
+        <span class="material-symbols-rounded stat-mini-icon" style="font-size:1.4rem;color:var(--green)">task_alt</span>
         <div><div class="stat-value">${doneLessons}<span style="font-size:0.85rem;font-weight:500;color:var(--muted)"> / ${totalLessons}</span></div><div class="stat-label">aulas concluídas</div></div>
       </div>
       <div class="stat-mini">
-        <span class="stat-mini-icon" title="${streak} dia${streak===1?'':'s'} seguido${streak===1?'':'s'}">${streak > 0 ? streakFires : '💤'}</span>
+        <span class="material-symbols-rounded stat-mini-icon" style="font-size:1.4rem;color:${streak>0?'#f97316':'var(--muted)'}">${streak > 0 ? 'local_fire_department' : 'bedtime'}</span>
         <div><div class="stat-value">${streak}</div><div class="stat-label">dia${streak===1?'':'s'} em sequência</div></div>
       </div>
     </div>`;
@@ -2127,7 +2215,7 @@ function renderLesson() {
     document.getElementById('nextPillar').textContent = next.pillar;
     nl.style.cursor = 'pointer'; nl.onclick = () => goLesson(idx+1);
   } else {
-    nl.innerHTML = `<div class="next-info"><div class="next-label">Parabéns!</div><div class="next-title">Você concluiu o Start.AI 🎉</div><div class="next-pillar">Pronto para o próximo nível?</div></div><div class="next-arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>`;
+    nl.innerHTML = `<div class="next-info"><div class="next-label">Parabéns!</div><div class="next-title">Você concluiu o Start.AI!</div><div class="next-pillar">Pronto para o próximo nível?</div></div><div class="next-arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>`;
     nl.style.cursor = 'default';
   }
 
@@ -2198,7 +2286,7 @@ async function loadComments(lessonId) {
     if (error) throw error;
     renderComments(data || [], lessonId);
   } catch(e) {
-    list.innerHTML = '<div class="comments-empty"><span class="emoji">⚠️</span>Não foi possível carregar os comentários.</div>';
+    list.innerHTML = '<div class="comments-empty"><span class="material-symbols-rounded" style="font-size:1.2rem;color:var(--muted)">warning</span> Não foi possível carregar os comentários.</div>';
   }
 }
 
@@ -2207,7 +2295,7 @@ function renderComments(comments, lessonId) {
   document.getElementById('commentCount').textContent = comments.length;
 
   if (comments.length === 0) {
-    list.innerHTML = '<div class="comments-empty"><span class="emoji">💬</span>Seja o primeiro a comentar nesta aula!</div>';
+    list.innerHTML = '<div class="comments-empty"><span class="material-symbols-rounded" style="font-size:1.2rem;color:var(--muted)">chat_bubble</span> Seja o primeiro a comentar nesta aula!</div>';
     return;
   }
 
@@ -2477,7 +2565,7 @@ function drawCertificate() {
   // Subtitle
   ctx.font = '500 14px Inter, sans-serif';
   ctx.fillStyle = 'rgba(240,250,224,0.45)';
-  ctx.fillText('by Nova AI · (R)evolução School', W/2, 106);
+  ctx.fillText('by Nova AI · (R)evolução&reg; School', W/2, 106);
 
   // Divider line
   ctx.beginPath();
@@ -2523,7 +2611,7 @@ function drawCertificate() {
   ctx.stroke();
   ctx.font = '500 10px Inter, sans-serif';
   ctx.fillStyle = 'rgba(150,208,52,0.8)';
-  ctx.fillText('✓ CONCLUÍDO', W/2, 406);
+  ctx.fillText('CONCLUÍDO', W/2, 406);
   ctx.fillText('100%', W/2, 420);
 }
 
@@ -2547,7 +2635,7 @@ document.getElementById('shareModal').addEventListener('click', e => {
 });
 document.getElementById('btnCopyShareText').addEventListener('click', () => {
   const name = state.user?.name || 'Aluno';
-  const text = `Acabei de concluir o Start.AI 🎉\n\nAprendi a usar IA de verdade em 5 dias — e mudou completamente a forma como trabalho.\n\nO melhor: é gratuito! Se você ainda não fez, acessa: nova-ai.com.br\n\n#StartAI #InteligênciaArtificial #NovaAI`;
+  const text = `Acabei de concluir o Start.AI!\n\nAprendi a usar IA de verdade em 5 dias — e mudou completamente a forma como trabalho.\n\nO melhor: é gratuito! Se você ainda não fez, acessa: nova-ai.com.br\n\n#StartAI #InteligênciaArtificial #NovaAI`;
   navigator.clipboard.writeText(text).then(() => {
     const btn = document.getElementById('btnCopyShareText');
     btn.textContent = 'Copiado!';
@@ -2555,7 +2643,7 @@ document.getElementById('btnCopyShareText').addEventListener('click', () => {
       btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copiar texto para postar`;
     }, 2000);
   }).catch(() => {
-    showToast('📋', 'Copie o texto abaixo', 'Ctrl+C / Cmd+C');
+    showToast('<span class="material-symbols-rounded" style="font-size:1.1rem;color:var(--green)">content_paste</span>', 'Copie o texto abaixo', 'Ctrl+C / Cmd+C');
   });
 });
 
