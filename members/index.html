@@ -507,12 +507,20 @@
 
     /* ── SUPPORT SECTION ── */
     .support-card {
-      background:var(--dg); border:1px solid var(--border); border-radius:16px; padding:28px 32px;
+      background:var(--dg); border:1px solid var(--border); border-radius:16px; overflow:hidden;
     }
-    .support-card-header { display:flex; align-items:center; gap:14px; margin-bottom:20px; }
-    .support-card-icon { width:48px; height:48px; border-radius:50%; background:rgba(150,208,52,0.1); border:1px solid rgba(150,208,52,0.2); display:flex; align-items:center; justify-content:center; color:var(--green); flex-shrink:0; }
+    .support-card-header {
+      display:flex; align-items:center; gap:14px; padding:22px 28px;
+      cursor:pointer; user-select:none; transition:background 0.15s;
+    }
+    .support-card-header:hover { background:rgba(150,208,52,0.03); }
+    .support-card-icon { width:44px; height:44px; border-radius:50%; background:rgba(150,208,52,0.1); border:1px solid rgba(150,208,52,0.2); display:flex; align-items:center; justify-content:center; color:var(--green); flex-shrink:0; }
     .support-card-title { font-family:'Outfit',sans-serif; font-size:1rem; font-weight:700; }
     .support-card-sub { font-size:0.75rem; color:var(--muted); margin-top:2px; }
+    .support-toggle-icon { margin-left:auto; color:var(--muted); transition:transform 0.25s; flex-shrink:0; }
+    .support-card.open .support-toggle-icon { transform:rotate(180deg); }
+    .support-card-body { display:none; padding:20px 28px 24px; border-top:1px solid var(--border); }
+    .support-card.open .support-card-body { display:block; }
     .support-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
     .support-field label { display:block; font-size:0.68rem; font-weight:600; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:6px; }
     .support-field input, .support-field textarea {
@@ -768,34 +776,33 @@
 
     <section class="home-section">
       <div class="section-label">Suporte</div>
-      <div class="support-card">
-        <div class="support-card-header">
-          <div class="support-card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      <div class="support-card" id="supportCard">
+        <div class="support-card-header" id="supportCardToggle">
+          <div class="support-card-icon" style="background:rgba(37,211,102,0.1);border-color:rgba(37,211,102,0.25);color:#25D366;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.039 2.878 1.188 3.077.15.198 2.042 3.116 4.95 4.378.692.302 1.233.482 1.655.618.697.221 1.33.19 1.83.115.558-.083 1.758-.718 2.006-1.412.247-.695.247-1.29.172-1.412-.074-.121-.272-.196-.57-.345zM12.067.012c-6.626 0-12 5.373-12 12 0 2.112.548 4.17 1.594 5.98L0 24l6.19-1.625c1.763.96 3.746 1.465 5.763 1.467h.005c6.623 0 12-5.373 12-12 0-3.2-1.244-6.208-3.504-8.469C18.19 1.256 15.185.012 12.067.012z"/></svg>
           </div>
           <div>
-            <div class="support-card-title">Fale com a gente</div>
-            <div class="support-card-sub">Alguma dúvida ou problema? Envie uma mensagem — respondemos por email.</div>
+            <div class="support-card-title">Suporte via WhatsApp</div>
+            <div class="support-card-sub">Alguma dúvida ou problema? Clique para enviar uma mensagem.</div>
           </div>
+          <svg class="support-toggle-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
-        <div class="support-form-grid">
-          <div class="support-field">
-            <label>Seu nome</label>
-            <input type="text" id="supportName" placeholder="Ex: Ana Paula">
+        <div class="support-card-body">
+          <div class="support-form-grid" style="grid-template-columns:1fr;">
+            <div class="support-field">
+              <label>Seu nome</label>
+              <input type="text" id="supportName" placeholder="Ex: Ana Paula">
+            </div>
+            <div class="support-field">
+              <label>Mensagem</label>
+              <textarea id="supportMessage" placeholder="Descreva sua dúvida, problema ou sugestão..."></textarea>
+            </div>
           </div>
-          <div class="support-field">
-            <label>Seu email</label>
-            <input type="email" id="supportEmail" placeholder="seu@email.com">
-          </div>
-          <div class="support-field support-field-full">
-            <label>Mensagem</label>
-            <textarea id="supportMessage" placeholder="Descreva sua dúvida, problema ou sugestão..."></textarea>
-          </div>
+          <button class="btn-support-submit" id="supportSubmitBtn" style="background:#25D366;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.039 2.878 1.188 3.077.15.198 2.042 3.116 4.95 4.378.692.302 1.233.482 1.655.618.697.221 1.33.19 1.83.115.558-.083 1.758-.718 2.006-1.412.247-.695.247-1.29.172-1.412-.074-.121-.272-.196-.57-.345zM12.067.012c-6.626 0-12 5.373-12 12 0 2.112.548 4.17 1.594 5.98L0 24l6.19-1.625c1.763.96 3.746 1.465 5.763 1.467h.005c6.623 0 12-5.373 12-12 0-3.2-1.244-6.208-3.504-8.469C18.19 1.256 15.185.012 12.067.012z"/></svg>
+            Enviar no WhatsApp
+          </button>
         </div>
-        <button class="btn-support-submit" id="supportSubmitBtn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          Enviar mensagem
-        </button>
       </div>
     </section>
   </div>
@@ -992,6 +999,8 @@
 ═══════════════════════════════════════════════════════════ */
 const SUPABASE_URL = 'https://iwdvhgqnlgxfqsqsfhmz.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3ZHZoZ3FubGd4ZnFzcXNmaG16Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0NjY0ODksImV4cCI6MjA5NzA0MjQ4OX0.YOAZz0P2Uh-4pAPt7rIP1fB7cg-RfuobvUzTBx57HiY';
+
+const SUPPORT_WHATSAPP = '5561991859761';
 
 /* ═══════════════════════════════════════════════════════════
    SUPABASE INIT
@@ -1611,49 +1620,41 @@ document.getElementById('mobileOverlay').addEventListener('click', closeMobileDr
 /* ═══════════════════════════════════════════════════════════
    SUPPORT FORM
 ═══════════════════════════════════════════════════════════ */
+
+// Toggle colapsável
+document.getElementById('supportCardToggle').addEventListener('click', () => {
+  document.getElementById('supportCard').classList.toggle('open');
+});
+
 function prefillSupportForm() {
   const nameEl  = document.getElementById('supportName');
-  const emailEl = document.getElementById('supportEmail');
-  if (state.user?.name  && nameEl)  nameEl.value  = state.user.name;
-  if (state.user?.email && emailEl) emailEl.value = state.user.email;
+  if (state.user?.name && nameEl && !nameEl.value) nameEl.value = state.user.name;
 }
 
-document.getElementById('supportSubmitBtn').addEventListener('click', async () => {
+const SUPPORT_BTN_DEFAULT = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.039 2.878 1.188 3.077.15.198 2.042 3.116 4.95 4.378.692.302 1.233.482 1.655.618.697.221 1.33.19 1.83.115.558-.083 1.758-.718 2.006-1.412.247-.695.247-1.29.172-1.412-.074-.121-.272-.196-.57-.345zM12.067.012c-6.626 0-12 5.373-12 12 0 2.112.548 4.17 1.594 5.98L0 24l6.19-1.625c1.763.96 3.746 1.465 5.763 1.467h.005c6.623 0 12-5.373 12-12 0-3.2-1.244-6.208-3.504-8.469C18.19 1.256 15.185.012 12.067.012z"/></svg> Enviar no WhatsApp`;
+
+document.getElementById('supportSubmitBtn').addEventListener('click', () => {
   const name    = document.getElementById('supportName').value.trim();
-  const email   = document.getElementById('supportEmail').value.trim();
   const message = document.getElementById('supportMessage').value.trim();
 
   if (!name)    { showToast('⚠️', 'Campo obrigatório', 'Por favor, informe seu nome.'); return; }
-  if (!email)   { showToast('⚠️', 'Campo obrigatório', 'Por favor, informe seu email.'); return; }
   if (!message) { showToast('⚠️', 'Campo obrigatório', 'Escreva sua mensagem.'); return; }
 
-  const btn = document.getElementById('supportSubmitBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Enviando...';
+  // Salva no Supabase (log, best effort)
+  sb.from('support_tickets').insert({
+    user_id:   state.user?.id || null,
+    user_name: name,
+    user_email: state.user?.email || '',
+    message
+  }).catch(() => {});
 
-  try {
-    // Save to Supabase (if table exists — best effort)
-    await sb.from('support_tickets').insert({
-      user_id:   state.user?.id || null,
-      user_name: name,
-      user_email: email,
-      message
-    }).then(() => {}).catch(() => {});
+  // Abre WhatsApp com mensagem pré-preenchida
+  const text = encodeURIComponent(`Olá! Sou ${name}, aluno do Start.AI.\n\n${message}`);
+  window.open(`https://wa.me/${SUPPORT_WHATSAPP}?text=${text}`, '_blank');
 
-    // Open mailto to notify Lucas
-    const subject = encodeURIComponent(`[Start.AI] Ticket de suporte — ${name}`);
-    const body    = encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`);
-    window.open(`mailto:lucas@revolucao.school?subject=${subject}&body=${body}`, '_blank');
-
-    // Clear form
-    document.getElementById('supportMessage').value = '';
-    showToast('✅', 'Mensagem enviada!', 'Responderemos em breve no seu email.');
-  } catch(e) {
-    showToast('❌', 'Erro ao enviar', 'Tente novamente ou contate lucas@revolucao.school');
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Enviar mensagem';
-  }
+  document.getElementById('supportMessage').value = '';
+  document.getElementById('supportCard').classList.remove('open');
+  showToast('✅', 'WhatsApp aberto!', 'Sua mensagem já está pronta para enviar.');
 });
 
 /* ═══════════════════════════════════════════════════════════
