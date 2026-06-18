@@ -2520,7 +2520,7 @@ function renderLesson() {
   const name = state.user?.name || '';
   const initial = getInitial(name);
 
-  document.getElementById('sidebarAvatar').textContent = initial;
+  updateSidebarAvatar(name, state.user?.avatarUrl || null);
   document.getElementById('sidebarName').textContent = name;
   document.getElementById('breadcrumbText').textContent = `Dia ${idx+1} — ${l.title}`;
   document.getElementById('pillarChip').textContent = l.pillar;
@@ -3175,8 +3175,12 @@ function updateSidebarAvatar(name, avatarUrl) {
     const img = document.createElement('img');
     img.src = avatarUrl;
     img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%;';
-    img.onerror = () => { sidebarAvEl.textContent = getInitial(name); sidebarAvEl.style = ''; };
+    img.onerror = () => { sidebarAvEl.innerHTML = ''; sidebarAvEl.style = ''; sidebarAvEl.textContent = getInitial(name); };
     sidebarAvEl.appendChild(img);
+  } else {
+    sidebarAvEl.innerHTML = '';
+    sidebarAvEl.style = '';
+    sidebarAvEl.textContent = getInitial(name);
   }
 }
 
