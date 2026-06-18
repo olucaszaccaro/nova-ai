@@ -637,11 +637,11 @@
       /* hide particle animation (renders too green on phone) */
       .hero-bg::after { display:none; }
       /* hero-content: column layout, photo stacks above text */
-      .hero-content { padding:24px 20px 32px !important; flex-direction:column-reverse; align-items:center; gap:20px; }
+      .hero-content { padding:24px 20px 32px !important; flex-direction:column-reverse !important; align-items:center !important; gap:20px !important; }
       .hero-text-col { text-align:center; }
       /* show photo on mobile but smaller and centered */
-      .hero-photo-col { display:flex !important; justify-content:center; }
-      .hero-photo { width:90px; height:118px; border-radius:14px; }
+      .hero-photo-col { display:flex !important; justify-content:center !important; width:100% !important; }
+      .hero-photo { width:120px !important; height:158px !important; border-radius:16px !important; }
       .hero-photo-wrap::before { display:none; }
       .hero-actions { justify-content:center; }
       .home-content { padding:0 16px calc(60px + env(safe-area-inset-bottom,0px)); }
