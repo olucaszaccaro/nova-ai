@@ -2011,7 +2011,6 @@ function renderHome() {
   const rocketPct = doneLessons === 0 ? 2 : doneLessons === totalLessons ? 94 : Math.round(4 + (doneLessons / totalLessons) * 88);
 
   // Completion badge
-  const allDone = doneLessons === totalLessons;
   const streakFireCount = Math.min(streak, 5);
   const streakFires = '🔥'.repeat(streakFireCount) || '–';
 
