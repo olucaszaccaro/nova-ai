@@ -173,6 +173,9 @@
       position:relative; height:72vh; min-height:480px;
       display:flex; align-items:flex-end; overflow:hidden; margin-top:-70px;
     }
+    @media(max-width:768px) {
+      .home-hero { height:auto; min-height:0; padding:90px 0 0; margin-top:0; }
+    }
     .hero-bg {
       position:absolute; inset:0;
       background:
@@ -594,8 +597,42 @@
     .mobile-nav-drawer.open .mobile-nav-panel { transform:translateX(0); }
 
     @media(max-width:900px) { .cards-row{grid-template-columns:repeat(3,1fr);} .stats-row{grid-template-columns:1fr 1fr;} }
-    @media(max-width:680px) { .cards-row{grid-template-columns:repeat(2,1fr);} .home-nav{padding:14px 20px;} .hero-content{padding:0 20px 40px;} .home-content{padding:0 20px 60px;} .stats-row{grid-template-columns:1fr;} .community-home-card{flex-direction:column;gap:16px;align-items:flex-start;} }
-    @media(max-width:768px) { .sidebar{display:none;} .main{margin-left:0;} .mobile-header{display:flex;} .main-header{padding:14px 20px;} .lesson-content{padding:20px 20px 40px;} .comments-section{padding:0 20px 60px;} .lesson-title{font-size:1.5rem;} }
+    @media(max-width:768px) {
+      /* lesson screen */
+      .sidebar{display:none;} .main{margin-left:0;} .mobile-header{display:flex;}
+      .main-header{padding:14px 20px;} .lesson-content{padding:20px 20px 40px;}
+      .comments-section{padding:0 20px 60px;} .lesson-title{font-size:1.5rem;}
+      /* home screen */
+      .home-nav{padding:12px 20px;}
+      .home-hero{height:auto; min-height:auto; padding-top:0;}
+      .hero-content{padding:0 20px 36px !important;}
+      .home-content{padding:0 16px 60px;}
+      .home-footer{padding:0 16px 40px;}
+      .hn-name{max-width:110px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+    }
+    @media(max-width:680px) {
+      .cards-row{grid-template-columns:repeat(2,1fr); gap:10px;}
+      .hero-content{padding:0 16px 28px !important;}
+      .home-content{padding:0 16px 60px;}
+      .stats-row{grid-template-columns:1fr;}
+      .community-home-card{flex-direction:column;gap:16px;align-items:flex-start;}
+    }
+    @media(max-width:480px) {
+      .hero-title{font-size:1.75rem;}
+      .hero-desc{font-size:0.9rem;}
+      .hero-actions{flex-direction:column; gap:10px;}
+      .btn-hero-primary,.btn-hero-secondary{width:100%; justify-content:center;}
+      .hero-progress-bar{max-width:130px;}
+      .hn-name{display:none;}
+      .cards-row{grid-template-columns:1fr 1fr; gap:8px;}
+      .home-section{margin-bottom:36px;}
+      .section-label{font-size:0.7rem;}
+      /* lesson screen small */
+      .lesson-tab-btn{padding:8px 14px; font-size:0.8rem;}
+      .resources-grid{grid-template-columns:1fr;}
+      .comment-text{font-size:0.85rem;}
+      .btn-complete{font-size:0.75rem; padding:7px 14px;}
+    }
     @media(prefers-reduced-motion:reduce) { .node.current{animation:none;} *{transition-duration:.01ms!important;} }
     :focus-visible { outline:2px solid var(--green); outline-offset:2px; }
 
@@ -1340,7 +1377,7 @@
   <nav class="home-nav" id="homeNav">
     <div class="hn-logo">Start.AI</div>
     <div class="hn-user">
-      <div class="hn-avatar" id="homeAvatar">?</div>
+      <div class="hn-avatar" id="homeAvatar" onclick="goProfile()" title="Meu perfil" style="cursor:pointer;">?</div>
       <span class="hn-name" id="homeUserName"></span>
       <button class="hn-logout" id="homeLogout">Sair</button>
     </div>

@@ -253,9 +253,6 @@
       border-radius: var(--rl); overflow: hidden;
       margin-top: 3rem;
     }
-    @media (max-width: 700px) {
-      .pillars { grid-template-columns: repeat(2,1fr); }
-    }
     .pillar { background: var(--space); padding: 2rem 1.75rem; }
     .pillar-icon { font-size: 1.6rem; margin-bottom: 1rem; }
     .pillar p { font-size: .875rem; color: var(--sub); line-height: 1.65; margin-top: .4rem; }
@@ -473,17 +470,31 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
-      .pillars { grid-template-columns: 1fr; }
+      section { padding: 3.5rem 0; }
+      .hero { padding: 5rem 1.5rem 3rem; }
+      .pillars { grid-template-columns: repeat(2,1fr); }
       .ladder  { grid-template-columns: 1fr; }
       .steps   { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .about-photo { aspect-ratio: 1 / 1; width: 140px; }
+      .about-photo { aspect-ratio: 1 / 1; width: 140px; margin: 0 auto; }
       .module { padding: 1rem 1.25rem; }
       .course-head { flex-direction: column; }
       h1 { letter-spacing: -1.5px; }
       .stats { gap: 1.5rem; }
       .footer-inner { flex-direction: column; text-align: center; }
       .footer-links { flex-wrap: wrap; justify-content: center; }
+    }
+    @media (max-width: 480px) {
+      .nav-powered { display: none; }
+      .hero { padding: 4rem 1rem 2.5rem; }
+      .btn-cta.large { width: 100%; justify-content: center; }
+      .pillars { grid-template-columns: 1fr; }
+      .hero-social { gap: .5rem; }
+      .stats { flex-wrap: wrap; gap: 1rem; }
+      h2 { letter-spacing: -1px; }
+      .modal { padding: 1.75rem; }
+      .legal-body { padding: 1.25rem 1.25rem 1.5rem; }
+      .legal-header { padding: 1.25rem 1.25rem 0; }
     }
   </style>
 </head>
