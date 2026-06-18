@@ -2340,14 +2340,20 @@ sb.auth.onAuthStateChange((event, session) => {
       setTimeout(() => showToast('<span class="material-symbols-rounded" style="font-size:1.1rem;color:var(--green)">check_circle</span>', `Olá, ${metaName.split(' ')[0]}!`, 'Login realizado com sucesso.'), 400);
     }
 
-    // Load real profile name in background (non-blocking)
-    sb.from('profiles').select('name').eq('id', session.user.id).single().then(({ data: profile }) => {
-      if (profile?.name && state.user?.id === session.user.id) {
-        state.user.name = profile.name;
-        const nameEl = document.getElementById('homeUserName');
-        const avatarEl = document.getElementById('homeAvatar');
-        if (nameEl) nameEl.textContent = profile.name;
-        if (avatarEl) avatarEl.textContent = getInitial(profile.name);
+    // Load real profile name + avatar in background (non-blocking)
+    sb.from('profiles').select('name,avatar_url').eq('id', session.user.id).single().then(({ data: profile }) => {
+      if (profile && state.user?.id === session.user.id) {
+        if (profile.name) {
+          state.user.name = profile.name;
+          const nameEl = document.getElementById('homeUserName');
+          const avatarEl = document.getElementById('homeAvatar');
+          if (nameEl) nameEl.textContent = profile.name;
+          if (avatarEl) avatarEl.textContent = getInitial(profile.name);
+        }
+        if (profile.avatar_url) {
+          state.user.avatarUrl = profile.avatar_url;
+          updateSidebarAvatar(state.user.name, profile.avatar_url);
+        }
       }
     }).catch(() => {});
   } else {
@@ -3054,7 +3060,9 @@ async function loadProfileScreen() {
   document.getElementById('profileLinkedin').value = data.linkedin_url || '';
   document.getElementById('profileGoal').value = data.goal || '';
   document.getElementById('profilePublicToggle').checked = !!data.is_public;
-  renderProfileAvatar(data.avatar_url, data.name || state.user.name);
+  // cache in state so it survives screen navigation
+  if (data.avatar_url) state.user.avatarUrl = data.avatar_url;
+  renderProfileAvatar(data.avatar_url || state.user.avatarUrl, data.name || state.user.name);
 }
 
 function renderProfileAvatar(avatarUrl, name) {
@@ -3112,10 +3120,13 @@ async function saveProfile() {
   const goal = document.getElementById('profileGoal').value.trim();
   const is_public = document.getElementById('profilePublicToggle').checked;
   try {
-    const { error } = await sb.from('profiles').upsert({
+    const upsertPayload = {
       id: state.user.id, name: name || state.user.name,
       bio, profession, city, linkedin_url, goal, is_public
-    });
+    };
+    // preserve avatar_url — never let saveProfile clear it
+    if (state.user.avatarUrl) upsertPayload.avatar_url = state.user.avatarUrl;
+    const { error } = await sb.from('profiles').upsert(upsertPayload);
     if (error) throw error;
     if (name) {
       state.user.name = name;
