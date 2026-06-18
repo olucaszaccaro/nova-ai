@@ -611,6 +611,238 @@
       .modal-body { max-height:55vh; }
       .modal-header, .modal-tabs, .modal-body, .modal-footer-note { padding-left:20px; padding-right:20px; }
     }
+
+    /* ══ FAQ ACCORDION ══════════════════════════════════════ */
+    .faq-list { display:flex; flex-direction:column; gap:10px; }
+    .faq-item {
+      background: rgba(26,47,10,0.45);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item:hover { border-color: rgba(150,208,52,0.28); }
+    .faq-item.open { border-color: rgba(150,208,52,0.35); }
+    .faq-question {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 18px;
+      cursor: pointer;
+      font-size: 0.88rem; font-weight: 600; color: var(--white);
+      user-select: none;
+    }
+    .faq-question svg { flex-shrink:0; transition: transform 0.25s; opacity:0.6; }
+    .faq-item.open .faq-question svg { transform: rotate(180deg); opacity:1; }
+    .faq-body {
+      display: none;
+      padding: 0 18px 16px;
+      font-size: 0.82rem; color: rgba(240,250,224,0.72); line-height: 1.65;
+    }
+    .faq-item.open .faq-body { display: block; }
+
+    /* ══ LESSON TABS (Conteúdo / Materiais) ═════════════════ */
+    .lesson-tabs {
+      display: flex; gap: 4px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px; margin-top: 4px;
+    }
+    .lesson-tab-btn {
+      background: none; border: none; cursor: pointer;
+      font-family: 'Inter', sans-serif; font-size: 0.83rem; font-weight: 600;
+      color: var(--muted); padding: 10px 16px;
+      border-bottom: 2px solid transparent; margin-bottom: -1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .lesson-tab-btn:hover { color: var(--white); }
+    .lesson-tab-btn.active { color: var(--green); border-bottom-color: var(--green); }
+    .lesson-tab-pane { display: none; }
+    .lesson-tab-pane.active { display: block; }
+
+    /* Materials pane */
+    .materials-list { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+    .material-item {
+      display: flex; align-items: center; gap: 14px;
+      background: rgba(26,47,10,0.45); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 16px;
+      text-decoration: none; color: var(--white);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .material-item:hover { border-color: rgba(150,208,52,0.35); background: rgba(26,47,10,0.65); }
+    .material-item.disabled { opacity: 0.45; pointer-events: none; }
+    .material-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(150,208,52,0.12); color: var(--green); flex-shrink:0;
+    }
+    .material-info { flex:1; }
+    .material-title { font-size: 0.86rem; font-weight: 600; }
+    .material-type { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+    .material-badge-soon {
+      font-size: 0.65rem; color: var(--muted);
+      background: rgba(240,250,224,0.07); border-radius: 4px; padding: 2px 7px;
+    }
+
+    /* ══ STREAK ═════════════════════════════════════════════ */
+    .stat-card-streak { background: linear-gradient(135deg, rgba(150,208,52,0.12), rgba(197,240,106,0.06)); border-color: rgba(150,208,52,0.25); }
+
+    /* ══ COMPLETION SCREEN ══════════════════════════════════ */
+    #completionScreen {
+      min-height: 100vh; display: none; align-items: center; justify-content: center;
+      padding: 32px 20px;
+      background: radial-gradient(ellipse at 40% 30%, rgba(26,47,10,0.95), var(--space) 70%);
+      position: relative; overflow: hidden;
+    }
+    #completionScreen.active { display: flex; }
+    .completion-box {
+      width: 100%; max-width: 520px; position: relative; z-index: 2;
+      text-align: center;
+    }
+    .completion-trophy {
+      font-size: 4rem; margin-bottom: 16px; display: block;
+      animation: trophy-pop 0.6s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes trophy-pop {
+      from { transform: scale(0.3) rotate(-15deg); opacity:0; }
+      to   { transform: scale(1) rotate(0deg); opacity:1; }
+    }
+    .completion-title {
+      font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 2rem;
+      background: linear-gradient(135deg, var(--green), var(--lime));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 10px;
+    }
+    .completion-sub {
+      font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 32px;
+    }
+    .completion-stats {
+      display: flex; gap: 12px; justify-content: center; margin-bottom: 32px; flex-wrap: wrap;
+    }
+    .completion-stat {
+      background: rgba(26,47,10,0.55); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 20px; min-width: 90px;
+    }
+    .completion-stat-val {
+      font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--green);
+    }
+    .completion-stat-lbl { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+    /* NPS */
+    .nps-block { margin-bottom: 28px; }
+    .nps-label { font-size: 0.85rem; color: var(--muted); margin-bottom: 12px; }
+    .nps-buttons { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+    .nps-btn {
+      width: 40px; height: 40px; border-radius: 8px;
+      background: rgba(26,47,10,0.55); border: 1px solid var(--border);
+      color: var(--muted); cursor: pointer; font-size: 0.8rem; font-weight: 600;
+      transition: all 0.2s;
+    }
+    .nps-btn:hover { border-color: rgba(150,208,52,0.4); color: var(--white); }
+    .nps-btn.selected { background: var(--green); color: var(--space); border-color: var(--green); }
+    .nps-thanks { font-size: 0.82rem; color: var(--green); margin-top: 8px; display:none; }
+
+    .completion-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .btn-completion-primary {
+      background: linear-gradient(135deg, var(--green), var(--lime));
+      color: var(--space); border: none; border-radius: 10px;
+      padding: 13px 24px; font-family: 'Outfit', sans-serif; font-weight: 700;
+      font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 8px;
+      transition: opacity 0.2s;
+    }
+    .btn-completion-primary:hover { opacity: 0.88; }
+    .btn-completion-secondary {
+      background: none; border: 1px solid var(--border); border-radius: 10px;
+      color: var(--white); padding: 13px 20px; font-size: 0.85rem; cursor: pointer;
+      font-family: 'Inter', sans-serif; transition: border-color 0.2s;
+    }
+    .btn-completion-secondary:hover { border-color: rgba(150,208,52,0.4); }
+
+    /* Confetti */
+    .confetti-canvas { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }
+
+    /* ══ CERTIFICATE ════════════════════════════════════════ */
+    .certificate-wrap {
+      margin-top: 32px; padding: 28px;
+      background: rgba(26,47,10,0.5); border: 1px solid rgba(150,208,52,0.25); border-radius: 16px;
+    }
+    .certificate-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+    #certCanvas {
+      width: 100%; max-width: 480px; border-radius: 10px;
+      display: block; margin: 0 auto 16px;
+      border: 1px solid rgba(150,208,52,0.2);
+    }
+    .btn-download-cert {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: none; border: 1px solid rgba(150,208,52,0.4);
+      color: var(--green); border-radius: 8px; padding: 10px 18px;
+      font-size: 0.82rem; cursor: pointer; font-weight: 600;
+      transition: background 0.2s;
+    }
+    .btn-download-cert:hover { background: rgba(150,208,52,0.1); }
+
+    /* ══ SHARE MODAL ════════════════════════════════════════ */
+    #shareModal {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(8,13,6,0.88); backdrop-filter: blur(12px);
+      display: none; align-items: center; justify-content: center; padding: 20px;
+    }
+    #shareModal.open { display: flex; }
+    .share-modal-box {
+      background: rgba(20,38,10,0.95); border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px; width: 100%; max-width: 420px;
+      position: relative;
+    }
+    .share-modal-title {
+      font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+    .share-modal-sub { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; }
+    .share-card-preview {
+      background: linear-gradient(135deg, #0d1a06 0%, #1a3a08 50%, #0a1204 100%);
+      border: 1px solid rgba(150,208,52,0.3);
+      border-radius: 14px; padding: 28px 24px; text-align: center; margin-bottom: 20px;
+      position: relative; overflow: hidden;
+    }
+    .share-card-preview::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 70% 30%, rgba(150,208,52,0.1), transparent 60%);
+    }
+    .share-card-logo {
+      font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.6rem;
+      background: linear-gradient(135deg, var(--green), var(--lime));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 6px; position: relative; z-index: 1;
+    }
+    .share-card-tag {
+      font-size: 0.7rem; color: var(--muted); margin-bottom: 16px; position: relative; z-index:1;
+    }
+    .share-card-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(150,208,52,0.15); border: 1px solid rgba(150,208,52,0.35);
+      border-radius: 100px; padding: 8px 18px; margin-bottom: 14px;
+      position: relative; z-index: 1;
+    }
+    .share-card-badge-text { font-size: 0.85rem; font-weight: 700; color: var(--green); }
+    .share-card-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; position: relative; z-index:1; }
+    .share-card-desc { font-size: 0.73rem; color: var(--muted); position: relative; z-index:1; }
+    .share-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn-share-copy {
+      flex:1; background: linear-gradient(135deg, var(--green), var(--lime));
+      color: var(--space); border: none; border-radius: 9px;
+      padding: 11px 16px; font-weight: 700; font-size: 0.83rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+      transition: opacity 0.2s;
+    }
+    .btn-share-copy:hover { opacity: 0.88; }
+    .btn-share-close {
+      background: none; border: 1px solid var(--border); border-radius: 9px;
+      color: var(--muted); padding: 11px 14px; font-size: 0.83rem; cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-share-close:hover { color: var(--white); border-color: rgba(150,208,52,0.3); }
+
+    @media(max-width:680px) {
+      .completion-title { font-size: 1.5rem; }
+      .nps-btn { width: 34px; height: 34px; font-size: 0.72rem; }
+    }
   </style>
   <script async src="https://tally.so/widgets/embed.js"></script>
 </head>
@@ -776,14 +1008,62 @@
     </section>
 
     <section class="home-section">
+      <div class="section-label">Perguntas Frequentes</div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            Quanto tempo leva para concluir o Start.AI?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-body">O curso é dividido em 5 aulas de aproximadamente 15 minutos cada, mais o tempo de prática dos exercícios. Você pode concluir em um dia ou no seu próprio ritmo — o acesso é permanente.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            Preciso ter algum conhecimento técnico?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-body">Não. O Start.AI foi feito para quem nunca usou IA de forma profissional. Não precisa saber programar, não precisa entender algoritmos — só precisa de curiosidade e vontade de aprender.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            Os vídeos já estão disponíveis?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-body">As aulas estão sendo lançadas progressivamente. Enquanto os vídeos não ficam prontos, todo o conteúdo do curso está disponível em texto, exercícios e materiais práticos para você já começar.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            O certificado é reconhecido?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-body">O Start.AI é um curso gratuito de introdução à IA. Ao concluir todas as aulas, você recebe um certificado de conclusão emitido pela Nova AI / (R)evolução School, que pode ser compartilhado no LinkedIn e outras redes.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            Qual é o próximo passo depois do Start.AI?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-body">Quem conclui o Start.AI está pronto para dar um salto com o Rise.ai — nossa formação completa em IA aplicada ao trabalho. Você vai ver o link na tela de conclusão do curso!</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            Posso acessar do celular?
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-body">Sim! A plataforma é totalmente responsiva e funciona perfeitamente no celular, tablet e computador. Acesse de onde for mais confortável para você.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section">
       <div class="section-label">Suporte</div>
       <div class="support-card" id="supportCard">
         <div class="support-card-header" id="supportCardToggle">
-          <div class="support-card-icon" style="background:rgba(37,211,102,0.1);border-color:rgba(37,211,102,0.25);color:#25D366;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.039 2.878 1.188 3.077.15.198 2.042 3.116 4.95 4.378.692.302 1.233.482 1.655.618.697.221 1.33.19 1.83.115.558-.083 1.758-.718 2.006-1.412.247-.695.247-1.29.172-1.412-.074-.121-.272-.196-.57-.345zM12.067.012c-6.626 0-12 5.373-12 12 0 2.112.548 4.17 1.594 5.98L0 24l6.19-1.625c1.763.96 3.746 1.465 5.763 1.467h.005c6.623 0 12-5.373 12-12 0-3.2-1.244-6.208-3.504-8.469C18.19 1.256 15.185.012 12.067.012z"/></svg>
+          <div class="support-card-icon" style="background:rgba(150,208,52,0.1);border-color:rgba(150,208,52,0.25);color:var(--green);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
           </div>
           <div>
-            <div class="support-card-title">Suporte via WhatsApp</div>
+            <div class="support-card-title">Fale com o Suporte</div>
             <div class="support-card-sub">Alguma dúvida ou problema? Clique para enviar uma mensagem.</div>
           </div>
           <svg class="support-toggle-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
@@ -796,7 +1076,7 @@
   </div>
 
   <footer class="home-footer">
-    &copy; 2025 Nova AI · (R)evolução School &nbsp;·&nbsp;
+    &copy; 2026 Nova AI · (R)evolução School &nbsp;·&nbsp;
     <a id="openTermsLink">Termos de Uso &amp; Políticas</a>
   </footer>
 </div>
@@ -857,17 +1137,32 @@
         <span class="duration-chip" id="durationChip"></span>
       </div>
       <h1 class="lesson-title"><span class="day-label" id="dayLabel"></span><span id="lessonTitle"></span></h1>
-      <div class="video-wrap" id="videoWrap"></div>
-      <p class="lesson-desc" id="lessonDesc"></p>
-      <div class="section-heading">Exercício da aula</div>
-      <div class="exercise-card"><div class="exercise-label">Coloca em prática</div><p id="exerciseText"></p></div>
-      <div class="section-heading">Recursos da aula</div>
-      <div class="resources-grid" id="resourcesGrid"></div>
-      <div class="divider"></div>
-      <div class="section-heading">Próximo passo</div>
-      <div class="next-lesson" id="nextLesson">
-        <div class="next-info"><div class="next-label">Próxima aula</div><div class="next-title" id="nextTitle"></div><div class="next-pillar" id="nextPillar"></div></div>
-        <div class="next-arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+
+      <!-- Tabs -->
+      <div class="lesson-tabs">
+        <button class="lesson-tab-btn active" data-tab="conteudo">Conteúdo</button>
+        <button class="lesson-tab-btn" data-tab="materiais">Materiais</button>
+      </div>
+
+      <!-- Pane: Conteúdo -->
+      <div class="lesson-tab-pane active" id="pane-conteudo">
+        <div class="video-wrap" id="videoWrap"></div>
+        <p class="lesson-desc" id="lessonDesc"></p>
+        <div class="section-heading">Exercício da aula</div>
+        <div class="exercise-card"><div class="exercise-label">Coloca em prática</div><p id="exerciseText"></p></div>
+        <div class="section-heading">Recursos da aula</div>
+        <div class="resources-grid" id="resourcesGrid"></div>
+        <div class="divider"></div>
+        <div class="section-heading">Próximo passo</div>
+        <div class="next-lesson" id="nextLesson">
+          <div class="next-info"><div class="next-label">Próxima aula</div><div class="next-title" id="nextTitle"></div><div class="next-pillar" id="nextPillar"></div></div>
+          <div class="next-arrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </div>
+      </div>
+
+      <!-- Pane: Materiais -->
+      <div class="lesson-tab-pane" id="pane-materiais">
+        <div class="materials-list" id="materialsList"></div>
       </div>
     </div>
 
@@ -979,6 +1274,84 @@
   </div>
 </div>
 
+<!-- ══ SCREEN 4: COMPLETION ══════════════════════════════════ -->
+<canvas class="confetti-canvas" id="confettiCanvas"></canvas>
+<div id="completionScreen" class="screen">
+  <div class="completion-box">
+    <span class="completion-trophy">🏆</span>
+    <div class="completion-title">Você concluiu o Start.AI!</div>
+    <p class="completion-sub">Parabéns! Você passou pelos 5 dias e descobriu como a IA pode transformar a sua rotina. Agora você faz parte de um grupo seleto que vai além do hype.</p>
+
+    <div class="completion-stats">
+      <div class="completion-stat">
+        <div class="completion-stat-val">5</div>
+        <div class="completion-stat-lbl">Aulas</div>
+      </div>
+      <div class="completion-stat">
+        <div class="completion-stat-val">75</div>
+        <div class="completion-stat-lbl">Min de conteúdo</div>
+      </div>
+      <div class="completion-stat">
+        <div class="completion-stat-val">100%</div>
+        <div class="completion-stat-lbl">Concluído</div>
+      </div>
+    </div>
+
+    <div class="nps-block">
+      <div class="nps-label">Em uma escala de 0 a 10, o quanto você indicaria o Start.AI para um amigo?</div>
+      <div class="nps-buttons" id="npsButtons"></div>
+      <div class="nps-thanks" id="npsThanks">Obrigado pelo feedback! 💚</div>
+    </div>
+
+    <div class="completion-actions">
+      <button class="btn-completion-primary" id="btnRise">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        Quero o próximo nível
+      </button>
+      <button class="btn-completion-secondary" id="btnShareProgress">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Compartilhar conquista
+      </button>
+      <button class="btn-completion-secondary" id="btnBackFromCompletion">Rever o curso</button>
+    </div>
+
+    <div class="certificate-wrap">
+      <div class="certificate-label">Seu certificado</div>
+      <canvas id="certCanvas" width="960" height="540"></canvas>
+      <br>
+      <button class="btn-download-cert" id="btnDownloadCert">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Baixar certificado
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SHARE MODAL ═══════════════════════════════════════════ -->
+<div id="shareModal">
+  <div class="share-modal-box">
+    <div class="share-modal-title">Compartilhe sua conquista</div>
+    <div class="share-modal-sub">Salve a imagem abaixo e poste no Instagram ou LinkedIn!</div>
+    <div class="share-card-preview">
+      <div class="share-card-logo">Start.AI</div>
+      <div class="share-card-tag">by Nova AI · (R)evolução School</div>
+      <div class="share-card-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#96D034" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <span class="share-card-badge-text">Curso Concluído</span>
+      </div>
+      <div class="share-card-name" id="shareCardName"></div>
+      <div class="share-card-desc">Aprendi a usar IA de verdade em 5 dias<br>nova-ai.com.br</div>
+    </div>
+    <div class="share-actions">
+      <button class="btn-share-copy" id="btnCopyShareText">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copiar texto para postar
+      </button>
+      <button class="btn-share-close" id="btnCloseShareModal">Fechar</button>
+    </div>
+  </div>
+</div>
+
 <div id="toastContainer"></div>
 
 <script>
@@ -1002,23 +1375,53 @@ const lessons = [
   { day:1, pillar:'🧠 Entender', title:'Entender IA de verdade', duration:'~15 min', youtubeId:null,
     description:'Descubra como a IA realmente funciona por dentro. Tokens, contexto, modelos, janela de atenção — e por que a forma como a maioria das pessoas usa IA desperdiça 90% do potencial. Sair dessa aula com um modelo mental correto muda tudo que vem depois.',
     exercise:'Abra o Claude e faça o mesmo pedido duas vezes: uma com uma frase curta e sem contexto, e outra com contexto rico (quem você é, o que precisa, qual o formato esperado). Compare os resultados e guarde o prompt que funcionou melhor.',
-    resources:[{label:'Framework CRISP',url:'#',ready:false},{label:'Glossário de IA para não-técnicos',url:'#',ready:false},{label:'Comparativo de modelos',url:'#',ready:false}]},
+    resources:[{label:'Framework CRISP',url:'#',ready:false},{label:'Glossário de IA para não-técnicos',url:'#',ready:false},{label:'Comparativo de modelos',url:'#',ready:false}],
+    materials:[
+      {title:'Framework CRISP (PDF)',type:'PDF · Guia prático',url:'#',ready:false},
+      {title:'Glossário de IA para não-técnicos',type:'PDF · Referência rápida',url:'#',ready:false},
+      {title:'Comparativo de modelos 2025',type:'PDF · Tabela comparativa',url:'#',ready:false},
+      {title:'Prompt de diagnóstico de contexto',type:'Prompt · Copie e use',url:'#',ready:false}
+    ]},
   { day:2, pillar:'✨ Criar', title:'Criar qualquer coisa', duration:'~15 min', youtubeId:null,
     description:'IA não é só um chat para conversar. É um estúdio criativo completo: textos, músicas, imagens, ferramentas digitais simples. Nessa aula você vai criar algo que antes parecia impossível sem anos de estudo — em menos de 10 minutos.',
     exercise:'Escolha UMA coisa para criar agora: uma música no Suno, uma imagem no Ideogram, ou uma ferramenta simples no Claude. Poste o resultado na comunidade do WhatsApp.',
-    resources:[{label:'Prompts de criação por tipo',url:'#',ready:false},{label:'Lista de ferramentas criativas',url:'#',ready:false},{label:'Tutorial: Suno para iniciantes',url:'#',ready:false}]},
+    resources:[{label:'Prompts de criação por tipo',url:'#',ready:false},{label:'Lista de ferramentas criativas',url:'#',ready:false},{label:'Tutorial: Suno para iniciantes',url:'#',ready:false}],
+    materials:[
+      {title:'50 prompts de criação por categoria',type:'PDF · Biblioteca de prompts',url:'#',ready:false},
+      {title:'Lista de ferramentas criativas com IA',type:'PDF · 30+ ferramentas comentadas',url:'#',ready:false},
+      {title:'Tutorial: Suno para iniciantes',type:'PDF · Passo a passo',url:'#',ready:false},
+      {title:'Prompt: crie um post viral em 3 formatos',type:'Prompt · Copie e use',url:'#',ready:false}
+    ]},
   { day:3, pillar:'💡 Resolver', title:'Resolver problemas', duration:'~15 min', youtubeId:null,
     description:'O poder real da IA está em resolver problemas que você tem agora — do trabalho, da vida pessoal, do dia a dia. Nessa aula você aprende a usar a IA como um colaborador que pensa com você, não só como um gerador de texto.',
     exercise:'Pegue um problema real que você está enfrentando hoje. Descreva o problema para o Claude em detalhes e peça uma solução. Adapte a resposta para o seu contexto específico.',
-    resources:[{label:'Biblioteca de prompts por situação',url:'#',ready:false},{label:'Templates de tomada de decisão',url:'#',ready:false},{label:'Roteiro: como descrever problemas',url:'#',ready:false}]},
+    resources:[{label:'Biblioteca de prompts por situação',url:'#',ready:false},{label:'Templates de tomada de decisão',url:'#',ready:false},{label:'Roteiro: como descrever problemas',url:'#',ready:false}],
+    materials:[
+      {title:'Biblioteca de prompts por situação (60+)',type:'PDF · Referência prática',url:'#',ready:false},
+      {title:'Templates de tomada de decisão com IA',type:'PDF · 5 modelos prontos',url:'#',ready:false},
+      {title:'Roteiro: como descrever problemas para a IA',type:'PDF · Método passo a passo',url:'#',ready:false},
+      {title:'Prompt: analise meu problema e me dê 3 soluções',type:'Prompt · Copie e use',url:'#',ready:false}
+    ]},
   { day:4, pillar:'⚡ Automatizar', title:'Automatizar sua rotina', duration:'~15 min', youtubeId:null,
     description:'Toda semana você faz dezenas de tarefas repetitivas. E se metade delas acontecessem sozinhas? Nessa aula você vai identificar suas maiores oportunidades de automação e montar o rascunho do seu AI Playbook pessoal.',
     exercise:'Liste 5 tarefas que você repete toda semana. Escolha a que consome mais tempo e crie um fluxo com a IA para automatizá-la. Documente em 3 linhas como funciona.',
-    resources:[{label:'Template: AI Playbook pessoal',url:'#',ready:false},{label:'Checklist de automação com Claude',url:'#',ready:false},{label:'Exemplos por perfil',url:'#',ready:false}]},
+    resources:[{label:'Template: AI Playbook pessoal',url:'#',ready:false},{label:'Checklist de automação com Claude',url:'#',ready:false},{label:'Exemplos por perfil',url:'#',ready:false}],
+    materials:[
+      {title:'Template: AI Playbook pessoal',type:'PDF · Template editável',url:'#',ready:false},
+      {title:'Checklist de automação com Claude',type:'PDF · 20 tarefas prontas',url:'#',ready:false},
+      {title:'Exemplos de automação por perfil profissional',type:'PDF · 10 perfis + exemplos',url:'#',ready:false},
+      {title:'Prompt: mapeie minha rotina e sugira automações',type:'Prompt · Copie e use',url:'#',ready:false}
+    ]},
   { day:5, pillar:'🚀 Sistema', title:'Seu sistema de IA', duration:'~15 min', youtubeId:null,
     description:'O último dia é sobre integração. Tudo que você aprendeu vira um sistema coerente. Você sai com seu mapa pessoal de IA e um plano claro para o que vem depois.',
     exercise:'Monte o mapa completo do seu sistema de IA: quais ferramentas você vai usar, para quê, e quais são os 3 próximos hábitos que você vai adotar. Compartilhe na comunidade.',
-    resources:[{label:'Template: mapa do sistema de IA',url:'#',ready:false},{label:'Guia: o que vem depois do Start.AI',url:'#',ready:false},{label:'Rise.ai — o próximo nível',url:'#',ready:false}]}
+    resources:[{label:'Template: mapa do sistema de IA',url:'#',ready:false},{label:'Guia: o que vem depois do Start.AI',url:'#',ready:false},{label:'Rise.ai — o próximo nível',url:'#',ready:false}],
+    materials:[
+      {title:'Template: mapa do sistema de IA pessoal',type:'PDF · Template editável',url:'#',ready:false},
+      {title:'Guia: o que vem depois do Start.AI',type:'PDF · Próximos passos',url:'#',ready:false},
+      {title:'Rise.ai — conheça a formação completa',type:'Link · Próximo nível',url:'https://rise.ai',ready:true},
+      {title:'Prompt: monte meu sistema de IA em 10 minutos',type:'Prompt · Copie e use',url:'#',ready:false}
+    ]}
 ];
 
 /* ═══════════════════════════════════════════════════════════
@@ -1360,9 +1763,11 @@ function renderHome() {
   });
 
   // Stats
+  const streak = getStreak();
   document.getElementById('homeStatsRow').innerHTML = `
     <div class="stat-card"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="stat-value">${pct}%</div><div class="stat-label">do curso concluído</div></div></div>
-    <div class="stat-card"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="stat-value">${state.completed.length}</div><div class="stat-label">aulas concluídas</div></div></div>`;
+    <div class="stat-card"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="stat-value">${state.completed.length}</div><div class="stat-label">aulas concluídas</div></div></div>
+    <div class="stat-card stat-card-streak"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div><div class="stat-value">${streak}</div><div class="stat-label">dia${streak===1?'':'s'} seguido${streak===1?'':'s'}</div></div></div>`;
 
 }
 
@@ -1457,16 +1862,52 @@ function renderLesson() {
     nl.style.cursor = 'default';
   }
 
+  // Materials tab
+  const ml = document.getElementById('materialsList');
+  if (ml) {
+    ml.innerHTML = '';
+    (l.materials || []).forEach(m => {
+      const isReady = m.ready;
+      const a = document.createElement(isReady ? 'a' : 'div');
+      a.className = `material-item${isReady ? '' : ' disabled'}`;
+      if (isReady) { a.href = m.url; a.target = '_blank'; a.rel = 'noopener'; }
+      a.innerHTML = `
+        <div class="material-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${isReady ? '<path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>' : '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>'}</svg>
+        </div>
+        <div class="material-info">
+          <div class="material-title">${m.title}</div>
+          <div class="material-type">${m.type}</div>
+        </div>
+        ${!isReady ? '<span class="material-badge-soon">Em breve</span>' : ''}`;
+      ml.appendChild(a);
+    });
+  }
+
+  // Reset lesson tabs to Conteúdo
+  document.querySelectorAll('.lesson-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === 'conteudo'));
+  document.querySelectorAll('.lesson-tab-pane').forEach(p => p.classList.toggle('active', p.id === 'pane-conteudo'));
+
   renderThread();
   renderProgressBars();
   loadComments(idx);
 }
 
 function toggleComplete(idx) {
-  if (isCompleted(idx)) state.completed = state.completed.filter(i => i!==idx);
-  else state.completed.push(idx);
+  const wasAllDone = state.completed.length === lessons.length;
+  if (isCompleted(idx)) {
+    state.completed = state.completed.filter(i => i!==idx);
+  } else {
+    state.completed.push(idx);
+    updateStreak(); // mark today as a study day
+  }
   saveCompleted();
   renderLesson();
+
+  // Show completion screen if just finished all lessons
+  if (!wasAllDone && state.completed.length === lessons.length) {
+    setTimeout(() => showCompletionScreen(), 600);
+  }
 }
 
 document.getElementById('backHomeBtn').addEventListener('click', goHome);
@@ -1604,6 +2045,250 @@ function closeMobileDrawer() {
 }
 document.getElementById('mobileMenuBtn').addEventListener('click', openMobileDrawer);
 document.getElementById('mobileOverlay').addEventListener('click', closeMobileDrawer);
+
+/* ═══════════════════════════════════════════════════════════
+   LESSON TABS
+═══════════════════════════════════════════════════════════ */
+document.querySelectorAll('.lesson-tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.lesson-tab-btn').forEach(b => b.classList.toggle('active', b === btn));
+    document.querySelectorAll('.lesson-tab-pane').forEach(p => p.classList.toggle('active', p.id === `pane-${tab}`));
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════
+   STREAK DE ESTUDO
+═══════════════════════════════════════════════════════════ */
+function getStreakKey() { return `startai_streak_${state.user?.id || 'guest'}`; }
+function getStreak() {
+  const data = JSON.parse(localStorage.getItem(getStreakKey()) || '{"count":0,"lastDate":null}');
+  return data.count || 0;
+}
+function updateStreak() {
+  const key = getStreakKey();
+  const data = JSON.parse(localStorage.getItem(key) || '{"count":0,"lastDate":null}');
+  const today = new Date().toISOString().slice(0, 10);
+  if (data.lastDate === today) return; // already counted today
+  const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+  data.count = (data.lastDate === yesterday) ? (data.count || 0) + 1 : 1;
+  data.lastDate = today;
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CONFETTI
+═══════════════════════════════════════════════════════════ */
+function launchConfetti() {
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const pieces = Array.from({length:120}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height - canvas.height,
+    w: 8 + Math.random() * 8,
+    h: 4 + Math.random() * 6,
+    color: ['#96D034','#C5F06A','#F0FAE0','#2a8a00','#fff176'][Math.floor(Math.random()*5)],
+    vx: (Math.random()-0.5)*3,
+    vy: 2 + Math.random()*4,
+    angle: Math.random()*Math.PI*2,
+    spin: (Math.random()-0.5)*0.15
+  }));
+  let frame;
+  let ticks = 0;
+  function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p => {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.angle);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      ctx.restore();
+      p.x += p.vx; p.y += p.vy; p.angle += p.spin; p.vy += 0.06;
+    });
+    ticks++;
+    if (ticks < 220) frame = requestAnimationFrame(draw);
+    else ctx.clearRect(0,0,canvas.width,canvas.height);
+  }
+  if (frame) cancelAnimationFrame(frame);
+  draw();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   COMPLETION SCREEN
+═══════════════════════════════════════════════════════════ */
+function showCompletionScreen() {
+  launchConfetti();
+  buildNpsButtons();
+  drawCertificate();
+  document.getElementById('shareCardName').textContent = state.user?.name || 'Aluno';
+  showScreen('completionScreen');
+  window.scrollTo(0,0);
+}
+
+document.getElementById('btnBackFromCompletion').addEventListener('click', goHome);
+document.getElementById('btnRise').addEventListener('click', () => {
+  window.open('https://rise.ai', '_blank', 'noopener');
+});
+document.getElementById('btnShareProgress').addEventListener('click', () => {
+  document.getElementById('shareCardName').textContent = state.user?.name || 'Aluno';
+  document.getElementById('shareModal').classList.add('open');
+});
+
+/* ═══════════════════════════════════════════════════════════
+   NPS
+═══════════════════════════════════════════════════════════ */
+function buildNpsButtons() {
+  const container = document.getElementById('npsButtons');
+  container.innerHTML = '';
+  document.getElementById('npsThanks').style.display = 'none';
+  for (let i = 0; i <= 10; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'nps-btn';
+    btn.textContent = i;
+    btn.addEventListener('click', async () => {
+      document.querySelectorAll('.nps-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      document.getElementById('npsThanks').style.display = 'block';
+      // Save to Supabase (best-effort, table may not exist yet)
+      try {
+        await sb.from('nps_responses').insert({
+          user_id: state.user?.id,
+          score: i,
+          course: 'startai'
+        });
+      } catch(e) { /* silently ignore if table doesn't exist */ }
+    });
+    container.appendChild(btn);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CERTIFICATE
+═══════════════════════════════════════════════════════════ */
+function drawCertificate() {
+  const canvas = document.getElementById('certCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  // Background
+  const bg = ctx.createLinearGradient(0, 0, W, H);
+  bg.addColorStop(0, '#0d1a06');
+  bg.addColorStop(0.5, '#1a3a08');
+  bg.addColorStop(1, '#0a1204');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  // Border
+  ctx.strokeStyle = 'rgba(150,208,52,0.5)';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(18, 18, W-36, H-36);
+  ctx.strokeStyle = 'rgba(150,208,52,0.2)';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(26, 26, W-52, H-52);
+
+  // Corner accents
+  const corners = [[36,36],[W-36,36],[36,H-36],[W-36,H-36]];
+  corners.forEach(([cx,cy]) => {
+    ctx.beginPath();
+    ctx.arc(cx, cy, 6, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(150,208,52,0.6)';
+    ctx.fill();
+  });
+
+  // Logo
+  ctx.font = 'bold 36px Outfit, sans-serif';
+  ctx.fillStyle = '#96D034';
+  ctx.textAlign = 'center';
+  ctx.fillText('Start.AI', W/2, 80);
+
+  // Subtitle
+  ctx.font = '500 14px Inter, sans-serif';
+  ctx.fillStyle = 'rgba(240,250,224,0.45)';
+  ctx.fillText('by Nova AI · (R)evolução School', W/2, 106);
+
+  // Divider line
+  ctx.beginPath();
+  ctx.moveTo(W/2-120, 122); ctx.lineTo(W/2+120, 122);
+  ctx.strokeStyle = 'rgba(150,208,52,0.25)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Certificate of
+  ctx.font = '500 13px Inter, sans-serif';
+  ctx.fillStyle = 'rgba(240,250,224,0.5)';
+  ctx.letterSpacing = '2px';
+  ctx.fillText('CERTIFICADO DE CONCLUSÃO', W/2, 160);
+
+  // Name
+  const name = state.user?.name || 'Aluno';
+  ctx.font = 'bold 38px Outfit, sans-serif';
+  ctx.fillStyle = '#F0FAE0';
+  ctx.fillText(name, W/2, 225);
+
+  // Description
+  ctx.font = '400 15px Inter, sans-serif';
+  ctx.fillStyle = 'rgba(240,250,224,0.65)';
+  ctx.fillText('concluiu com sucesso o curso', W/2, 268);
+  ctx.font = 'bold 18px Outfit, sans-serif';
+  ctx.fillStyle = '#96D034';
+  ctx.fillText('Start.AI — Inteligência Artificial na Prática', W/2, 298);
+  ctx.font = '400 13px Inter, sans-serif';
+  ctx.fillStyle = 'rgba(240,250,224,0.45)';
+  ctx.fillText('5 módulos · 75 minutos de conteúdo', W/2, 325);
+
+  // Date
+  const date = new Date().toLocaleDateString('pt-BR', {day:'numeric',month:'long',year:'numeric'});
+  ctx.font = '400 12px Inter, sans-serif';
+  ctx.fillStyle = 'rgba(240,250,224,0.35)';
+  ctx.fillText(date, W/2, H-50);
+
+  // Seal circle
+  ctx.beginPath();
+  ctx.arc(W/2, 410, 40, 0, Math.PI*2);
+  ctx.strokeStyle = 'rgba(150,208,52,0.5)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.font = '500 10px Inter, sans-serif';
+  ctx.fillStyle = 'rgba(150,208,52,0.8)';
+  ctx.fillText('✓ CONCLUÍDO', W/2, 406);
+  ctx.fillText('100%', W/2, 420);
+}
+
+document.getElementById('btnDownloadCert').addEventListener('click', () => {
+  const canvas = document.getElementById('certCanvas');
+  const link = document.createElement('a');
+  link.download = `certificado-startai-${(state.user?.name||'aluno').replace(/\s+/g,'-').toLowerCase()}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+});
+
+/* ═══════════════════════════════════════════════════════════
+   SHARE MODAL
+═══════════════════════════════════════════════════════════ */
+document.getElementById('btnCloseShareModal').addEventListener('click', () => {
+  document.getElementById('shareModal').classList.remove('open');
+});
+document.getElementById('shareModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('shareModal'))
+    document.getElementById('shareModal').classList.remove('open');
+});
+document.getElementById('btnCopyShareText').addEventListener('click', () => {
+  const name = state.user?.name || 'Aluno';
+  const text = `Acabei de concluir o Start.AI 🎉\n\nAprendi a usar IA de verdade em 5 dias — e mudou completamente a forma como trabalho.\n\nO melhor: é gratuito! Se você ainda não fez, acessa: nova-ai.com.br\n\n#StartAI #InteligênciaArtificial #NovaAI`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('btnCopyShareText');
+    btn.textContent = 'Copiado!';
+    setTimeout(() => {
+      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copiar texto para postar`;
+    }, 2000);
+  }).catch(() => {
+    showToast('📋', 'Copie o texto abaixo', 'Ctrl+C / Cmd+C');
+  });
+});
 
 /* ═══════════════════════════════════════════════════════════
    SUPPORT FORM
