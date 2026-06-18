@@ -287,7 +287,7 @@
     .grad-3 { background:linear-gradient(135deg,#1a1005,#2e1a08,#1a1a05); }
     .grad-4 { background:linear-gradient(135deg,#0a1a08,#142d0a,#1a2d05); }
 
-    .stats-row { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .stats-row { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
     .stat-card {
       background:var(--dg); border:1px solid var(--border); border-radius:14px;
       padding:20px 22px; display:flex; align-items:center; gap:16px;
@@ -300,7 +300,7 @@
     .stat-value { font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; line-height:1; }
     .stat-label { font-size:0.72rem; color:var(--muted); margin-top:3px; }
 
-    .community-home-card {
+    .community-home-card { color:var(--white); text-decoration:none;
       display:flex; align-items:center; justify-content:space-between;
       background:rgba(37,211,102,0.07); border:1px solid rgba(37,211,102,0.2);
       border-radius:16px; padding:28px 32px; text-decoration:none; transition:background 0.15s;
@@ -504,6 +504,105 @@
     .toast-text span { font-size:0.75rem; color:var(--muted); }
     @keyframes toastIn { from{opacity:0;transform:translateX(20px);} to{opacity:1;transform:translateX(0);} }
     @keyframes toastOut { to{opacity:0;transform:translateX(20px);} }
+
+    /* ── SUPPORT SECTION ── */
+    .support-card {
+      background:var(--dg); border:1px solid var(--border); border-radius:16px; padding:28px 32px;
+    }
+    .support-card-header { display:flex; align-items:center; gap:14px; margin-bottom:20px; }
+    .support-card-icon { width:48px; height:48px; border-radius:50%; background:rgba(150,208,52,0.1); border:1px solid rgba(150,208,52,0.2); display:flex; align-items:center; justify-content:center; color:var(--green); flex-shrink:0; }
+    .support-card-title { font-family:'Outfit',sans-serif; font-size:1rem; font-weight:700; }
+    .support-card-sub { font-size:0.75rem; color:var(--muted); margin-top:2px; }
+    .support-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+    .support-field label { display:block; font-size:0.68rem; font-weight:600; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:6px; }
+    .support-field input, .support-field textarea {
+      width:100%; background:rgba(240,250,224,0.06); border:1px solid var(--border);
+      border-radius:10px; padding:11px 13px; font-family:'Inter',sans-serif;
+      font-size:0.87rem; color:var(--white); outline:none; transition:border-color 0.15s, background 0.15s;
+    }
+    .support-field input::placeholder, .support-field textarea::placeholder { color:rgba(240,250,224,0.22); }
+    .support-field input:focus, .support-field textarea:focus { border-color:rgba(150,208,52,0.5); background:rgba(240,250,224,0.08); }
+    .support-field textarea { resize:none; min-height:88px; line-height:1.55; }
+    .support-field-full { grid-column:1/-1; }
+    .btn-support-submit {
+      display:inline-flex; align-items:center; gap:7px;
+      background:var(--green); color:var(--space); border:none; border-radius:10px;
+      padding:11px 22px; font-family:'Outfit',sans-serif; font-weight:800; font-size:0.85rem;
+      cursor:pointer; transition:background 0.15s, transform 0.1s; margin-top:4px;
+    }
+    .btn-support-submit:hover:not(:disabled) { background:var(--lime); transform:translateY(-1px); }
+    .btn-support-submit:disabled { opacity:0.55; cursor:default; }
+
+    /* ── HOME FOOTER ── */
+    .home-footer {
+      text-align:center; padding:0 40px 48px;
+      font-size:0.72rem; color:var(--muted); line-height:2;
+    }
+    .home-footer a { color:var(--muted); text-decoration:underline; text-underline-offset:3px; cursor:pointer; transition:color 0.15s; }
+    .home-footer a:hover { color:var(--green); }
+
+    /* ── TERMS MODAL ── */
+    .modal-overlay {
+      position:fixed; inset:0; z-index:10000;
+      background:rgba(8,13,6,0.88); backdrop-filter:blur(8px);
+      display:none; align-items:flex-start; justify-content:center;
+      padding:24px 20px; overflow-y:auto;
+    }
+    .modal-overlay.open { display:flex; }
+    .modal-box {
+      background:var(--dg); border:1px solid var(--border); border-radius:20px;
+      width:100%; max-width:680px; margin:auto;
+      position:relative; animation:modalIn 0.25s cubic-bezier(.34,1.4,.64,1);
+    }
+    @keyframes modalIn { from{opacity:0;transform:translateY(20px) scale(.97);} to{opacity:1;transform:translateY(0) scale(1);} }
+    .modal-header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:22px 28px 0;
+    }
+    .modal-header h3 { font-family:'Outfit',sans-serif; font-size:1.1rem; font-weight:800; }
+    .modal-close {
+      background:rgba(240,250,224,0.06); border:1px solid var(--border); border-radius:8px;
+      width:34px; height:34px; display:flex; align-items:center; justify-content:center;
+      cursor:pointer; color:var(--muted); transition:color 0.15s, background 0.15s; flex-shrink:0;
+    }
+    .modal-close:hover { color:var(--white); background:rgba(240,250,224,0.1); }
+    .modal-tabs {
+      display:flex; gap:4px; padding:16px 28px 0;
+    }
+    .modal-tab {
+      background:none; border:none; cursor:pointer;
+      font-family:'Outfit',sans-serif; font-weight:600; font-size:0.78rem;
+      color:var(--muted); padding:7px 14px; border-radius:8px;
+      transition:background 0.15s, color 0.15s;
+    }
+    .modal-tab.active { background:rgba(150,208,52,0.12); color:var(--green); }
+    .modal-body {
+      padding:20px 28px 28px; max-height:65vh; overflow-y:auto;
+    }
+    .modal-body::-webkit-scrollbar { width:4px; }
+    .modal-body::-webkit-scrollbar-track { background:transparent; }
+    .modal-body::-webkit-scrollbar-thumb { background:rgba(150,208,52,0.2); border-radius:2px; }
+    .legal-tab-content { display:none; }
+    .legal-tab-content.active { display:block; }
+    .legal-tab-content h4 {
+      font-family:'Outfit',sans-serif; font-size:0.8rem; font-weight:700; color:var(--green);
+      margin:18px 0 6px; letter-spacing:0.04em; text-transform:uppercase;
+    }
+    .legal-tab-content h4:first-child { margin-top:0; }
+    .legal-tab-content p {
+      font-size:0.83rem; color:rgba(240,250,224,0.75); line-height:1.7; margin-bottom:6px;
+    }
+    .modal-footer-note {
+      font-size:0.65rem; color:var(--muted); text-align:center;
+      padding:0 28px 20px; margin-top:-4px;
+    }
+
+    @media(max-width:680px) {
+      .support-form-grid { grid-template-columns:1fr; }
+      .support-card { padding:20px; }
+      .modal-body { max-height:55vh; }
+      .modal-header, .modal-tabs, .modal-body, .modal-footer-note { padding-left:20px; padding-right:20px; }
+    }
   </style>
 </head>
 <body>
@@ -666,7 +765,45 @@
         <button class="community-home-btn">Entrar no grupo</button>
       </a>
     </section>
+
+    <section class="home-section">
+      <div class="section-label">Suporte</div>
+      <div class="support-card">
+        <div class="support-card-header">
+          <div class="support-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <div>
+            <div class="support-card-title">Fale com a gente</div>
+            <div class="support-card-sub">Alguma dúvida ou problema? Envie uma mensagem — respondemos por email.</div>
+          </div>
+        </div>
+        <div class="support-form-grid">
+          <div class="support-field">
+            <label>Seu nome</label>
+            <input type="text" id="supportName" placeholder="Ex: Ana Paula">
+          </div>
+          <div class="support-field">
+            <label>Seu email</label>
+            <input type="email" id="supportEmail" placeholder="seu@email.com">
+          </div>
+          <div class="support-field support-field-full">
+            <label>Mensagem</label>
+            <textarea id="supportMessage" placeholder="Descreva sua dúvida, problema ou sugestão..."></textarea>
+          </div>
+        </div>
+        <button class="btn-support-submit" id="supportSubmitBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Enviar mensagem
+        </button>
+      </div>
+    </section>
   </div>
+
+  <footer class="home-footer">
+    &copy; 2025 Nova AI · (R)evolução School &nbsp;·&nbsp;
+    <a id="openTermsLink">Termos de Uso &amp; Políticas</a>
+  </footer>
 </div>
 
 <!-- ══ SCREEN 3: LESSON ══════════════════════════════════════ -->
@@ -765,6 +902,88 @@
   </main>
 </div>
 
+<!-- ══ TERMS MODAL ══════════════════════════════════════════ -->
+<div class="modal-overlay" id="termsModal" role="dialog" aria-modal="true" aria-label="Termos e Políticas">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>Termos &amp; Políticas</h3>
+      <button class="modal-close" id="termsModalClose" aria-label="Fechar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-tabs">
+      <button class="modal-tab active" data-tab="termos">Termos de Uso</button>
+      <button class="modal-tab" data-tab="privacidade">Privacidade</button>
+      <button class="modal-tab" data-tab="cookies">Cookies</button>
+    </div>
+    <div class="modal-body">
+      <div class="legal-tab-content active" id="modal-termos">
+        <h4>1. Aceitação dos Termos</h4>
+        <p>Ao acessar ou utilizar os serviços da Nova AI, incluindo nosso site, comunidade no WhatsApp, conteúdos digitais e cursos, você concorda com estes Termos de Uso. Caso não concorde com alguma cláusula, solicitamos que não utilize nossos serviços.</p>
+        <h4>2. Descrição dos Serviços</h4>
+        <p>A Nova AI oferece conteúdos educacionais sobre Inteligência Artificial, incluindo o curso gratuito Start.AI, comunidades online, newsletters e materiais de apoio. Nossos serviços têm caráter informativo e educacional, voltados para profissionais e pessoas interessadas em aprender sobre IA.</p>
+        <h4>3. Condições de Uso</h4>
+        <p>Você se compromete a: (a) fornecer informações verdadeiras no cadastro; (b) não compartilhar seu acesso com terceiros; (c) não reproduzir, distribuir ou comercializar nossos conteúdos sem autorização prévia e por escrito; (d) utilizar os serviços apenas para fins lícitos e de acordo com a legislação brasileira vigente.</p>
+        <h4>4. Propriedade Intelectual</h4>
+        <p>Todo o conteúdo disponibilizado pela Nova AI — incluindo textos, vídeos, imagens, logotipos, metodologias e materiais didáticos — é protegido por direitos autorais. É proibida a reprodução total ou parcial sem autorização expressa. O uso não autorizado pode implicar em responsabilidade civil e criminal.</p>
+        <h4>5. Comunidade e Conduta</h4>
+        <p>Ao participar de nossas comunidades (WhatsApp, redes sociais, etc.), você concorda em manter uma conduta respeitosa. É vedado: spam, conteúdo ofensivo, discriminatório, ilegal ou que viole direitos de terceiros. A Nova AI reserva-se o direito de remover membros que violem essas regras, sem aviso prévio.</p>
+        <h4>6. Conteúdo Gerado pelo Usuário</h4>
+        <p>Ao compartilhar conteúdo em nossas comunidades, você concede à Nova AI licença não exclusiva para exibir, reproduzir e distribuir esse conteúdo dentro de suas plataformas. Você declara ser titular dos direitos sobre o conteúdo compartilhado.</p>
+        <h4>7. Isenção de Responsabilidade</h4>
+        <p>Os conteúdos da Nova AI são de caráter educacional e não constituem aconselhamento profissional, jurídico, financeiro ou médico. A Nova AI não garante resultados específicos decorrentes do uso de suas metodologias. Os resultados dependem do esforço, dedicação e contexto de cada usuário.</p>
+        <h4>8. Links Externos</h4>
+        <p>Nosso site pode conter links para sites e plataformas de terceiros. Não nos responsabilizamos pelo conteúdo, políticas de privacidade ou práticas dessas plataformas externas.</p>
+        <h4>9. Modificações dos Termos</h4>
+        <p>Reservamo-nos o direito de alterar estes Termos a qualquer momento. Alterações significativas serão comunicadas por e-mail ou via nossas plataformas. O uso continuado dos serviços após a publicação das alterações implica na aceitação dos novos termos.</p>
+        <h4>10. Foro e Legislação</h4>
+        <p>Estes Termos são regidos pela legislação brasileira. Fica eleito o foro da comarca de domicílio do usuário para resolução de eventuais disputas, conforme o Código de Defesa do Consumidor (Lei nº 8.078/1990).</p>
+        <h4>11. Contato</h4>
+        <p>Para dúvidas sobre estes Termos: lucas@revolucao.school</p>
+      </div>
+      <div class="legal-tab-content" id="modal-privacidade">
+        <h4>1. Introdução</h4>
+        <p>A Nova AI está comprometida com a proteção da sua privacidade e com o tratamento responsável dos seus dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018).</p>
+        <h4>2. Dados que Coletamos</h4>
+        <p>Coletamos apenas os dados necessários: <strong>Nome</strong> (identificação e personalização), <strong>E-mail</strong> (comunicação), e <strong>dados de navegação</strong> (analytics via cookies).</p>
+        <h4>3. Como Usamos seus Dados</h4>
+        <p>Utilizamos seus dados para: garantir acesso aos serviços, enviar comunicações sobre novidades e materiais educacionais, personalizar sua experiência, melhorar nossos serviços e cumprir obrigações legais.</p>
+        <h4>4. Base Legal para o Tratamento</h4>
+        <p>O tratamento de seus dados se baseia em: consentimento (fornecido no cadastro), execução de contrato (prestação dos serviços solicitados) e legítimo interesse (melhoria dos serviços).</p>
+        <h4>5. Compartilhamento de Dados</h4>
+        <p>Não vendemos seus dados pessoais. Podemos compartilhá-los apenas com prestadores de serviços essenciais (ex: plataformas de e-mail, hospedagem) que atuam sob nossas instruções, ou quando exigido por lei.</p>
+        <h4>6. Armazenamento e Segurança</h4>
+        <p>Seus dados são armazenados em servidores seguros com acesso restrito. Adotamos medidas técnicas e organizacionais adequadas para proteger suas informações.</p>
+        <h4>7. Seus Direitos (LGPD)</h4>
+        <p>Como titular de dados, você tem direito a: acessar, corrigir, excluir seus dados, revogar o consentimento a qualquer momento, entre outros. Para exercer seus direitos: lucas@revolucao.school</p>
+        <h4>8. Cancelamento e Exclusão</h4>
+        <p>Você pode solicitar a exclusão dos seus dados pelo e-mail lucas@revolucao.school. Realizaremos a exclusão em até 15 dias úteis.</p>
+        <h4>9. Menores de Idade</h4>
+        <p>Nossos serviços não são direcionados a menores de 13 anos. Não coletamos intencionalmente dados de crianças.</p>
+        <h4>10. Contato</h4>
+        <p>Para dúvidas sobre privacidade: lucas@revolucao.school</p>
+      </div>
+      <div class="legal-tab-content" id="modal-cookies">
+        <h4>1. O que são Cookies?</h4>
+        <p>Cookies são pequenos arquivos de texto armazenados no seu dispositivo quando você acessa um site. Eles permitem que o site lembre suas preferências e melhore sua experiência.</p>
+        <h4>2. Tipos de Cookies que Utilizamos</h4>
+        <p><strong>Cookies Essenciais:</strong> necessários para o funcionamento básico do site. Não podem ser desativados.</p>
+        <p><strong>Cookies de Análise:</strong> coletam informações anônimas sobre como os visitantes utilizam o site. Usados para melhorar o desempenho e o conteúdo.</p>
+        <p><strong>Cookies de Preferência:</strong> permitem que o site lembre suas escolhas para uma experiência personalizada.</p>
+        <h4>3. Controle de Cookies</h4>
+        <p>Você pode controlar cookies através das configurações do seu navegador. Atenção: desabilitar certos cookies pode afetar o funcionamento do site.</p>
+        <h4>4. Cookies de Terceiros</h4>
+        <p>Alguns serviços utilizam ferramentas de terceiros com seus próprios cookies: Google Analytics, Meta Pixel (se ativo), WhatsApp e YouTube. Cada plataforma possui sua própria política de cookies.</p>
+        <h4>5. Consentimento</h4>
+        <p>Ao continuar utilizando nossos serviços após ser informado sobre o uso de cookies, você consente com sua utilização. Você pode revogar seu consentimento a qualquer momento.</p>
+        <h4>6. Contato</h4>
+        <p>Para dúvidas sobre nossa Política de Cookies: lucas@revolucao.school</p>
+      </div>
+    </div>
+    <div class="modal-footer-note">Última atualização: junho de 2025 · Nova AI · (R)evolução School</div>
+  </div>
+</div>
+
 <div id="toastContainer"></div>
 
 <script>
@@ -808,7 +1027,7 @@ const lessons = [
 /* ═══════════════════════════════════════════════════════════
    STATE
 ═══════════════════════════════════════════════════════════ */
-let state = { user: null, currentLesson: 0, completed: [], isNewUser: false };
+let state = { user: null, currentLesson: 0, completed: [], isNewUser: false, justLoggedIn: false };
 
 function getCompletedKey() { return `startai_progress_${state.user?.id || 'guest'}`; }
 function loadCompleted() { state.completed = JSON.parse(localStorage.getItem(getCompletedKey()) || '[]'); }
@@ -884,7 +1103,7 @@ function showForgotForm() {
   document.getElementById('tabSignin').classList.remove('active');
   document.getElementById('tabSignup').classList.remove('active');
 }
-function goHome()   { loadCompleted(); renderHome(); showScreen('homeScreen'); window.scrollTo(0,0); }
+function goHome()   { loadCompleted(); renderHome(); showScreen('homeScreen'); window.scrollTo(0,0); prefillSupportForm(); }
 function goLesson(idx) { state.currentLesson = idx; renderLesson(); showScreen('lessonScreen'); window.scrollTo(0,0); }
 
 /* ═══════════════════════════════════════════════════════════
@@ -923,6 +1142,7 @@ document.getElementById('signinBtn').addEventListener('click', async () => {
   if (!email || !password) { showMsg('signinError', 'Preencha email e senha.'); return; }
 
   setBtn('signinBtn', true, 'Entrando...');
+  state.justLoggedIn = true;
   try {
     const { data, error } = await sb.auth.signInWithPassword({ email, password });
     if (error) throw error;
@@ -935,6 +1155,7 @@ document.getElementById('signinBtn').addEventListener('click', async () => {
       goHome();
     }
   } catch(e) {
+    state.justLoggedIn = false;
     setBtn('signinBtn', false, 'Entrar no curso');
     const msg = e.message?.includes('Invalid login') || e.message?.includes('invalid_credentials')
                ? 'Email ou senha incorretos.'
@@ -1070,7 +1291,8 @@ sb.auth.onAuthStateChange((event, session) => {
     // Toast de boas-vindas
     if (wasNewUser) {
       setTimeout(() => showToast('🎉', `Bem-vindo, ${metaName.split(' ')[0]}!`, 'Sua conta foi criada com sucesso.'), 400);
-    } else if (event === 'SIGNED_IN') {
+    } else if (event === 'SIGNED_IN' && state.justLoggedIn) {
+      state.justLoggedIn = false;
       setTimeout(() => showToast('✅', `Olá, ${metaName.split(' ')[0]}!`, 'Login realizado com sucesso.'), 400);
     }
 
@@ -1143,14 +1365,8 @@ function renderHome() {
   // Stats
   document.getElementById('homeStatsRow').innerHTML = `
     <div class="stat-card"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="stat-value">${pct}%</div><div class="stat-label">do curso concluído</div></div></div>
-    <div class="stat-card"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="stat-value">${state.completed.length}</div><div class="stat-label">aulas concluídas</div></div></div>
-    <div class="stat-card"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div><div class="stat-value" id="totalStudentsStat">—</div><div class="stat-label">alunos na turma</div></div></div>`;
+    <div class="stat-card"><div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="stat-value">${state.completed.length}</div><div class="stat-label">aulas concluídas</div></div></div>`;
 
-  // Count total profiles (students)
-  sb.from('profiles').select('id', {count:'exact', head:true}).then(({count}) => {
-    const el = document.getElementById('totalStudentsStat');
-    if (el) el.textContent = count ?? '—';
-  });
 }
 
 window.addEventListener('scroll', () => {
@@ -1393,11 +1609,84 @@ document.getElementById('mobileMenuBtn').addEventListener('click', openMobileDra
 document.getElementById('mobileOverlay').addEventListener('click', closeMobileDrawer);
 
 /* ═══════════════════════════════════════════════════════════
+   SUPPORT FORM
+═══════════════════════════════════════════════════════════ */
+function prefillSupportForm() {
+  const nameEl  = document.getElementById('supportName');
+  const emailEl = document.getElementById('supportEmail');
+  if (state.user?.name  && nameEl)  nameEl.value  = state.user.name;
+  if (state.user?.email && emailEl) emailEl.value = state.user.email;
+}
+
+document.getElementById('supportSubmitBtn').addEventListener('click', async () => {
+  const name    = document.getElementById('supportName').value.trim();
+  const email   = document.getElementById('supportEmail').value.trim();
+  const message = document.getElementById('supportMessage').value.trim();
+
+  if (!name)    { showToast('⚠️', 'Campo obrigatório', 'Por favor, informe seu nome.'); return; }
+  if (!email)   { showToast('⚠️', 'Campo obrigatório', 'Por favor, informe seu email.'); return; }
+  if (!message) { showToast('⚠️', 'Campo obrigatório', 'Escreva sua mensagem.'); return; }
+
+  const btn = document.getElementById('supportSubmitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Enviando...';
+
+  try {
+    // Save to Supabase (if table exists — best effort)
+    await sb.from('support_tickets').insert({
+      user_id:   state.user?.id || null,
+      user_name: name,
+      user_email: email,
+      message
+    }).then(() => {}).catch(() => {});
+
+    // Open mailto to notify Lucas
+    const subject = encodeURIComponent(`[Start.AI] Ticket de suporte — ${name}`);
+    const body    = encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`);
+    window.open(`mailto:lucas@revolucao.school?subject=${subject}&body=${body}`, '_blank');
+
+    // Clear form
+    document.getElementById('supportMessage').value = '';
+    showToast('✅', 'Mensagem enviada!', 'Responderemos em breve no seu email.');
+  } catch(e) {
+    showToast('❌', 'Erro ao enviar', 'Tente novamente ou contate lucas@revolucao.school');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Enviar mensagem';
+  }
+});
+
+/* ═══════════════════════════════════════════════════════════
+   TERMS MODAL
+═══════════════════════════════════════════════════════════ */
+function openTermsModal(tab) {
+  const modal = document.getElementById('termsModal');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (tab) switchModalTab(tab);
+}
+function closeTermsModal() {
+  document.getElementById('termsModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function switchModalTab(name) {
+  document.querySelectorAll('.modal-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  document.querySelectorAll('.legal-tab-content').forEach(c => c.classList.toggle('active', c.id === `modal-${name}`));
+}
+
+document.getElementById('openTermsLink').addEventListener('click', () => openTermsModal('termos'));
+document.getElementById('termsModalClose').addEventListener('click', closeTermsModal);
+document.getElementById('termsModal').addEventListener('click', e => { if (e.target === document.getElementById('termsModal')) closeTermsModal(); });
+document.querySelectorAll('.modal-tab').forEach(tab => tab.addEventListener('click', () => switchModalTab(tab.dataset.tab)));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTermsModal(); });
+
+/* ═══════════════════════════════════════════════════════════
    INIT — verifica sessão existente
 ═══════════════════════════════════════════════════════════ */
 (async () => {
   const { data: { session } } = await sb.auth.getSession();
   if (!session) goLogin();
+  else prefillSupportForm();
   // If session exists, onAuthStateChange fires automatically
 })();
 </script>
