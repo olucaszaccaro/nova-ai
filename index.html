@@ -14,7 +14,8 @@
   <style>
     /* ── RESET ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    button, a, [role="button"], input, textarea, select { touch-action: manipulation; }
 
     /* ── TOKENS ── */
     :root {
@@ -155,6 +156,7 @@
       transform: translateY(-1px);
       box-shadow: 0 6px 20px rgba(150,208,52,.3);
     }
+    .btn-cta:active { transform: scale(0.97); box-shadow: none; }
     .btn-cta.large {
       padding: 15px 32px; font-size: 15px;
     }
@@ -399,7 +401,7 @@
     .form-field input {
       width: 100%; background: rgba(255,255,255,.04);
       border: 1px solid var(--muted); border-radius: 10px;
-      padding: 11px 14px; font-size: 14px; color: var(--white);
+      padding: 12px 14px; font-size: 16px; color: var(--white);
       outline: none; transition: border-color .2s;
       font-family: inherit;
     }
@@ -415,6 +417,7 @@
       font-family: inherit;
     }
     .btn-submit:hover { opacity: .9; transform: translateY(-1px); }
+    .btn-submit:active { opacity: .85; transform: scale(0.98); }
     .btn-submit:disabled { opacity: .5; cursor: not-allowed; }
     .modal-close {
       position: absolute; top: 1.25rem; right: 1.25rem;
@@ -486,15 +489,26 @@
     }
     @media (max-width: 480px) {
       .nav-powered { display: none; }
-      .hero { padding: 4rem 1rem 2.5rem; }
-      .btn-cta.large { width: 100%; justify-content: center; }
+      /* safe area for notch/home indicator */
+      footer { padding-bottom: calc(2.5rem + env(safe-area-inset-bottom, 0px)); }
+      .final { padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px)); }
+      .hero { padding: 4rem 1rem calc(2.5rem + env(safe-area-inset-bottom, 0px)); }
+      /* nav CTA tap target */
+      .btn-cta { min-height: 44px; padding: 10px 20px; }
+      .btn-cta.large { width: 100%; justify-content: center; min-height: 52px; }
       .pillars { grid-template-columns: 1fr; }
       .hero-social { gap: .5rem; }
+      .hero-social a { width: 52px; height: 52px; } /* bigger tap targets */
       .stats { flex-wrap: wrap; gap: 1rem; }
       h2 { letter-spacing: -1px; }
-      .modal { padding: 1.75rem; }
+      /* modal: tighter padding, full safe area */
+      .modal { padding: 1.75rem; max-height: calc(90dvh - env(safe-area-inset-bottom, 0px)); }
       .legal-body { padding: 1.25rem 1.25rem 1.5rem; }
       .legal-header { padding: 1.25rem 1.25rem 0; }
+      /* modal overlay: align to bottom on small screens (thumb-reachable) */
+      .modal-overlay { align-items: flex-end; padding: 0; }
+      .modal { border-radius: 20px 20px 0 0; }
+      .modal-legal { border-radius: 20px 20px 0 0; }
     }
   </style>
 </head>
