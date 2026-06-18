@@ -830,7 +830,6 @@
     .sidebar-social-link:hover { background:rgba(150,208,52,0.15); color:var(--green); border-color:rgba(150,208,52,0.3); }
 
     @media(max-width:700px) {
-      .hero-photo-col { display:none; }
       .hero-content { max-width:100%; }
     }
 
@@ -1483,7 +1482,10 @@
       <!-- Coluna direita: foto -->
       <div class="hero-photo-col">
         <div class="hero-photo-wrap">
-          <img src="/lucas.png" alt="Lucas Zaccaro" class="hero-photo">
+          <picture>
+            <source srcset="/lucas.webp" type="image/webp">
+            <img src="/lucas.png" alt="Lucas Zaccaro" class="hero-photo" fetchpriority="high" loading="eager">
+          </picture>
         </div>
       </div>
     </div>
