@@ -175,6 +175,7 @@
     .home-hero {
       position:relative; height:72vh; min-height:480px;
       display:flex; align-items:flex-end; overflow:hidden; margin-top:-70px;
+      background:var(--space); /* explicit dark fallback */
     }
     .hero-bg {
       position:absolute; inset:0;
@@ -610,16 +611,29 @@
       .sidebar { display:none; }
       .main { margin-left:0; }
       .mobile-header { display:flex; }
-      .main-header { padding:14px 20px; }
+      .main-header {
+        padding:12px 16px;
+        flex-wrap:wrap; gap:8px;
+      }
+      /* truncate breadcrumb so it doesn't fight the button for space */
+      .lesson-breadcrumb {
+        flex:1; min-width:0;
+        overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+        font-size:0.7rem;
+      }
+      .btn-complete { white-space:nowrap; flex-shrink:0; min-height:44px; padding:10px 16px; font-size:0.8rem; }
       .lesson-content { padding:20px 16px calc(40px + env(safe-area-inset-bottom,0px)); }
       .comments-section { padding:0 16px calc(60px + env(safe-area-inset-bottom,0px)); }
       .lesson-title { font-size:1.5rem; }
 
       /* ── home screen ── */
       .home-nav { padding:12px 20px; }
+      /* hero: collapse to content, reset the desktop pull-up trick */
       .home-hero { height:auto; min-height:0; margin-top:0; }
-      /* resolve the conflicting padding rules: hero-content carries its own top breathing room */
-      .hero-content { padding:32px 20px 40px !important; }
+      /* particles too bright on mobile screens — disable animation */
+      .hero-bg::after { animation:none; opacity:0.5; }
+      /* hero-content: breathing room at top, flush sides */
+      .hero-content { padding:28px 20px 36px !important; }
       .home-content { padding:0 16px calc(60px + env(safe-area-inset-bottom,0px)); }
       .home-footer { padding:0 16px calc(40px + env(safe-area-inset-bottom,0px)); }
       .hn-name { max-width:110px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
@@ -629,7 +643,6 @@
       .hn-logout { padding:10px 14px; min-height:44px; display:flex; align-items:center; }
       .mobile-menu-btn { width:44px; height:44px; }
       .btn-comment-submit { min-height:44px; padding:10px 18px; }
-      .btn-complete { min-height:44px; padding:10px 18px; font-size:0.82rem; }
 
       /* ── iOS: prevent zoom on input focus (must be ≥16px) ── */
       input, textarea, select { font-size:16px !important; }
