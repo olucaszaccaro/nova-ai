@@ -2346,13 +2346,14 @@ sb.auth.onAuthStateChange((event, session) => {
         if (profile.name) {
           state.user.name = profile.name;
           const nameEl = document.getElementById('homeUserName');
-          const avatarEl = document.getElementById('homeAvatar');
           if (nameEl) nameEl.textContent = profile.name;
-          if (avatarEl) avatarEl.textContent = getInitial(profile.name);
         }
         if (profile.avatar_url) {
           state.user.avatarUrl = profile.avatar_url;
+          updateHomeAvatar(state.user.name, profile.avatar_url);
           updateSidebarAvatar(state.user.name, profile.avatar_url);
+        } else {
+          updateHomeAvatar(state.user.name, null);
         }
       }
     }).catch(() => {});
@@ -2371,7 +2372,7 @@ function renderHome() {
   const initial = getInitial(name);
   const pct = getProgress();
 
-  document.getElementById('homeAvatar').textContent = initial;
+  updateHomeAvatar(name, state.user?.avatarUrl || null);
   document.getElementById('homeUserName').textContent = name;
   document.getElementById('heroProgressFill').style.width = `${pct}%`;
   document.getElementById('heroProgressText').innerHTML = `<strong>${state.completed.length}</strong> de 5 aulas concluídas`;
@@ -3096,6 +3097,7 @@ async function handleAvatarUpload(input) {
     await sb.from('profiles').upsert({ id: state.user.id, avatar_url: avatarUrl });
     state.user.avatarUrl = avatarUrl;
     renderProfileAvatar(avatarUrl, state.user.name);
+    updateHomeAvatar(state.user.name, avatarUrl);
     updateSidebarAvatar(state.user.name, avatarUrl);
     showToast('<span class="material-symbols-rounded" style="font-size:1.1rem;color:var(--green)">check_circle</span>', 'Foto atualizada!', '');
   } catch(e) {
@@ -3139,6 +3141,26 @@ async function saveProfile() {
   } finally {
     btn.disabled = false;
     btn.innerHTML = '<span class="material-symbols-rounded" style="font-size:18px;">save</span> Salvar perfil';
+  }
+}
+
+// Update home nav avatar (#homeAvatar, top-right circle)
+function updateHomeAvatar(name, avatarUrl) {
+  const el = document.getElementById('homeAvatar');
+  if (!el) return;
+  if (avatarUrl) {
+    el.innerHTML = '';
+    el.style.background = 'none';
+    el.style.padding = '0';
+    const img = document.createElement('img');
+    img.src = avatarUrl;
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%;';
+    img.onerror = () => { el.innerHTML = ''; el.style = ''; el.textContent = getInitial(name); };
+    el.appendChild(img);
+  } else {
+    el.innerHTML = '';
+    el.style = '';
+    el.textContent = getInitial(name);
   }
 }
 
