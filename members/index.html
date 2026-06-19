@@ -633,11 +633,11 @@
       /* ── home screen ── */
       .home-nav { padding:12px 20px; }
       /* hero: collapse to content, remove desktop pull-up */
-      .home-hero { height:auto !important; min-height:0 !important; margin-top:0 !important; }
-      /* the 160px gradient overlay covers ~70% of collapsed hero — remove it */
-      .home-hero::after { display:none !important; }
-      /* hide particle animation (renders too green on phone) */
-      .hero-bg::after { display:none !important; }
+      .home-hero { height:auto !important; min-height:0 !important; margin-top:0 !important; overflow:visible !important; }
+      /* the 160px gradient overlay — remove with all available levers for iOS Safari */
+      .home-hero::after { display:none !important; content:none !important; visibility:hidden !important; }
+      /* hide particle animation */
+      .hero-bg::after { display:none !important; content:none !important; visibility:hidden !important; }
       /* hero-content: column layout, photo stacks above text */
       .hero-content { padding:24px 20px 32px !important; flex-direction:column-reverse !important; align-items:center !important; gap:20px !important; }
       .hero-text-col { text-align:center; }
@@ -1484,10 +1484,7 @@
       <!-- Coluna direita: foto -->
       <div class="hero-photo-col">
         <div class="hero-photo-wrap">
-          <picture>
-            <source srcset="/lucas.webp" type="image/webp">
-            <img src="/lucas.png" alt="Lucas Zaccaro" class="hero-photo" fetchpriority="high" loading="eager">
-          </picture>
+          <img src="/lucas.webp" alt="Lucas Zaccaro" class="hero-photo" fetchpriority="high" loading="eager" onerror="this.onerror=null;this.src='/lucas.png'">
         </div>
       </div>
     </div>
