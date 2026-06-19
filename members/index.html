@@ -445,7 +445,8 @@
       padding:22px 24px 18px; border-bottom:1px solid var(--border);
       display:flex; align-items:center; justify-content:space-between;
     }
-    .sidebar-logo .brand { font-family:'Outfit',sans-serif; font-weight:800; font-size:1.15rem; color:var(--green); }
+    .sidebar-logo .brand { font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:1.15rem; color:var(--white); letter-spacing:-0.5px; }
+    .sidebar-logo .brand .ai { color:var(--green); }
     .sidebar-logo .sub { font-size:0.62rem; color:var(--muted); letter-spacing:0.12em; text-transform:uppercase; margin-top:2px; }
     .back-home-btn {
       background:none; border:none; cursor:pointer; color:var(--muted);
@@ -591,7 +592,8 @@
 
     /* mobile */
     .mobile-header { display:none; padding:14px 20px; background:var(--dg); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:200; align-items:center; justify-content:space-between; }
-    .mobile-logo { font-family:'Outfit',sans-serif; font-weight:800; font-size:1rem; color:var(--green); }
+    .mobile-logo { font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:1rem; color:var(--white); letter-spacing:-0.5px; }
+    .mobile-logo .ai { color:var(--green); }
     .mobile-menu-btn { background:none; border:1px solid var(--border); border-radius:7px; width:36px; height:36px; display:flex; align-items:center; justify-content:center; color:var(--white); cursor:pointer; }
     .mobile-nav-drawer { display:none; position:fixed; inset:0; z-index:300; }
     .mobile-nav-overlay { position:absolute; inset:0; background:rgba(8,13,6,0.8); }
@@ -1620,7 +1622,7 @@
 <div id="lessonScreen" class="screen">
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
-      <div><div class="brand">Start.AI</div><div class="sub">Área de Membros</div></div>
+      <div><div class="brand">Start.<span class="ai">ai</span></div><div class="sub">Área de Membros</div></div>
       <button class="back-home-btn" id="backHomeBtn" title="Voltar ao início">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       </button>
@@ -1661,7 +1663,7 @@
   </aside>
 
   <div class="mobile-header">
-    <div class="mobile-logo">Start.AI</div>
+    <div class="mobile-logo">Start.<span class="ai">ai</span></div>
     <button class="mobile-menu-btn" id="mobileMenuBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
   </div>
   <div class="mobile-nav-drawer" id="mobileDrawer">
