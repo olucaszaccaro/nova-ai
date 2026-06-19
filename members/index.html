@@ -633,18 +633,18 @@
       /* ── home screen ── */
       .home-nav { padding:12px 20px; }
       /* hero: collapse to content, remove desktop pull-up */
-      .home-hero { height:auto; min-height:0; margin-top:0; }
+      .home-hero { height:auto !important; min-height:0 !important; margin-top:0 !important; }
       /* the 160px gradient overlay covers ~70% of collapsed hero — remove it */
-      .home-hero::after { display:none; }
+      .home-hero::after { display:none !important; }
       /* hide particle animation (renders too green on phone) */
-      .hero-bg::after { display:none; }
+      .hero-bg::after { display:none !important; }
       /* hero-content: column layout, photo stacks above text */
       .hero-content { padding:24px 20px 32px !important; flex-direction:column-reverse !important; align-items:center !important; gap:20px !important; }
       .hero-text-col { text-align:center; }
       /* show photo on mobile but smaller and centered */
       .hero-photo-col { display:flex !important; justify-content:center !important; width:100% !important; }
       .hero-photo { width:120px !important; height:158px !important; border-radius:16px !important; }
-      .hero-photo-wrap::before { display:none; }
+      .hero-photo-wrap::before { display:none !important; }
       .hero-actions { justify-content:center; }
       .home-content { padding:0 16px calc(60px + env(safe-area-inset-bottom,0px)); }
       .home-footer { padding:0 16px calc(40px + env(safe-area-inset-bottom,0px)); }
