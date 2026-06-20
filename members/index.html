@@ -632,9 +632,11 @@
       .lesson-title { font-size:1.5rem; }
 
       /* ── home screen ── */
-      .home-nav { padding:12px 20px; }
+      .home-nav { padding:12px 20px; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; background:rgba(8,13,6,0.97) !important; }
       /* hero: collapse to content, remove desktop pull-up */
-      .home-hero { height:auto !important; min-height:0 !important; margin-top:0 !important; overflow:visible !important; }
+      .home-hero { height:auto !important; min-height:0 !important; margin-top:0 !important; overflow:hidden !important; position:relative !important; }
+      /* isolate hero-bg absolutely within hero so it can't bleed */
+      .hero-bg { position:absolute !important; inset:0 !important; height:100% !important; pointer-events:none !important; }
       /* the 160px gradient overlay — remove with all available levers for iOS Safari */
       .home-hero::after { display:none !important; content:none !important; visibility:hidden !important; }
       /* hide particle animation */
@@ -2024,13 +2026,13 @@ const lessons = [
       {title:'Prompt de diagnóstico de contexto',type:'Prompt · Copie e use',url:'#',ready:false}
     ]},
   { day:2, pillar:'Criar', title:'Criar qualquer coisa', duration:'~15 min', youtubeId:null,
-    description:'IA não é só um chat para conversar. É um estúdio criativo completo: textos, músicas, imagens, ferramentas digitais simples. Nessa aula você vai criar algo que antes parecia impossível sem anos de estudo — em menos de 10 minutos.',
-    exercise:'Escolha UMA coisa para criar agora: uma música no Suno, uma imagem no Ideogram, ou uma ferramenta simples no Claude. Poste o resultado na comunidade do WhatsApp.',
-    resources:[{label:'Prompts de criação por tipo',url:'#',ready:false},{label:'Lista de ferramentas criativas',url:'#',ready:false},{label:'Tutorial: Suno para iniciantes',url:'#',ready:false}],
+    description:'IA não é só um chat para conversar. É um estúdio criativo completo: textos, imagens, sites e ferramentas digitais simples. Nessa aula você vai criar algo que antes parecia impossível sem anos de estudo — em menos de 10 minutos.',
+    exercise:'Escolha UMA coisa para criar agora: uma imagem no Ideogram, um texto formatado no Claude, ou uma ferramenta simples para uso próprio. Poste o resultado na comunidade do WhatsApp.',
+    resources:[{label:'Prompts de criação por tipo',url:'#',ready:false},{label:'Lista de ferramentas criativas',url:'#',ready:false},{label:'Lista de ferramentas criativas com IA',url:'#',ready:false}],
     materials:[
       {title:'50 prompts de criação por categoria',type:'PDF · Biblioteca de prompts',url:'#',ready:false},
       {title:'Lista de ferramentas criativas com IA',type:'PDF · 30+ ferramentas comentadas',url:'#',ready:false},
-      {title:'Tutorial: Suno para iniciantes',type:'PDF · Passo a passo',url:'#',ready:false},
+      {title:'Guia: criar sites simples com Claude',type:'PDF · Passo a passo',url:'#',ready:false},
       {title:'Prompt: crie um post viral em 3 formatos',type:'Prompt · Copie e use',url:'#',ready:false}
     ]},
   { day:3, pillar:'Resolver', title:'Resolver problemas', duration:'~15 min', youtubeId:null,
