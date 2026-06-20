@@ -245,10 +245,11 @@
     .nova-letter {
       font-family:'Space Grotesk',sans-serif; font-weight:900;
       font-size:3rem; line-height:1; letter-spacing:-0.04em;
-      color:rgba(150,208,52,0.18); margin-bottom:0.5rem;
-      transition:color 0.3s;
+      color:var(--nova); margin-bottom:0.5rem;
+      transition:opacity 0.3s;
+      opacity:0.85;
     }
-    .pillar:hover .nova-letter { color:rgba(150,208,52,0.4); }
+    .pillar:hover .nova-letter { opacity:1; }
     .pillar-tag {
       display:inline-block; font-size:0.62rem; font-weight:700;
       letter-spacing:0.1em; text-transform:uppercase;
