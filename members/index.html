@@ -650,6 +650,12 @@
       .home-hero { height:auto !important; min-height:0 !important; margin-top:0 !important; overflow:hidden !important; position:relative !important; }
       /* isolate hero-bg absolutely within hero so it can't bleed */
       .hero-bg { position:absolute !important; inset:0 !important; height:100% !important; pointer-events:none !important; }
+      /* On mobile, replace the heavy radial gradient (90% opacity dark veil)
+         with a simple base color — the desktop gradient was designed for the
+         two-column layout and creates an unintended overlay when centered */
+      .hero-bg {
+        background: linear-gradient(180deg, #0a1a06 0%, #080D06 100%) !important;
+      }
       /* the 160px gradient overlay — remove with all available levers for iOS Safari */
       .home-hero::after { display:none !important; content:none !important; visibility:hidden !important; }
       /* hide particle animation */
@@ -1220,7 +1226,7 @@
     .btn-completion-secondary:hover { border-color: rgba(150,208,52,0.4); }
 
     /* Confetti */
-    .confetti-canvas { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }
+    .confetti-canvas { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:999; display:none; }
 
     /* ══ CERTIFICATE ════════════════════════════════════════ */
     .certificate-wrap {
@@ -2833,6 +2839,7 @@ function updateStreak() {
 ═══════════════════════════════════════════════════════════ */
 function launchConfetti() {
   const canvas = document.getElementById('confettiCanvas');
+  canvas.style.display = 'block';
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -2862,7 +2869,7 @@ function launchConfetti() {
     });
     ticks++;
     if (ticks < 220) frame = requestAnimationFrame(draw);
-    else ctx.clearRect(0,0,canvas.width,canvas.height);
+    else { ctx.clearRect(0,0,canvas.width,canvas.height); canvas.style.display = 'none'; }
   }
   if (frame) cancelAnimationFrame(frame);
   draw();
