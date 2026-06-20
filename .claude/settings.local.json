@@ -2,7 +2,14 @@
   "permissions": {
     "allow": [
       "mcp__visualize__read_me",
-      "mcp__visualize__show_widget"
+      "mcp__visualize__show_widget",
+      "Bash(git mv *)",
+      "Bash(python3 -)",
+      "Bash(node --check assets/js/landing.js)",
+      "Bash(node --check assets/js/members.js)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }
