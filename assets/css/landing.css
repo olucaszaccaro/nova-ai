@@ -242,9 +242,23 @@
       margin-top: 3rem;
     }
     .pillar { background: var(--space); padding: 2rem 1.75rem; }
-    .pillar-icon { font-size: 1.6rem; margin-bottom: 1rem; line-height: 1; }
-    .pillar-icon .material-symbols-rounded { font-size: 2rem; color: var(--nova); font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 32; }
-    .pillar p { font-size: .875rem; color: var(--sub); line-height: 1.65; margin-top: .4rem; }
+    .nova-letter {
+      font-family:'Space Grotesk',sans-serif; font-weight:900;
+      font-size:3rem; line-height:1; letter-spacing:-0.04em;
+      color:rgba(150,208,52,0.18); margin-bottom:0.5rem;
+      transition:color 0.3s;
+    }
+    .pillar:hover .nova-letter { color:rgba(150,208,52,0.4); }
+    .pillar-tag {
+      display:inline-block; font-size:0.62rem; font-weight:700;
+      letter-spacing:0.1em; text-transform:uppercase;
+      color:rgba(150,208,52,0.7); border:1px solid rgba(150,208,52,0.25);
+      border-radius:999px; padding:2px 10px; margin:6px 0 10px;
+    }
+    .pillar-icon { font-size:1.6rem; margin-bottom:0.75rem; line-height:1; }
+    .pillar-icon .material-symbols-rounded { font-size:1.8rem; color:var(--nova); font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 32; }
+    .pillar h3 { font-size:1.05rem; }
+    .pillar p { font-size:.875rem; color:var(--sub); line-height:1.65; margin-top:.4rem; }
 
     /* ── START.AI ── */
     .course-card {

@@ -273,6 +273,19 @@
       opacity:0; transition:opacity 0.2s;
     }
     .lesson-card:hover .card-hover-overlay { opacity:1; }
+    .nova-badge {
+      position:absolute; bottom:10px; left:10px;
+      font-family:'Outfit',sans-serif; font-weight:900;
+      font-size:0.65rem; letter-spacing:0.12em;
+      color:var(--green); background:rgba(150,208,52,0.12);
+      border:1px solid rgba(150,208,52,0.3);
+      border-radius:6px; padding:2px 8px;
+      text-transform:uppercase;
+    }
+    .nova-pillar-label {
+      font-size:0.58rem; font-weight:700; letter-spacing:0.08em;
+      text-transform:uppercase; color:var(--green); opacity:0.75;
+    }
     .play-circle { width:44px; height:44px; border-radius:50%; background:var(--green); display:flex; align-items:center; justify-content:center; color:var(--space); }
     .play-circle svg { margin-left:3px; }
     .card-state-badge {
@@ -2392,6 +2405,15 @@ function renderHome() {
   // Cards
   const row = document.getElementById('homeCardsRow');
   row.innerHTML = '';
+
+  const novaMap = {
+    'Entender':   { letter:'N', name:'Navegar' },
+    'Criar':      { letter:'O', name:'Operar'  },
+    'Resolver':   { letter:'V', name:'Vencer'  },
+    'Automatizar':{ letter:'A', name:'Automatizar' },
+    'Sistema':    { letter:'★', name:'Sistema' }
+  };
+
   lessons.forEach((l, i) => {
     const done = isCompleted(i);
     const accessible = i===0 || isCompleted(i-1) || done;
@@ -2411,7 +2433,7 @@ function renderHome() {
       </div>
       <div class="card-body">
         <div class="card-title-text">${l.title}</div>
-        <div class="card-pillar-text">${l.pillar}</div>
+        <div class="card-pillar-text">${novaMap[l.pillar] ? novaMap[l.pillar].letter + " · " + novaMap[l.pillar].name : l.pillar}</div>
         <div class="card-duration-text">${l.duration}</div>
       </div>`;
     if (accessible || done) card.addEventListener('click', () => goLesson(i));
@@ -2493,6 +2515,15 @@ window.addEventListener('scroll', () => {
 function renderThread() {
   const list = document.getElementById('threadList');
   list.innerHTML = '';
+
+  const novaMap = {
+    'Entender':   { letter:'N', name:'Navegar' },
+    'Criar':      { letter:'O', name:'Operar'  },
+    'Resolver':   { letter:'V', name:'Vencer'  },
+    'Automatizar':{ letter:'A', name:'Automatizar' },
+    'Sistema':    { letter:'★', name:'Sistema' }
+  };
+
   lessons.forEach((l, i) => {
     const done = isCompleted(i);
     const active = i === state.currentLesson;
@@ -2503,7 +2534,7 @@ function renderThread() {
     li.className = 'thread-item';
     li.innerHTML = `<button class="thread-btn ${active?'active':''}" ${disabled} data-idx="${i}">
       <div class="node ${nodeClass}"></div>
-      <div class="thread-info"><div class="day-num">Dia ${i+1}</div><div class="day-title">${l.title}</div><div class="day-pillar">${l.pillar}</div></div>
+      <div class="thread-info"><div class="day-num">Dia ${i+1}</div><div class="day-title">${l.title}</div><div class="day-pillar">${novaMap[l.pillar] ? '<span class="nova-pillar-label">' + novaMap[l.pillar].letter + ' · ' + novaMap[l.pillar].name + '</span>' : l.pillar}</div></div>
     </button>`;
     list.appendChild(li);
   });
