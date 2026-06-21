@@ -661,6 +661,14 @@
       .hero-bg,
       .hero-bg::after,
       .home-hero::after { display:none !important; content:none !important; }
+
+      /* ── same iOS/WebKit veil prevention on the LOGIN screen ──
+         #loginScreen::before is a separate semi-transparent layer and the
+         .login-box uses backdrop-filter (a known iOS veil/gray-box trigger).
+         Remove the extra layer and drop the blur on mobile, compensating with
+         a slightly more opaque box background so it still reads well. */
+      #loginScreen::before { display:none !important; content:none !important; }
+      .login-box { backdrop-filter:none !important; -webkit-backdrop-filter:none !important; background:rgba(20,36,8,0.92) !important; }
       /* hero-content: column layout, photo stacks above text */
       .hero-content { padding:24px 20px 32px !important; flex-direction:column-reverse !important; align-items:center !important; gap:20px !important; }
       .hero-text-col { text-align:center; }
