@@ -3307,5 +3307,33 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTermsMo
 })();
 
 </script>
+<script>
+/* ── TEMP diagnostic: append #diag to the URL to reveal the on-device veil culprit ── */
+if (location.hash === '#diag') {
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      var L = [];
+      L.push('W=' + innerWidth + ' H=' + innerHeight + ' dpr=' + devicePixelRatio);
+      function desc(el, name) {
+        if (!el) { L.push(name + ': MISSING'); return; }
+        var cs = getComputedStyle(el), r = el.getBoundingClientRect();
+        L.push(name + ': disp=' + cs.display + ' vis=' + cs.visibility + ' op=' + cs.opacity +
+          ' z=' + cs.zIndex + ' bg=' + cs.backgroundColor +
+          ' bf=' + (cs.backdropFilter || cs.webkitBackdropFilter) +
+          ' fl=' + cs.filter + ' sz=' + Math.round(r.width) + 'x' + Math.round(r.height));
+      }
+      desc(document.querySelector('.hero-bg'), 'hero-bg');
+      ['termsModal','profileModal','shareModal','confettiCanvas','mobileDrawer','toastContainer','homeScreen']
+        .forEach(function (id) { desc(document.getElementById(id), id); });
+      var cx = (innerWidth/2)|0, cy = (innerHeight/2)|0, t = document.elementFromPoint(cx, cy);
+      L.push('centerEl=' + (t ? (t.tagName + '#' + t.id + '.' + (t.className||'')) : 'null'));
+      var p = document.createElement('div');
+      p.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:2147483647;background:#fff;color:#000;font:11px/1.4 monospace;padding:10px;white-space:pre-wrap;border-bottom:3px solid red;max-height:60vh;overflow:auto;';
+      p.textContent = 'DIAG\n' + L.join('\n');
+      document.body.appendChild(p);
+    }, 1500);
+  });
+}
+</script>
 </body>
 </html>
