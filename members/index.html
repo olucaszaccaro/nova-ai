@@ -648,18 +648,19 @@
       .home-nav { padding:12px 20px; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; background:rgba(8,13,6,0.97) !important; }
       /* hero: collapse to content, remove desktop pull-up */
       .home-hero { height:auto !important; min-height:0 !important; margin-top:0 !important; overflow:hidden !important; position:relative !important; }
-      /* isolate hero-bg absolutely within hero so it can't bleed */
-      .hero-bg { position:absolute !important; inset:0 !important; height:100% !important; pointer-events:none !important; }
-      /* On mobile, replace the heavy radial gradient (90% opacity dark veil)
-         with a simple base color — the desktop gradient was designed for the
-         two-column layout and creates an unintended overlay when centered */
-      .hero-bg {
-        background: linear-gradient(180deg, #0a1a06 0%, #080D06 100%) !important;
-      }
-      /* the 160px gradient overlay — remove with all available levers for iOS Safari */
-      .home-hero::after { display:none !important; content:none !important; visibility:hidden !important; }
-      /* hide particle animation */
-      .hero-bg::after { display:none !important; content:none !important; visibility:hidden !important; }
+      /* ── iOS/WebKit fix for the dark veil over the hero ──
+         The hero used a SEPARATE absolutely-positioned layer (.hero-bg) whose
+         semi-transparent radial gradient + animated ::after particles get
+         mis-composited by iOS WebKit (Safari AND Chrome on iPhone share this
+         engine), painting OVER the hero content as a dark veil. Earlier fixes
+         only tweaked that layer's background, so the bug kept returning.
+         Definitive fix: on mobile, delete the separate layer entirely and paint
+         the dark background directly on .home-hero. A parent's own background
+         can never render above its children, so the veil becomes impossible. */
+      .home-hero { background:linear-gradient(180deg,#0a1a06 0%,#080D06 100%) !important; }
+      .hero-bg,
+      .hero-bg::after,
+      .home-hero::after { display:none !important; content:none !important; }
       /* hero-content: column layout, photo stacks above text */
       .hero-content { padding:24px 20px 32px !important; flex-direction:column-reverse !important; align-items:center !important; gap:20px !important; }
       .hero-text-col { text-align:center; }
