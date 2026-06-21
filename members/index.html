@@ -669,6 +669,23 @@
          a slightly more opaque box background so it still reads well. */
       #loginScreen::before { display:none !important; content:none !important; }
       .login-box { backdrop-filter:none !important; -webkit-backdrop-filter:none !important; background:rgba(20,36,8,0.92) !important; }
+
+      /* ── DEFINITIVE iOS/WebKit veil fix ──
+         iOS WebKit renders backdrop-filter even on display:none elements,
+         painting a full-viewport dark rectangle over the whole page. The
+         hidden modals (terms/profile/share), toasts and the photo caption all
+         use backdrop-filter and live in the DOM on every screen — which is why
+         the veil showed on BOTH home and login, in every iPhone browser, even
+         incognito, while desktop Chrome stayed clean. Nuke backdrop-filter
+         entirely on mobile; the affected elements already have opaque-enough
+         backgrounds so nothing is lost visually. */
+      *, *::before, *::after {
+        backdrop-filter:none !important;
+        -webkit-backdrop-filter:none !important;
+      }
+      /* keep modal/caption backgrounds readable without the blur */
+      .modal-overlay, #profileModal, #shareModal,
+      .hero-photo-caption, .toast { background-color:rgba(8,13,6,0.94) !important; }
       /* hero-content: column layout, photo stacks above text */
       .hero-content { padding:24px 20px 32px !important; flex-direction:column-reverse !important; align-items:center !important; gap:20px !important; }
       .hero-text-col { text-align:center; }
