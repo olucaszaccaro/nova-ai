@@ -734,11 +734,17 @@
       .resources-grid { grid-template-columns:1fr; }
       .comment-text { font-size:0.87rem; line-height:1.65; }
 
-      /* toast: full-width at bottom on mobile (avoids covering content at top) */
+      /* toast: full-width at bottom on mobile (avoids covering content at top).
+         IMPORTANT (iOS veil bug): never give this container a background. On iOS
+         WebKit, "top:auto;bottom:0" did NOT reset the base "top:20px", so the
+         container stretched to ~full height (616px) and its gradient background
+         painted a dark veil over the whole page (z-index 9999). Force the height
+         back to content and remove any background — toasts carry their own bg. */
       #toastContainer {
-        top:auto; bottom:0; left:0; right:0;
+        top:auto !important; bottom:0; left:0; right:0;
+        height:auto !important; max-height:none;
         padding:0 16px calc(16px + env(safe-area-inset-bottom,0px));
-        background:linear-gradient(to top, rgba(8,13,6,0.7) 0%, transparent 100%);
+        background:none !important;
       }
       .toast { min-width:auto; max-width:none; width:100%; }
 
