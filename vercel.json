@@ -24,7 +24,7 @@
   "rewrites": [
     {
       "source": "/startai",
-      "destination": "/"
+      "destination": "/startai/index.html"
     },
     {
       "source": "/curso",
