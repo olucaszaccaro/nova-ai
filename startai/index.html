@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Start.AI — Curso Gratuito de IA</title>
+  <meta name="description" content="Curso gratuito para aprender a usar IA de verdade. Método NOVA — por Lucas Zaccaro · (R)evolução School.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --space: #080D06; --dg: #1A2F0A;
+      --green: #96D034; --lime: #C5F06A;
+      --white: #F0FAE0; --muted: rgba(240,250,224,0.50);
+      --border: rgba(150,208,52,0.14);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--space);
+      color: var(--white);
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(8,13,6,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 clamp(20px, 5vw, 60px);
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .header-left { display: flex; align-items: center; gap: 16px; }
+    .logo {
+      font-family: 'Space Grotesk', sans-serif; font-weight: 800;
+      font-size: 1.25rem; color: var(--white); text-decoration: none;
+      letter-spacing: -0.5px; line-height: 1;
+    }
+    .logo .ai { color: var(--green); }
+    .header-divider {
+      width: 1px; height: 24px; background: var(--border);
+    }
+    .header-by {
+      font-size: 0.68rem; color: var(--muted);
+      font-weight: 500; letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+    .header-by a {
+      color: var(--muted); text-decoration: none; transition: color 0.15s;
+    }
+    .header-by a:hover { color: var(--white); }
+    .header-cta {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .btn-wa {
+      display: flex; align-items: center; gap: 7px;
+      background: rgba(37,211,102,0.1); border: 1px solid rgba(37,211,102,0.25);
+      border-radius: 8px; padding: 8px 14px;
+      color: #25D366; font-size: 0.75rem; font-weight: 600;
+      text-decoration: none; transition: background 0.15s;
+    }
+    .btn-wa:hover { background: rgba(37,211,102,0.18); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: clamp(48px, 8vw, 88px) clamp(20px, 5vw, 60px) clamp(40px, 6vw, 64px);
+      background: radial-gradient(ellipse at 20% 50%, rgba(26,47,10,0.9), var(--space) 65%);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-author {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 28px; flex-wrap: wrap;
+    }
+    .hero-author-photo {
+      width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
+      object-fit: cover;
+      border: 2px solid rgba(150,208,52,0.4);
+      box-shadow: 0 0 14px rgba(150,208,52,0.18);
+    }
+    .hero-author-info { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .hero-author-name {
+      font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.88rem;
+      color: var(--white);
+    }
+    .hero-author-sep { color: var(--border); font-size: 1rem; }
+    .hero-author-socials { display: flex; gap: 6px; }
+    .hero-social-link {
+      width: 30px; height: 30px; border-radius: 7px;
+      background: rgba(240,250,224,0.05); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); text-decoration: none;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .hero-social-link:hover { background: rgba(150,208,52,0.1); color: var(--white); border-color: rgba(150,208,52,0.3); }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(150,208,52,0.1); border: 1px solid rgba(150,208,52,0.25);
+      border-radius: 999px; padding: 5px 14px;
+      font-size: 0.68rem; font-weight: 700; color: var(--green);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 22px;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+    .hero-title {
+      font-family: 'Outfit', sans-serif; font-weight: 800;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.05; letter-spacing: -0.03em;
+      max-width: 680px; margin-bottom: 20px;
+    }
+    .hero-title span { color: var(--green); }
+    .hero-sub {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--muted); line-height: 1.7;
+      max-width: 560px; margin-bottom: 36px;
+    }
+    .hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green); color: var(--space);
+      border: none; border-radius: 10px; padding: 13px 24px;
+      font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 0.9rem;
+      text-decoration: none; cursor: pointer; transition: background 0.15s, transform 0.1s;
+    }
+    .btn-primary:hover { background: var(--lime); transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: none; border: 1px solid var(--border);
+      border-radius: 10px; padding: 13px 22px;
+      font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.88rem;
+      color: var(--white); text-decoration: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .btn-outline:hover { border-color: rgba(150,208,52,0.4); background: rgba(150,208,52,0.05); }
+
+    /* ── CONTENT WRAPPER ── */
+    .content {
+      max-width: 860px; margin: 0 auto;
+      padding: clamp(40px, 6vw, 72px) clamp(20px, 5vw, 40px);
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-eyebrow {
+      font-size: 0.62rem; font-weight: 700; color: var(--green);
+      letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: 'Outfit', sans-serif; font-weight: 800;
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 14px;
+    }
+    .section-sub { font-size: 0.93rem; color: var(--muted); line-height: 1.65; margin-bottom: 40px; }
+
+    /* ── LESSON CARDS ── */
+    .lessons { display: flex; flex-direction: column; gap: 32px; }
+
+    .lesson-card {
+      background: var(--dg); border: 1px solid var(--border);
+      border-radius: 18px; overflow: hidden;
+    }
+    .lesson-header {
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .lesson-num {
+      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+      background: rgba(150,208,52,0.1); border: 1px solid rgba(150,208,52,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1rem;
+      color: var(--green);
+    }
+    .lesson-meta-top { flex: 1; }
+    .lesson-pillar-badge {
+      display: inline-block;
+      background: rgba(150,208,52,0.1); border: 1px solid rgba(150,208,52,0.2);
+      border-radius: 999px; padding: 3px 11px;
+      font-size: 0.64rem; font-weight: 700; color: var(--green);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .lesson-title {
+      font-family: 'Outfit', sans-serif; font-weight: 800;
+      font-size: 1.2rem; line-height: 1.2; letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .lesson-duration { font-size: 0.7rem; color: var(--muted); }
+    .lesson-body { padding: 24px 28px; display: flex; flex-direction: column; gap: 22px; }
+
+    /* Video embed */
+    .video-wrap {
+      border-radius: 12px; overflow: hidden;
+      background: rgba(8,13,6,0.6); border: 1px solid var(--border);
+      aspect-ratio: 16/9; position: relative;
+    }
+    .video-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+    .video-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 12px;
+      background: radial-gradient(ellipse at 50% 60%, rgba(150,208,52,0.04), transparent 70%);
+    }
+    .play-ring {
+      width: 56px; height: 56px; border-radius: 50%;
+      border: 2px solid rgba(150,208,52,0.35);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .play-ring svg { margin-left: 4px; }
+    .video-placeholder-text { text-align: center; }
+    .video-placeholder-text strong { display: block; font-family: 'Outfit', sans-serif; font-size: 0.88rem; font-weight: 700; margin-bottom: 3px; }
+    .video-placeholder-text span { font-size: 0.7rem; color: var(--muted); }
+    .soon-chip {
+      background: rgba(150,208,52,0.1); border: 1px solid rgba(150,208,52,0.2);
+      border-radius: 999px; padding: 3px 12px;
+      font-size: 0.63rem; font-weight: 700; color: var(--green);
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+
+    /* Description */
+    .lesson-description { font-size: 0.93rem; color: var(--muted); line-height: 1.7; }
+
+    /* Exercise */
+    .exercise-block {
+      background: rgba(150,208,52,0.05); border: 1px solid rgba(150,208,52,0.18);
+      border-left: 3px solid var(--green); border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .exercise-label {
+      font-size: 0.6rem; font-weight: 700; color: var(--green);
+      letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .exercise-text { font-size: 0.87rem; line-height: 1.65; color: rgba(240,250,224,0.82); }
+
+    /* Materials */
+    .materials-label {
+      font-size: 0.6rem; font-weight: 700; color: var(--muted);
+      letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .materials-list { display: flex; flex-direction: column; gap: 6px; }
+    .material-item {
+      display: flex; align-items: center; gap: 11px;
+      background: rgba(240,250,224,0.03); border: 1px solid var(--border);
+      border-radius: 9px; padding: 10px 14px;
+    }
+    .material-icon { flex-shrink: 0; color: var(--muted); }
+    .material-name { font-size: 0.83rem; font-weight: 500; }
+    .material-type { font-size: 0.67rem; color: var(--muted); margin-top: 2px; }
+    .material-badge-soon {
+      margin-left: auto; flex-shrink: 0;
+      background: rgba(240,250,224,0.05); border: 1px solid var(--border);
+      border-radius: 999px; padding: 2px 10px;
+      font-size: 0.6rem; color: var(--muted); letter-spacing: 0.06em;
+    }
+    .material-link {
+      margin-left: auto; flex-shrink: 0;
+      display: flex; align-items: center; gap: 5px;
+      background: rgba(150,208,52,0.1); border: 1px solid rgba(150,208,52,0.25);
+      border-radius: 999px; padding: 4px 12px;
+      font-size: 0.63rem; font-weight: 700; color: var(--green);
+      text-decoration: none; transition: background 0.15s;
+    }
+    .material-link:hover { background: rgba(150,208,52,0.18); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px; background: var(--border);
+      margin: 48px 0;
+    }
+
+    /* ── PROFESSOR CARD ── */
+    .professor-card {
+      display: flex; align-items: center; gap: 24px;
+      background: var(--dg); border: 1px solid var(--border);
+      border-radius: 18px; padding: 28px 32px;
+      margin-bottom: 32px; flex-wrap: wrap;
+    }
+    .professor-photo {
+      width: 80px; height: 80px; border-radius: 50%; flex-shrink: 0;
+      object-fit: cover;
+      border: 2px solid rgba(150,208,52,0.35);
+      box-shadow: 0 0 20px rgba(150,208,52,0.15);
+    }
+    .professor-info { flex: 1; min-width: 200px; }
+    .professor-label {
+      font-size: 0.6rem; font-weight: 700; color: var(--green);
+      letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px;
+    }
+    .professor-name {
+      font-family: 'Outfit', sans-serif; font-weight: 800;
+      font-size: 1.1rem; margin-bottom: 4px;
+    }
+    .professor-bio { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+    .professor-socials {
+      display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap;
+    }
+    .social-btn {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(240,250,224,0.04); border: 1px solid var(--border);
+      border-radius: 8px; padding: 7px 12px;
+      text-decoration: none; color: var(--muted); font-size: 0.72rem; font-weight: 500;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .social-btn:hover { background: rgba(150,208,52,0.08); color: var(--white); border-color: rgba(150,208,52,0.25); }
+    .social-btn svg { flex-shrink: 0; }
+
+    /* ── WHATSAPP CARD ── */
+    .wa-card {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; flex-wrap: wrap;
+      background: rgba(37,211,102,0.07); border: 1px solid rgba(37,211,102,0.2);
+      border-radius: 18px; padding: 28px 32px;
+      text-decoration: none; color: var(--white);
+      transition: background 0.15s;
+      margin-bottom: 48px;
+    }
+    .wa-card:hover { background: rgba(37,211,102,0.12); }
+    .wa-card-left { display: flex; align-items: center; gap: 18px; }
+    .wa-icon {
+      width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(37,211,102,0.15);
+      display: flex; align-items: center; justify-content: center;
+      color: #25D366;
+    }
+    .wa-title { font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 3px; color: var(--white); }
+    .wa-sub { font-size: 0.77rem; color: var(--muted); }
+    .wa-btn {
+      background: #25D366; color: #fff;
+      border: none; border-radius: 10px; padding: 11px 22px;
+      font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.83rem;
+      cursor: pointer; white-space: nowrap; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 7px;
+      transition: background 0.15s;
+    }
+    .wa-btn:hover { background: #22c55e; }
+
+    /* ── UPSELL CARD ── */
+    .upsell-card {
+      background: linear-gradient(135deg, rgba(26,47,10,0.9) 0%, rgba(8,13,6,1) 100%);
+      border: 1px solid rgba(150,208,52,0.25); border-radius: 18px;
+      padding: 40px 36px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .upsell-card::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse at 50% 0%, rgba(150,208,52,0.08), transparent 60%);
+    }
+    .upsell-eyebrow {
+      font-size: 0.62rem; font-weight: 700; color: var(--green);
+      letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .upsell-title {
+      font-family: 'Outfit', sans-serif; font-weight: 800;
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 14px;
+    }
+    .upsell-sub { font-size: 0.92rem; color: var(--muted); line-height: 1.65; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .upsell-features {
+      display: flex; gap: 24px; justify-content: center;
+      flex-wrap: wrap; margin-bottom: 32px;
+    }
+    .upsell-feat {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 0.82rem; color: rgba(240,250,224,0.72);
+    }
+    .feat-check {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: rgba(150,208,52,0.15); border: 1px solid rgba(150,208,52,0.3);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: var(--green);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px clamp(20px, 5vw, 60px);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-brand { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1rem; color: var(--white); }
+    .footer-brand .ai { color: var(--green); }
+    .footer-links { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+    .footer-link {
+      font-size: 0.75rem; color: var(--muted); text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-link:hover { color: var(--white); }
+    .footer-social-icons { display: flex; gap: 10px; }
+    .footer-social-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: rgba(240,250,224,0.04); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+    .footer-social-icon:hover { background: rgba(150,208,52,0.08); color: var(--white); }
+    .footer-copy { font-size: 0.7rem; color: var(--muted); margin-top: 4px; }
+
+    /* ── WAITLIST MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(4,8,4,0.82); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-box {
+      width: 100%; max-width: 420px;
+      background: var(--dg); border: 1px solid rgba(150,208,52,0.2);
+      border-radius: 20px; padding: 36px 32px;
+      position: relative;
+      animation: modalIn 0.22s ease;
+    }
+    @keyframes modalIn { from{opacity:0;transform:translateY(16px) scale(.97);} to{opacity:1;transform:translateY(0) scale(1);} }
+    .modal-close {
+      position: absolute; top: 14px; right: 16px;
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); font-size: 1.1rem; line-height: 1;
+      padding: 4px; transition: color 0.15s;
+    }
+    .modal-close:hover { color: var(--white); }
+    .modal-icon { font-size: 2rem; margin-bottom: 14px; }
+    .modal-box h3 {
+      font-family: 'Outfit', sans-serif; font-weight: 800;
+      font-size: 1.3rem; letter-spacing: -0.02em; margin-bottom: 8px;
+    }
+    .modal-box > p {
+      font-size: 0.87rem; color: var(--muted); line-height: 1.6; margin-bottom: 24px;
+    }
+    .form-field { margin-bottom: 14px; }
+    .form-field label {
+      display: block; font-size: 0.62rem; font-weight: 700;
+      color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+    .form-field input {
+      width: 100%; background: rgba(240,250,224,0.05);
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 11px 14px; font-family: 'Inter', sans-serif;
+      font-size: 0.95rem; color: var(--white); outline: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .form-field input::placeholder { color: rgba(240,250,224,0.22); }
+    .form-field input:focus { border-color: rgba(150,208,52,0.5); background: rgba(240,250,224,0.08); }
+    .btn-submit {
+      width: 100%; background: var(--green); color: var(--space);
+      border: none; border-radius: 10px; padding: 13px;
+      font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 0.92rem;
+      cursor: pointer; margin-top: 8px;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .btn-submit:hover:not(:disabled) { background: var(--lime); transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: 0.5; cursor: default; }
+    .modal-note { font-size: 0.67rem; color: var(--muted); text-align: center; margin-top: 12px; }
+    .modal-success { display: none; text-align: center; }
+    .modal-success .success-icon {
+      width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 18px;
+      background: rgba(150,208,52,0.12); border: 1px solid rgba(150,208,52,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+    }
+    .modal-success h3 { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.25rem; margin-bottom: 10px; }
+    .modal-success p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+    .success-green { color: var(--green); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      .lesson-header { flex-direction: column; gap: 10px; }
+      .lesson-num { width: 36px; height: 36px; font-size: 0.85rem; }
+      .lesson-body { padding: 18px 20px; }
+      .lesson-header { padding: 18px 20px 16px; }
+      .wa-card { flex-direction: column; align-items: flex-start; padding: 22px 20px; }
+      .upsell-card { padding: 32px 20px; }
+      footer { flex-direction: column; align-items: flex-start; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .professor-card { padding: 20px; }
+      .header-divider, .header-by { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-left">
+    <a href="/" class="logo">Start<span class="ai">.AI</span></a>
+    <div class="header-divider"></div>
+    <div class="header-by">by <a href="https://revolucao.school" target="_blank" rel="noopener">(R)evolução School</a></div>
+  </div>
+  <div class="header-cta">
+    <a href="https://chat.whatsapp.com/F5000nSwSezL2sIER5dEtN" target="_blank" rel="noopener" class="btn-wa">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Comunidade
+    </a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-author">
+    <img src="../links/lucas.png" alt="Lucas Zaccaro" class="hero-author-photo">
+    <div class="hero-author-info">
+      <span class="hero-author-name">Lucas Zaccaro</span>
+      <span class="hero-author-sep">·</span>
+      <div class="hero-author-socials">
+        <a href="https://www.instagram.com/lucas.zaccaro" target="_blank" rel="noopener" class="hero-social-link" title="Instagram">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://youtube.com/@lucas.zaccaro" target="_blank" rel="noopener" class="hero-social-link" title="YouTube">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@lucas.zaccaro" target="_blank" rel="noopener" class="hero-social-link" title="TikTok">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.27 8.27 0 0 0 4.84 1.55V6.79a4.85 4.85 0 0 1-1.07-.1z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/lucaszaccaro" target="_blank" rel="noopener" class="hero-social-link" title="LinkedIn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-badge"><div class="hero-badge-dot"></div> Curso Gratuito · Aberto à comunidade</div>
+  <h1 class="hero-title">Aprenda a usar IA de verdade.<br><span>Do jeito certo.</span></h1>
+  <p class="hero-sub">Aulas diretas ao ponto, com método, prática e resultados imediatos. O conteúdo cresce com a comunidade — os próximos temas são escolhidos por votação.</p>
+  <div class="hero-actions">
+    <a href="#aulas" class="btn-primary">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      Começar agora
+    </a>
+    <a href="https://chat.whatsapp.com/F5000nSwSezL2sIER5dEtN" target="_blank" rel="noopener" class="btn-outline">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Votar nos próximos temas
+    </a>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main class="content">
+
+  <!-- Section heading -->
+  <div class="section-eyebrow">Conteúdo do curso</div>
+  <h2 class="section-title" id="aulas">Aulas do Start.AI</h2>
+  <p class="section-sub">Cada aula tem vídeo, exercício prático e materiais para download. Assista no seu ritmo — acesso permanente, sem cadastro. Novos temas são adicionados com base nos votos da comunidade.</p>
+
+  <!-- LESSONS -->
+  <div class="lessons">
+
+    <!-- AULA 1 -->
+    <div class="lesson-card" id="aula-1">
+      <div class="lesson-header">
+        <div class="lesson-num">01</div>
+        <div class="lesson-meta-top">
+          <div class="lesson-pillar-badge">Entender</div>
+          <div class="lesson-title">Entender IA de verdade</div>
+          <div class="lesson-duration">~15 min</div>
+        </div>
+      </div>
+      <div class="lesson-body">
+        <div class="video-wrap">
+          <div class="video-placeholder">
+            <div class="play-ring">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(150,208,52,0.6)"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="video-placeholder-text">
+              <strong>Vídeo em breve</strong>
+              <span>O conteúdo completo já está disponível abaixo</span>
+            </div>
+            <div class="soon-chip">Em produção</div>
+          </div>
+        </div>
+        <p class="lesson-description">Descubra como a IA realmente funciona por dentro. Tokens, contexto, modelos, janela de atenção — e por que a forma como a maioria das pessoas usa IA desperdiça 90% do potencial. Sair dessa aula com um modelo mental correto muda tudo que vem depois.</p>
+        <div class="exercise-block">
+          <div class="exercise-label">✦ Exercício da aula</div>
+          <div class="exercise-text">Abra o Claude e faça o mesmo pedido duas vezes: uma com uma frase curta e sem contexto, e outra com contexto rico (quem você é, o que precisa, qual o formato esperado). Compare os resultados e guarde o prompt que funcionou melhor.</div>
+        </div>
+        <div>
+          <div class="materials-label">Materiais</div>
+          <div class="materials-list">
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div><div class="material-name">Framework CRISP (PDF)</div><div class="material-type">PDF · Guia prático</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div><div class="material-name">Glossário de IA para não-técnicos</div><div class="material-type">PDF · Referência rápida</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div><div class="material-name">Comparativo de modelos 2025</div><div class="material-type">PDF · Tabela comparativa</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+              <div><div class="material-name">Prompt de diagnóstico de contexto</div><div class="material-type">Prompt · Copie e use</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AULA 2 -->
+    <div class="lesson-card" id="aula-2">
+      <div class="lesson-header">
+        <div class="lesson-num">02</div>
+        <div class="lesson-meta-top">
+          <div class="lesson-pillar-badge">Criar</div>
+          <div class="lesson-title">Criar qualquer coisa</div>
+          <div class="lesson-duration">~15 min</div>
+        </div>
+      </div>
+      <div class="lesson-body">
+        <div class="video-wrap">
+          <div class="video-placeholder">
+            <div class="play-ring">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(150,208,52,0.6)"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="video-placeholder-text">
+              <strong>Vídeo em breve</strong>
+              <span>O conteúdo completo já está disponível abaixo</span>
+            </div>
+            <div class="soon-chip">Em produção</div>
+          </div>
+        </div>
+        <p class="lesson-description">IA não é só um chat para conversar. É um estúdio criativo completo: textos, imagens, sites e ferramentas digitais simples. Nessa aula você vai criar algo que antes parecia impossível sem anos de estudo — em menos de 10 minutos.</p>
+        <div class="exercise-block">
+          <div class="exercise-label">✦ Exercício da aula</div>
+          <div class="exercise-text">Escolha UMA coisa para criar agora: uma imagem no Ideogram, um texto formatado no Claude, ou uma ferramenta digital simples para uso próprio. Poste o resultado na comunidade do WhatsApp.</div>
+        </div>
+        <div>
+          <div class="materials-label">Materiais</div>
+          <div class="materials-list">
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div><div class="material-name">50 prompts de criação por categoria</div><div class="material-type">PDF · Biblioteca de prompts</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div><div class="material-name">Lista de ferramentas criativas com IA</div><div class="material-type">PDF · 30+ ferramentas comentadas</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div><div class="material-name">Guia: criar sites simples com Claude</div><div class="material-type">PDF · Passo a passo</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+              <div><div class="material-name">Prompt: crie um post viral em 3 formatos</div><div class="material-type">Prompt · Copie e use</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AULA 3 -->
+    <div class="lesson-card" id="aula-3">
+      <div class="lesson-header">
+        <div class="lesson-num">03</div>
+        <div class="lesson-meta-top">
+          <div class="lesson-pillar-badge">Resolver</div>
+          <div class="lesson-title">Resolver problemas</div>
+          <div class="lesson-duration">~15 min</div>
+        </div>
+      </div>
+      <div class="lesson-body">
+        <div class="video-wrap">
+          <div class="video-placeholder">
+            <div class="play-ring">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(150,208,52,0.6)"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="video-placeholder-text">
+              <strong>Vídeo em breve</strong>
+              <span>O conteúdo completo já está disponível abaixo</span>
+            </div>
+            <div class="soon-chip">Em produção</div>
+          </div>
+        </div>
+        <p class="lesson-description">O poder real da IA está em resolver problemas que você tem agora — do trabalho, da vida pessoal, do dia a dia. Nessa aula você aprende a usar a IA como um colaborador que pensa com você, não só como um gerador de texto.</p>
+        <div class="exercise-block">
+          <div class="exercise-label">✦ Exercício da aula</div>
+          <div class="exercise-text">Pegue um problema real que você está enfrentando hoje. Descreva o problema para o Claude em detalhes e peça uma solução. Adapte a resposta para o seu contexto específico.</div>
+        </div>
+        <div>
+          <div class="materials-label">Materiais</div>
+          <div class="materials-list">
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div><div class="material-name">Biblioteca de prompts por situação (60+)</div><div class="material-type">PDF · Referência prática</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div><div class="material-name">Templates de tomada de decisão com IA</div><div class="material-type">PDF · 5 modelos prontos</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div><div class="material-name">Roteiro: como descrever problemas para a IA</div><div class="material-type">PDF · Método passo a passo</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+              <div><div class="material-name">Prompt: analise meu problema e me dê 3 soluções</div><div class="material-type">Prompt · Copie e use</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AULA 4 -->
+    <div class="lesson-card" id="aula-4">
+      <div class="lesson-header">
+        <div class="lesson-num">04</div>
+        <div class="lesson-meta-top">
+          <div class="lesson-pillar-badge">Automatizar</div>
+          <div class="lesson-title">Automatizar sua rotina</div>
+          <div class="lesson-duration">~15 min</div>
+        </div>
+      </div>
+      <div class="lesson-body">
+        <div class="video-wrap">
+          <div class="video-placeholder">
+            <div class="play-ring">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(150,208,52,0.6)"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="video-placeholder-text">
+              <strong>Vídeo em breve</strong>
+              <span>O conteúdo completo já está disponível abaixo</span>
+            </div>
+            <div class="soon-chip">Em produção</div>
+          </div>
+        </div>
+        <p class="lesson-description">Toda semana você faz dezenas de tarefas repetitivas. E se metade delas acontecessem sozinhas? Nessa aula você vai identificar suas maiores oportunidades de automação e montar o rascunho do seu AI Playbook pessoal.</p>
+        <div class="exercise-block">
+          <div class="exercise-label">✦ Exercício da aula</div>
+          <div class="exercise-text">Liste 5 tarefas que você repete toda semana. Escolha a que consome mais tempo e crie um fluxo com a IA para automatizá-la. Documente em 3 linhas como funciona.</div>
+        </div>
+        <div>
+          <div class="materials-label">Materiais</div>
+          <div class="materials-list">
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div><div class="material-name">Template: AI Playbook pessoal</div><div class="material-type">PDF · Template editável</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div><div class="material-name">Checklist de automação com Claude</div><div class="material-type">PDF · 20 tarefas prontas</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div><div class="material-name">Exemplos de automação por perfil profissional</div><div class="material-type">PDF · 10 perfis + exemplos</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+              <div><div class="material-name">Prompt: mapeie minha rotina e sugira automações</div><div class="material-type">Prompt · Copie e use</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AULA 5 -->
+    <div class="lesson-card" id="aula-5">
+      <div class="lesson-header">
+        <div class="lesson-num">05</div>
+        <div class="lesson-meta-top">
+          <div class="lesson-pillar-badge">Sistema</div>
+          <div class="lesson-title">Seu sistema de IA</div>
+          <div class="lesson-duration">~15 min</div>
+        </div>
+      </div>
+      <div class="lesson-body">
+        <div class="video-wrap">
+          <div class="video-placeholder">
+            <div class="play-ring">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(150,208,52,0.6)"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="video-placeholder-text">
+              <strong>Vídeo em breve</strong>
+              <span>O conteúdo completo já está disponível abaixo</span>
+            </div>
+            <div class="soon-chip">Em produção</div>
+          </div>
+        </div>
+        <p class="lesson-description">O último dia é sobre integração. Tudo que você aprendeu vira um sistema coerente. Você sai com seu mapa pessoal de IA e um plano claro para o que vem depois.</p>
+        <div class="exercise-block">
+          <div class="exercise-label">✦ Exercício da aula</div>
+          <div class="exercise-text">Monte o mapa completo do seu sistema de IA: quais ferramentas você vai usar, para quê, e quais são os 3 próximos hábitos que você vai adotar. Compartilhe na comunidade.</div>
+        </div>
+        <div>
+          <div class="materials-label">Materiais</div>
+          <div class="materials-list">
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div><div class="material-name">Template: mapa do sistema de IA pessoal</div><div class="material-type">PDF · Template editável</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div><div class="material-name">Guia: o que vem depois do Start.AI</div><div class="material-type">PDF · Próximos passos</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+              <div><div class="material-name">Rise.ai — conheça a formação completa</div><div class="material-type">Link · Próximo nível</div></div>
+              <a href="https://rise.ai" target="_blank" rel="noopener" class="material-link">
+                Acessar
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+            <div class="material-item">
+              <div class="material-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+              <div><div class="material-name">Prompt: monte meu sistema de IA em 10 minutos</div><div class="material-type">Prompt · Copie e use</div></div>
+              <span class="material-badge-soon">Em breve</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /lessons -->
+
+  <div class="divider"></div>
+
+  <!-- PROFESSOR -->
+  <div class="professor-card">
+    <img src="../links/lucas.png" alt="Lucas Zaccaro" class="professor-photo">
+    <div class="professor-info">
+      <div class="professor-label">Quem criou este curso</div>
+      <div class="professor-name">Lucas Zaccaro</div>
+      <div class="professor-bio">Economista, palestrante e fundador da Nova AI. Não é programador — e é exatamente por isso que ensina IA para quem não é técnico. 5x premiado em inovação (1 internacional).</div>
+      <div class="professor-socials">
+        <a href="https://www.instagram.com/lucas.zaccaro" target="_blank" rel="noopener" class="social-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          Instagram
+        </a>
+        <a href="https://youtube.com/@lucas.zaccaro" target="_blank" rel="noopener" class="social-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          YouTube
+        </a>
+        <a href="https://www.tiktok.com/@lucas.zaccaro" target="_blank" rel="noopener" class="social-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.27 8.27 0 0 0 4.84 1.55V6.79a4.85 4.85 0 0 1-1.07-.1z"/></svg>
+          TikTok
+        </a>
+        <a href="https://www.linkedin.com/in/lucaszaccaro" target="_blank" rel="noopener" class="social-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHATSAPP -->
+  <a href="https://chat.whatsapp.com/F5000nSwSezL2sIER5dEtN" target="_blank" rel="noopener" class="wa-card">
+    <div class="wa-card-left">
+      <div class="wa-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </div>
+      <div>
+        <div class="wa-title">Comunidade Start.AI no WhatsApp</div>
+        <div class="wa-sub">Tire dúvidas, vote nos próximos temas e conecte-se com outros alunos</div>
+      </div>
+    </div>
+    <div class="wa-btn">
+      Entrar grátis
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </div>
+  </a>
+
+  <!-- UPSELL / WAITLIST RISE.AI -->
+  <div class="upsell-card">
+    <div class="upsell-eyebrow">Em breve · Rise.ai</div>
+    <h2 class="upsell-title">Quer ir além do básico?<br>Entre na lista de espera.</h2>
+    <p class="upsell-sub">O Rise.ai está sendo construído — com profundidade, projetos reais e suporte direto. Quem entrar na lista será o primeiro a saber quando abrir, e vai ter condições especiais de lançamento.</p>
+    <div class="upsell-features">
+      <div class="upsell-feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div> Módulos avançados</div>
+      <div class="upsell-feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div> Projetos práticos</div>
+      <div class="upsell-feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div> Acesso prioritário</div>
+      <div class="upsell-feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div> Condições de lançamento</div>
+    </div>
+    <button onclick="openWaitlist()" class="btn-primary" style="font-size:0.95rem; padding:14px 30px; border:none; cursor:pointer;">
+      Quero entrar na lista
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">Start<span class="ai">.AI</span></div>
+    <div class="footer-copy">© 2026 Nova AI · <a href="https://revolucao.school" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">(R)evolução® School</a> · Todos os direitos reservados</div>
+  </div>
+  <div class="footer-links">
+    <div class="footer-social-icons">
+      <a href="https://www.instagram.com/lucas.zaccaro" target="_blank" rel="noopener" class="footer-social-icon" title="Instagram">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://youtube.com/@lucas.zaccaro" target="_blank" rel="noopener" class="footer-social-icon" title="YouTube">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a href="https://www.tiktok.com/@lucas.zaccaro" target="_blank" rel="noopener" class="footer-social-icon" title="TikTok">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.27 8.27 0 0 0 4.84 1.55V6.79a4.85 4.85 0 0 1-1.07-.1z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/lucaszaccaro" target="_blank" rel="noopener" class="footer-social-icon" title="LinkedIn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+    </div>
+    <a href="https://chat.whatsapp.com/F5000nSwSezL2sIER5dEtN" target="_blank" rel="noopener" class="footer-link">Comunidade</a>
+    <a href="https://rise.ai" target="_blank" rel="noopener" class="footer-link">Rise.ai</a>
+  </div>
+</footer>
+
+<!-- WAITLIST MODAL -->
+<div class="modal-overlay" id="waitlist-modal" onclick="handleModalOverlay(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeWaitlist()" aria-label="Fechar">✕</button>
+
+    <!-- Form -->
+    <div id="wl-form">
+      <div class="modal-icon">🚀</div>
+      <h3>Entrar na lista de espera</h3>
+      <p>Quando o Rise.ai abrir, você será o primeiro a saber — e vai ter condições especiais de lançamento.</p>
+      <form onsubmit="handleWaitlist(event)">
+        <div class="form-field">
+          <label for="wl-nome">SEU NOME</label>
+          <input id="wl-nome" type="text" placeholder="Como posso te chamar?" required autocomplete="given-name">
+        </div>
+        <div class="form-field">
+          <label for="wl-email">E-MAIL</label>
+          <input id="wl-email" type="email" placeholder="seu@email.com" required autocomplete="email">
+        </div>
+        <div class="form-field">
+          <label for="wl-wpp">WHATSAPP <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:0.6rem">(opcional)</span></label>
+          <input id="wl-wpp" type="tel" placeholder="(11) 99999-9999" autocomplete="tel">
+        </div>
+        <button type="submit" class="btn-submit" id="wl-btn">Quero entrar na lista →</button>
+      </form>
+      <p class="modal-note">Sem spam, nunca. Só avisamos quando abrir.</p>
+    </div>
+
+    <!-- Success -->
+    <div class="modal-success" id="wl-success">
+      <div class="success-icon">✅</div>
+      <h3>Você está na lista, <span class="success-green" id="wl-nome-ok"></span>!</h3>
+      <p>Assim que o Rise.ai abrir, você será o primeiro a saber — com condições exclusivas de lançamento. Até lá, continue aproveitando o Start.AI gratuitamente.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const SUPABASE_URL = 'https://iwdvhgqnlgxfqsqsfhmz.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_tfU8VvGwJOFoi-oi-tKmgw_Gk_4cE2M';
+
+  async function salvarLead(nome, email, whatsapp) {
+    try {
+      await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ nome, email, whatsapp: whatsapp || null, source: 'rise-waitlist' })
+      });
+    } catch(e) {
+      console.warn('Supabase lead:', e.message);
+    }
+  }
+
+  function openWaitlist() {
+    document.getElementById('waitlist-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('wl-nome').focus(), 50);
+  }
+  function closeWaitlist() {
+    document.getElementById('waitlist-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function handleModalOverlay(e) {
+    if (e.target === document.getElementById('waitlist-modal')) closeWaitlist();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeWaitlist(); });
+
+  async function handleWaitlist(e) {
+    e.preventDefault();
+    const nome     = document.getElementById('wl-nome').value.trim();
+    const email    = document.getElementById('wl-email').value.trim();
+    const whatsapp = document.getElementById('wl-wpp').value.trim();
+    const btn      = document.getElementById('wl-btn');
+
+    btn.disabled = true;
+    btn.textContent = 'Salvando…';
+
+    await salvarLead(nome, email, whatsapp);
+
+    document.getElementById('wl-form').style.display = 'none';
+    document.getElementById('wl-nome-ok').textContent = nome.split(' ')[0];
+    document.getElementById('wl-success').style.display = 'block';
+  }
+</script>
+</body>
+</html>
