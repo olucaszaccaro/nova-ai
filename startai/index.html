@@ -7,7 +7,7 @@
   <meta name="description" content="Curso gratuito para aprender a usar IA de verdade. Método NOVA — por Lucas Zaccaro · (R)evolução School.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700;800&family=Space+Grotesk:wght@700;800&family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -36,11 +36,12 @@
     }
     .header-left { display: flex; align-items: center; gap: 16px; }
     .logo {
-      font-family: 'Space Grotesk', sans-serif; font-weight: 800;
+      font-family: 'Raleway', 'Space Grotesk', sans-serif; font-weight: 800;
       font-size: 1.25rem; color: var(--white); text-decoration: none;
       letter-spacing: -0.5px; line-height: 1;
+      display: flex; align-items: center; gap: 7px;
     }
-    .logo .ai { color: var(--green); }
+    .logo .ai { color: var(--lime); }
     .header-divider {
       width: 1px; height: 24px; background: var(--border);
     }
@@ -106,7 +107,7 @@
     .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
     .hero-title {
-      font-family: 'Outfit', sans-serif; font-weight: 800;
+      font-family: 'Raleway', 'Outfit', sans-serif; font-weight: 800;
       font-size: clamp(2rem, 5vw, 3.4rem);
       line-height: 1.05; letter-spacing: -0.03em;
       max-width: 680px; margin-bottom: 20px;
@@ -148,7 +149,7 @@
       letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 8px;
     }
     .section-title {
-      font-family: 'Outfit', sans-serif; font-weight: 800;
+      font-family: 'Raleway', 'Outfit', sans-serif; font-weight: 800;
       font-size: clamp(1.5rem, 3.5vw, 2rem);
       letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 14px;
     }
@@ -380,8 +381,8 @@
       display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: 16px;
     }
-    .footer-brand { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1rem; color: var(--white); }
-    .footer-brand .ai { color: var(--green); }
+    .footer-brand { font-family: 'Raleway', 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1rem; color: var(--white); display:flex; align-items:center; gap:6px; }
+    .footer-brand .ai { color: var(--lime); }
     .footer-links { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
     .footer-link {
       font-size: 0.75rem; color: var(--muted); text-decoration: none;
@@ -488,7 +489,14 @@
 <!-- HEADER -->
 <header>
   <div class="header-left">
-    <a href="/" class="logo">Start<span class="ai">.AI</span></a>
+    <a href="/" class="logo">
+      <svg width="20" height="20" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="28" height="28" rx="6" fill="#1A2F0A"/>
+        <path d="M7 10L13 14L7 18" stroke="#96D034" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M15 18H21" stroke="#C5F06A" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      Start<span class="ai">.ai</span>
+    </a>
     <div class="header-divider"></div>
     <div class="header-by">by <a href="https://revolucao.school" target="_blank" rel="noopener">(R)evolução School</a></div>
   </div>
@@ -903,7 +911,14 @@
 <!-- FOOTER -->
 <footer>
   <div>
-    <div class="footer-brand">Start<span class="ai">.AI</span></div>
+    <div class="footer-brand">
+      <svg width="16" height="16" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="28" height="28" rx="6" fill="#1A2F0A"/>
+        <path d="M7 10L13 14L7 18" stroke="#96D034" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M15 18H21" stroke="#C5F06A" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      Start<span class="ai">.ai</span>
+    </div>
     <div class="footer-copy">© 2026 Nova AI · <a href="https://revolucao.school" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">(R)evolução® School</a> · Todos os direitos reservados</div>
   </div>
   <div class="footer-links">

@@ -89,13 +89,13 @@
       color: var(--nova); margin-bottom: .75rem;
     }
     h1 {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'Raleway', 'Space Grotesk', sans-serif;
       font-size: clamp(2.8rem, 9vw, 5.2rem);
-      font-weight: 700; line-height: 1.04;
+      font-weight: 800; line-height: 1.04;
       letter-spacing: -2.5px;
     }
     h2 {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'Raleway', 'Space Grotesk', sans-serif;
       font-size: clamp(2rem, 5.5vw, 3rem);
       font-weight: 700; line-height: 1.1;
       letter-spacing: -1.5px;
@@ -221,9 +221,9 @@
     /* ── PAIN ── */
     .pain { background: var(--deep); border-top: 1px solid rgba(150,208,52,.07); border-bottom: 1px solid rgba(150,208,52,.07); }
     .pain-quote {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'Raleway', 'Space Grotesk', sans-serif;
       font-size: clamp(1.4rem, 4vw, 2.1rem);
-      font-weight: 600; line-height: 1.35;
+      font-weight: 700; line-height: 1.35;
       letter-spacing: -.5px; max-width: 620px; margin-bottom: 2rem;
     }
     .pain-quote em { color: var(--nova); font-style: normal; }
@@ -305,7 +305,7 @@
     .lcard:hover { border-color: rgba(150,208,52,.45); transform: translateY(-3px); }
     .lcard.active { border-color: var(--nova); background: linear-gradient(135deg, rgba(150,208,52,.05), transparent 60%); }
     .lcard-tier { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--dim); margin-bottom: .75rem; }
-    .lcard-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700; margin-bottom: .25rem; }
+    .lcard-name { font-family: 'Raleway', 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700; margin-bottom: .25rem; }
     .lcard-line { font-size: .85rem; color: var(--sub); margin-bottom: 1rem; }
     .lcard-price { font-size: .85rem; font-weight: 600; }
     .lcard-price.free { color: var(--nova); }
@@ -330,7 +330,7 @@
       color: var(--dim); font-size: .8rem; text-align: center; padding: 1rem;
     }
     .about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: var(--rl); }
-    .about-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: .2rem; }
+    .about-name { font-family: 'Raleway', 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: .2rem; }
     .about-role { font-size: .85rem; color: var(--nova); margin-bottom: 1.25rem; }
     .about-text { color: var(--sub); line-height: 1.75; }
     .stats { display: flex; gap: 2rem; margin-top: 2rem; }

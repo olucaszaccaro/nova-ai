@@ -1,16 +1,17 @@
 /* Global Configurations & Reset */
 :root {
-    --primary-green: #8AE322;
-    --primary-green-glow: rgba(138, 227, 34, 0.4);
-    --primary-green-dim: rgba(138, 227, 34, 0.15);
-    --bg-dark: #070B06;
+    --primary-green: #96D034;
+    --lime: #C5F06A;
+    --primary-green-glow: rgba(150, 208, 52, 0.4);
+    --primary-green-dim: rgba(150, 208, 52, 0.15);
+    --bg-dark: #080D06;
     --bg-dark-secondary: #0A1108;
-    --text-white: #FFFFFF;
-    --text-muted: #A3B59D;
+    --text-white: #F0FAE0;
+    --text-muted: #8BA87A;
     --card-bg: rgba(10, 18, 9, 0.6);
-    --card-border: rgba(138, 227, 34, 0.12);
-    --card-border-hover: rgba(138, 227, 34, 0.45);
-    --font-heading: 'Outfit', sans-serif;
+    --card-border: rgba(150, 208, 52, 0.12);
+    --card-border-hover: rgba(150, 208, 52, 0.45);
+    --font-heading: 'Raleway', 'Outfit', sans-serif;
     --font-body: 'Inter', sans-serif;
     --transition-speed: 0.3s;
     --transition-curve: cubic-bezier(0.16, 1, 0.3, 1);
@@ -57,8 +58,8 @@ body {
 .cyber-grid {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-image:
-        linear-gradient(rgba(138, 227, 34, 0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(138, 227, 34, 0.015) 1px, transparent 1px);
+        linear-gradient(rgba(150, 208, 52, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(150, 208, 52, 0.015) 1px, transparent 1px);
     background-size: 40px 40px;
     z-index: -1; pointer-events: none;
 }
@@ -86,7 +87,7 @@ body {
 }
 
 .share-btn:hover {
-    background: rgba(138,227,34,.15);
+    background: rgba(150,208,52,.15);
     border-color: var(--primary-green);
     color: var(--primary-green);
     transform: rotate(15deg) scale(1.05);
@@ -133,16 +134,16 @@ body {
 
 .logo-badge {
     display: flex; align-items: center; gap: 8px;
-    background: rgba(138,227,34,.08);
+    background: rgba(150,208,52,.08);
     border: 1px solid var(--primary-green-dim);
     padding: 6px 14px; border-radius: 20px; margin-bottom: 16px;
     transition: all var(--transition-speed) var(--transition-curve);
 }
 
 .logo-badge:hover {
-    background: rgba(138,227,34,.15);
+    background: rgba(150,208,52,.15);
     border-color: var(--primary-green);
-    box-shadow: 0 0 10px rgba(138,227,34,.25);
+    box-shadow: 0 0 10px rgba(150,208,52,.25);
 }
 
 .logo-image { width: 18px; height: 18px; border-radius: 50%; object-fit: cover; }
@@ -181,7 +182,7 @@ body {
 .link-card:hover {
     transform: translateY(-4px);
     border-color: var(--card-border-hover);
-    box-shadow: 0 8px 25px rgba(5,10,5,.5), 0 0 15px rgba(138,227,34,.05);
+    box-shadow: 0 8px 25px rgba(5,10,5,.5), 0 0 15px rgba(150,208,52,.05);
 }
 
 .card-content { display: flex; align-items: center; gap: 16px; position: relative; z-index: 2; }
@@ -231,14 +232,14 @@ body {
 }
 
 .link-card.featured {
-    border: 1px solid rgba(138,227,34,.3);
-    background: linear-gradient(135deg, rgba(138,227,34,.06) 0%, rgba(10,18,9,.8) 100%);
+    border: 1px solid rgba(150,208,52,.3);
+    background: linear-gradient(135deg, rgba(150,208,52,.06) 0%, rgba(10,18,9,.8) 100%);
     animation: border-pulse 2.5s infinite alternate;
 }
 
 .card-glow {
     position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(circle 120px at var(--x, 50%) var(--y, 50%), rgba(138,227,34,.12) 0%, transparent 80%);
+    background: radial-gradient(circle 120px at var(--x, 50%) var(--y, 50%), rgba(150,208,52,.12) 0%, transparent 80%);
     opacity: 0; transition: opacity 0.4s ease; z-index: 1; pointer-events: none;
 }
 
@@ -246,7 +247,7 @@ body {
 
 .card-badge {
     position: absolute; top: 0; right: 18px;
-    background: var(--primary-green); color: #050a04;
+    background: var(--primary-green); color: #080D06;
     font-family: var(--font-heading); font-size: 9px; font-weight: 800;
     letter-spacing: 1px; padding: 3px 8px;
     border-radius: 0 0 6px 6px; z-index: 3;
@@ -254,8 +255,8 @@ body {
 }
 
 @keyframes border-pulse {
-    0% { border-color: rgba(138,227,34,.25); box-shadow: 0 4px 15px rgba(5,10,5,.3), 0 0 0 rgba(138,227,34,0); }
-    100% { border-color: rgba(138,227,34,.55); box-shadow: 0 6px 20px rgba(5,10,5,.4), 0 0 12px rgba(138,227,34,.15); }
+    0% { border-color: rgba(150,208,52,.25); box-shadow: 0 4px 15px rgba(5,10,5,.3), 0 0 0 rgba(150,208,52,0); }
+    100% { border-color: rgba(150,208,52,.55); box-shadow: 0 6px 20px rgba(5,10,5,.4), 0 0 12px rgba(150,208,52,.15); }
 }
 
 .social-links {
@@ -276,7 +277,7 @@ body {
 .social-icon-btn svg { width: 20px; height: 20px; }
 
 .social-icon-btn:hover {
-    color: var(--primary-green); background: rgba(138,227,34,.1);
+    color: var(--primary-green); background: rgba(150,208,52,.1);
     border-color: var(--primary-green);
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 0 15px var(--primary-green-glow);
@@ -301,7 +302,7 @@ body {
 
 .badge-ai {
     font-family: var(--font-heading); font-size: 10px; font-weight: 700;
-    color: var(--primary-green); background: rgba(138,227,34,.08);
+    color: var(--primary-green); background: rgba(150,208,52,.08);
     border: 1px solid var(--primary-green-dim); padding: 2px 7px; border-radius: 4px;
 }
 
