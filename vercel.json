@@ -46,6 +46,10 @@
     {
       "source": "/grupo",
       "destination": "/grupo/index.html"
+    },
+    {
+      "source": "/materiais",
+      "destination": "/materiais/index.html"
     }
   ]
 }

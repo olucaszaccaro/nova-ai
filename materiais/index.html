@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central de Material — Start.AI</title>
+  <meta name="description" content="Todo material que já compartilhei nos reels, num lugar só. Busca pela palavra que comentaste no vídeo.">
+  <meta name="author" content="Lucas Zaccaro">
+  <meta property="og:title" content="Central de Material — Start.AI">
+  <meta property="og:description" content="Todo material dos reels num lugar só. Escolhe o vídeo e resgata o passo a passo.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Raleway:ital,wght@0,700;0,800;0,900;1,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── TOKENS ── */
+    :root {
+      --ink:    #080D06;
+      --dg:     #1A2F0A;
+      --green:  #96D034;
+      --lime:   #C5F06A;
+      --white:  #F0FAE0;
+      --muted:  rgba(240,250,224,0.5);
+      --border: rgba(149,208,52,0.18);
+      --card-bg: rgba(20,38,10,0.7);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      background: var(--ink);
+      color: var(--white);
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── GLOW ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 40% at 50% 0%, rgba(149,208,52,0.12) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 30% at 90% 80%, rgba(149,208,52,0.06) 0%, transparent 55%);
+    }
+
+    /* ── LAYOUT ── */
+    .page { position: relative; z-index: 1; }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ════════════════════════════════
+       HEADER
+    ════════════════════════════════ */
+    .site-header {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.1rem; font-weight: 800; color: var(--white);
+      text-decoration: none; letter-spacing: -0.2px;
+    }
+    .logo em { color: var(--lime); font-style: normal; }
+    .header-handle {
+      font-size: 0.72rem; color: var(--muted); font-weight: 500;
+    }
+    .header-handle a { color: var(--muted); text-decoration: none; }
+    .header-handle a:hover { color: var(--lime); }
+
+    /* ════════════════════════════════
+       HERO
+    ════════════════════════════════ */
+    .hero {
+      padding: 52px 0 40px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 1.6px;
+      color: var(--lime); text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-heading {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 900; line-height: 1.0;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero-heading .vt {
+      font-family: 'VT323', monospace;
+      color: var(--lime);
+      font-size: clamp(2.8rem, 7vw, 4.8rem);
+      letter-spacing: 2px;
+      line-height: 0.85;
+      display: inline-block;
+      vertical-align: bottom;
+    }
+    .hero-desc {
+      font-size: 1rem; color: var(--muted); line-height: 1.65;
+      max-width: 540px; margin: 0 auto 32px;
+    }
+    .hero-divider {
+      width: 48px; height: 3px;
+      background: var(--green);
+      border-radius: 2px;
+      margin: 0 auto 36px;
+    }
+
+    /* ── SEARCH ── */
+    .search-wrap {
+      display: flex; gap: 10px;
+      max-width: 520px; margin: 0 auto;
+    }
+    .search-input {
+      flex: 1;
+      padding: 13px 18px;
+      background: rgba(8,13,6,0.8);
+      border: 1.5px solid rgba(149,208,52,0.2);
+      border-radius: 8px;
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.15s;
+      -webkit-appearance: none;
+    }
+    .search-input::placeholder { color: rgba(240,250,224,0.3); }
+    .search-input:focus { border-color: var(--green); }
+    .btn-buscar {
+      padding: 13px 22px;
+      background: var(--green); color: var(--ink);
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.9rem; font-weight: 800; letter-spacing: 0.5px;
+      border: none; border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      white-space: nowrap;
+    }
+    .btn-buscar:hover { background: var(--lime); }
+    .btn-buscar:active { transform: scale(0.98); }
+
+    /* ── No results ── */
+    .search-hint {
+      text-align: center;
+      font-size: 0.75rem; color: rgba(240,250,224,0.3);
+      margin-top: 10px;
+    }
+
+    /* ════════════════════════════════
+       GRID
+    ════════════════════════════════ */
+    .grid-section { padding: 48px 0 64px; }
+
+    .grid-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .grid-count {
+      font-size: 0.75rem; color: var(--muted); font-weight: 600;
+    }
+    .grid-count strong { color: var(--white); }
+
+    .mat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 840px) { .mat-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .mat-grid { grid-template-columns: 1fr; } }
+
+    /* ── CARD ── */
+    .mat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .mat-card:hover {
+      border-color: rgba(149,208,52,0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(149,208,52,0.1);
+    }
+    .mat-card.hidden { display: none; }
+
+    /* Image area */
+    .card-img-wrap {
+      position: relative;
+      aspect-ratio: 4/5;
+      background: rgba(26,47,10,0.6);
+      overflow: hidden;
+    }
+    .card-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .mat-card:hover .card-img-wrap img { transform: scale(1.04); }
+
+    /* Placeholder when no image */
+    .card-img-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px;
+      background: linear-gradient(160deg, #1A2F0A 0%, #0d1a06 100%);
+    }
+    .card-img-placeholder svg { opacity: 0.3; }
+    .card-img-placeholder span {
+      font-family: 'VT323', monospace;
+      font-size: 1.1rem; color: var(--green); opacity: 0.5;
+      letter-spacing: 1px;
+    }
+
+    /* Keyword badge */
+    .card-keyword {
+      position: absolute; top: 12px; left: 12px;
+      background: var(--ink);
+      border: 1px solid var(--green);
+      color: var(--lime);
+      font-family: 'VT323', monospace;
+      font-size: 1.05rem; letter-spacing: 1.5px;
+      padding: 3px 10px;
+      border-radius: 4px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Hover overlay */
+    .card-overlay {
+      position: absolute; inset: 0;
+      background: rgba(8,13,6,0.65);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .mat-card:hover .card-overlay { opacity: 1; }
+    .overlay-btn {
+      font-family: 'VT323', monospace;
+      font-size: 1.35rem; letter-spacing: 2px;
+      color: var(--ink);
+      background: var(--lime);
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .overlay-btn:hover { background: var(--green); }
+
+    /* Card body */
+    .card-body { padding: 16px 18px 18px; }
+    .card-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.95rem; font-weight: 800; line-height: 1.3;
+      margin-bottom: 6px; color: var(--white);
+    }
+    .card-desc {
+      font-size: 0.8rem; color: var(--muted); line-height: 1.55;
+      margin-bottom: 14px;
+    }
+    .card-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'VT323', monospace;
+      font-size: 1.1rem; letter-spacing: 1.5px;
+      color: var(--lime);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .card-link:hover { color: var(--green); }
+    .card-link svg { transition: transform 0.15s; }
+    .card-link:hover svg { transform: translateX(3px); }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      display: none;
+      grid-column: 1 / -1;
+      text-align: center; padding: 60px 20px;
+    }
+    .empty-state .vt-big {
+      font-family: 'VT323', monospace;
+      font-size: 3rem; color: var(--green); opacity: 0.4;
+      display: block; margin-bottom: 12px;
+    }
+    .empty-state p { color: var(--muted); font-size: 0.9rem; }
+
+    /* ════════════════════════════════
+       WA CTA SECTION
+    ════════════════════════════════ */
+    .wa-section {
+      border-top: 1px solid var(--border);
+      padding: 52px 0;
+      text-align: center;
+    }
+    .wa-label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 1.4px;
+      color: var(--lime); text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .wa-heading {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      font-weight: 900; line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .wa-desc {
+      font-size: 0.88rem; color: var(--muted); line-height: 1.6;
+      max-width: 420px; margin: 0 auto 28px;
+    }
+    .btn-wa-section {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 15px 28px;
+      background: #25D366; color: #fff;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem; font-weight: 800; letter-spacing: 0.3px;
+      border: none; border-radius: 8px;
+      cursor: pointer; text-decoration: none;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .btn-wa-section:hover { background: #1da851; }
+    .btn-wa-section:active { transform: scale(0.99); }
+
+    /* ════════════════════════════════
+       FOOTER
+    ════════════════════════════════ */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+    }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 8px;
+    }
+    .footer-copy {
+      font-size: 0.7rem; color: rgba(240,250,224,0.25);
+    }
+    .footer-handle {
+      font-size: 0.7rem; color: rgba(240,250,224,0.25);
+    }
+
+    /* ════════════════════════════════
+       FLOATING WA BUTTON
+    ════════════════════════════════ */
+    .wa-float {
+      position: fixed; bottom: 24px; right: 24px; z-index: 100;
+      display: flex; align-items: center; gap: 9px;
+      padding: 12px 18px;
+      background: #25D366; color: #fff;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.82rem; font-weight: 800; letter-spacing: 0.2px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+      transition: transform 0.15s, background 0.15s;
+    }
+    .wa-float:hover { transform: scale(1.04); background: #1da851; }
+    @media (max-width: 520px) {
+      .wa-float span { display: none; }
+      .wa-float { padding: 14px; border-radius: 50%; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="https://revolucao.school/startai" class="logo">Start<em>.AI</em></a>
+        <span class="header-handle">
+          <a href="https://instagram.com/lucas.zaccaro" target="_blank" rel="noopener">@lucas.zaccaro</a>
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="container">
+      <p class="hero-eyebrow">Lucas Zaccaro · Start.AI</p>
+      <h1 class="hero-heading">
+        Central de <span class="vt">MATERIAL</span>
+      </h1>
+      <p class="hero-desc">
+        Todo material que já compartilhei nos reels, num lugar só.
+        Escolhe o vídeo e resgata o passo a passo.
+      </p>
+      <div class="hero-divider"></div>
+
+      <div class="search-wrap">
+        <input
+          type="text"
+          class="search-input"
+          id="search"
+          placeholder="Comentou uma palavra? Busca ela aqui..."
+          autocomplete="off" autocorrect="off"
+          spellcheck="false"
+        >
+        <button class="btn-buscar" onclick="buscar()">BUSCAR</button>
+      </div>
+      <p class="search-hint">Ex: SETUP, VIRAL, PROMPT...</p>
+    </div>
+  </section>
+
+  <!-- ── GRID ── -->
+  <section class="grid-section">
+    <div class="container">
+      <div class="grid-meta">
+        <p class="grid-count" id="grid-count"></p>
+      </div>
+      <div class="mat-grid" id="grid">
+        <!-- cards gerados pelo JS -->
+        <div class="empty-state" id="empty">
+          <span class="vt-big">_ NÃO ENCONTRADO</span>
+          <p>Tenta outra palavra ou veja todos os materiais abaixo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WA CTA ── -->
+  <section class="wa-section">
+    <div class="container">
+      <p class="wa-label">Quer ser o primeiro a saber</p>
+      <h2 class="wa-heading">Entra no grupo.<br>Os materiais chegam lá primeiro.</h2>
+      <p class="wa-desc">
+        Toda vez que posto um reel com material, ele cai no grupo antes de qualquer outra coisa.
+        É de graça e sem spam.
+      </p>
+      <a
+        class="btn-wa-section"
+        href="https://chat.whatsapp.com/F5000nSwSezL2sIER5dEtN"
+        target="_blank" rel="noopener noreferrer"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.039 2.878 1.188 3.077.15.198 2.042 3.116 4.95 4.378.692.302 1.233.482 1.655.618.697.221 1.33.19 1.83.115.558-.083 1.758-.718 2.006-1.412.247-.695.247-1.29.172-1.412-.074-.121-.272-.196-.57-.345zM12.067.012c-6.626 0-12 5.373-12 12 0 2.112.548 4.17 1.594 5.98L0 24l6.19-1.625c1.763.96 3.746 1.465 5.763 1.467h.005c6.623 0 12-5.373 12-12 0-3.2-1.244-6.208-3.504-8.469C18.19 1.256 15.185.012 12.067.012z"/>
+        </svg>
+        ENTRAR NO GRUPO GRATUITO
+      </a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">&copy; 2026 Start.AI · Todos os direitos reservados</span>
+        <span class="footer-handle">@lucas.zaccaro</span>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /page -->
+
+<!-- ── FLOATING WA ── -->
+<a
+  class="wa-float"
+  href="https://chat.whatsapp.com/F5000nSwSezL2sIER5dEtN"
+  target="_blank" rel="noopener noreferrer"
+  title="Entrar no grupo do WhatsApp"
+>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.039 2.878 1.188 3.077.15.198 2.042 3.116 4.95 4.378.692.302 1.233.482 1.655.618.697.221 1.33.19 1.83.115.558-.083 1.758-.718 2.006-1.412.247-.695.247-1.29.172-1.412-.074-.121-.272-.196-.57-.345zM12.067.012c-6.626 0-12 5.373-12 12 0 2.112.548 4.17 1.594 5.98L0 24l6.19-1.625c1.763.96 3.746 1.465 5.763 1.467h.005c6.623 0 12-5.373 12-12 0-3.2-1.244-6.208-3.504-8.469C18.19 1.256 15.185.012 12.067.012z"/>
+  </svg>
+  <span>Grupo gratuito</span>
+</a>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   MATERIAIS — ADICIONE NOVOS ITENS AQUI
+
+   Para cada novo material:
+   1. Coloca a imagem do reel em:  materiais/imagens/nome-do-arquivo.jpg
+   2. Adiciona um objeto nesta lista:
+
+   {
+     titulo:    'Título do material',
+     descricao: 'Descrição curta do que a pessoa vai receber.',
+     palavra:   'PALAVRA',             // palavra que você pede pra comentar no reel
+     imagem:    'imagens/arquivo.jpg', // caminho da imagem (ou URL externa)
+     link:      'https://...'          // link para o material (Doc, Notion, etc.)
+   },
+
+   Dica: a `palavra` aparece como badge no card e funciona na busca.
+═══════════════════════════════════════════════════════ */
+const MATERIAIS = [
+
+  // ── EXEMPLO 1 ──────────────────────────────────────
+  {
+    titulo:    'Setup completo do Claude para trabalho',
+    descricao: 'O arquivo de configuração que uso todo dia. Cola no Claude e começa a usar em 2 minutos.',
+    palavra:   'SETUP',
+    imagem:    '', // coloca o caminho da imagem aqui: 'imagens/setup.jpg'
+    link:      '#'
+  },
+
+  // ── EXEMPLO 2 ──────────────────────────────────────
+  {
+    titulo:    'Prompt que viraliza no Instagram',
+    descricao: 'O prompt exato que usei para gerar posts com mais de 50k impressões. Funciona no Claude.',
+    palavra:   'VIRAL',
+    imagem:    '',
+    link:      '#'
+  },
+
+  // ── EXEMPLO 3 ──────────────────────────────────────
+  {
+    titulo:    'Automação para resumir reuniões',
+    descricao: 'Fluxo completo com Claude que transcreve, resume e cria action items de qualquer reunião.',
+    palavra:   'REUNIAO',
+    imagem:    '',
+    link:      '#'
+  },
+
+];
+/* ═══════════════════════════════════════════════════════ */
+
+
+/* ── RENDER ── */
+function renderCards(lista) {
+  const grid  = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  const count = document.getElementById('grid-count');
+
+  // remove cards anteriores (mantém o empty-state)
+  grid.querySelectorAll('.mat-card').forEach(c => c.remove());
+
+  if (lista.length === 0) {
+    empty.style.display = 'block';
+    count.innerHTML = '';
+    return;
+  }
+
+  empty.style.display = 'none';
+  count.innerHTML = '<strong>' + lista.length + '</strong> ' + (lista.length === 1 ? 'material disponível' : 'materiais disponíveis');
+
+  lista.forEach(function(m) {
+    const card = document.createElement('div');
+    card.className = 'mat-card';
+
+    // ── Imagem ──
+    let imgHTML;
+    if (m.imagem) {
+      imgHTML = '<img src="' + m.imagem + '" alt="' + escapar(m.titulo) + '" loading="lazy">';
+    } else {
+      imgHTML =
+        '<div class="card-img-placeholder">' +
+          '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#96D034" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.845v6.309a1 1 0 0 1-1.447.894L15 14M3 8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/>' +
+          '</svg>' +
+          '<span>REEL_THUMBNAIL</span>' +
+        '</div>';
+    }
+
+    card.innerHTML =
+      '<div class="card-img-wrap">' +
+        imgHTML +
+        '<span class="card-keyword">' + escapar(m.palavra) + '</span>' +
+        '<div class="card-overlay">' +
+          '<a class="overlay-btn" href="' + escapar(m.link) + '" target="_blank" rel="noopener">RESGATAR MATERIAL</a>' +
+        '</div>' +
+      '</div>' +
+      '<div class="card-body">' +
+        '<h3 class="card-title">' + escapar(m.titulo) + '</h3>' +
+        '<p class="card-desc">' + escapar(m.descricao) + '</p>' +
+        '<a class="card-link" href="' + escapar(m.link) + '" target="_blank" rel="noopener">' +
+          'RESGATAR MATERIAL' +
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>' +
+        '</a>' +
+      '</div>';
+
+    grid.appendChild(card);
+  });
+}
+
+/* ── BUSCA ── */
+function buscar() {
+  const q = document.getElementById('search').value.trim().toUpperCase();
+  if (!q) { renderCards(MATERIAIS); return; }
+  const filtrado = MATERIAIS.filter(function(m) {
+    return m.palavra.toUpperCase().includes(q) ||
+           m.titulo.toUpperCase().includes(q) ||
+           m.descricao.toUpperCase().includes(q);
+  });
+  renderCards(filtrado);
+}
+
+/* ── ESCAPE ── */
+function escapar(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/* ── ENTER ── */
+document.getElementById('search').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') buscar();
+});
+
+/* ── LIMPA BUSCA SE APAGAR TUDO ── */
+document.getElementById('search').addEventListener('input', function() {
+  if (this.value.trim() === '') renderCards(MATERIAIS);
+});
+
+/* ── INIT ── */
+renderCards(MATERIAIS);
+</script>
+</body>
+</html>
