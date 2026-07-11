@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pg-title">Carregando... — Start.AI</title>
+  <meta name="author" content="Lucas Zaccaro">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Raleway:ital,wght@0,700;0,800;0,900;1,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── TOKENS ── */
+    :root {
+      --ink:    #080D06;
+      --dg:     #1A2F0A;
+      --green:  #96D034;
+      --lime:   #C5F06A;
+      --white:  #F0FAE0;
+      --muted:  rgba(240,250,224,0.52);
+      --border: rgba(149,208,52,0.18);
+      --code-bg:#0d1a06;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      background: var(--ink);
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100dvh;
+    }
+
+    /* ── GLOW ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background: radial-gradient(ellipse 80% 35% at 50% 0%, rgba(149,208,52,0.11) 0%, transparent 60%);
+    }
+
+    /* ── PAGE WRAPPER ── */
+    .page {
+      position: relative; z-index: 1;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 0 64px;
+    }
+
+    /* ════════════════════════════════
+       NAV BAR
+    ════════════════════════════════ */
+    .nav-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(8,13,6,0.92);
+      backdrop-filter: blur(12px);
+    }
+    .nav-back {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.82rem; font-weight: 600; color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--lime); }
+    .nav-logo {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.9rem; font-weight: 800; color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo em { color: var(--lime); font-style: normal; }
+    .nav-share {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; font-weight: 700; color: var(--lime);
+      background: none; border: 1px solid var(--border);
+      border-radius: 20px; padding: 6px 12px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .nav-share:hover { border-color: var(--lime); }
+
+    /* ════════════════════════════════
+       HERO
+    ════════════════════════════════ */
+    .hero {
+      padding: 32px 20px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-keyword {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'VT323', monospace;
+      font-size: 0.95rem; letter-spacing: 1.5px; color: var(--lime);
+      background: rgba(149,208,52,0.08);
+      border: 1px solid rgba(149,208,52,0.2);
+      border-radius: 4px; padding: 3px 10px;
+      margin-bottom: 18px;
+    }
+    .hero-keyword::before {
+      content: '';
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--lime);
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%,100% { opacity: 1; } 50% { opacity: 0.3; }
+    }
+
+    .hero-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(1.55rem, 5.5vw, 2rem);
+      font-weight: 900; line-height: 1.1; letter-spacing: -0.5px;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .hero-title .accent { color: var(--lime); }
+
+    .hero-sub {
+      font-size: 0.92rem; color: var(--muted); line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .btn-cta-hero {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 14px 20px;
+      background: var(--green); color: var(--ink);
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.95rem; font-weight: 800; letter-spacing: 0.3px;
+      border: none; border-radius: 8px;
+      cursor: pointer; text-decoration: none;
+      transition: background 0.15s;
+    }
+    .btn-cta-hero:hover { background: var(--lime); }
+
+    /* ════════════════════════════════
+       INTRO BLOCK (opcional)
+    ════════════════════════════════ */
+    .intro-block {
+      padding: 24px 20px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.92rem; color: var(--muted); line-height: 1.7;
+    }
+    .intro-block p + p { margin-top: 12px; }
+    .intro-block strong { color: var(--white); }
+
+    /* ════════════════════════════════
+       PASSOS
+    ════════════════════════════════ */
+    .passos { padding: 8px 0; }
+
+    .passo {
+      padding: 28px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Número + título */
+    .passo-header {
+      display: flex; align-items: flex-start; gap: 14px;
+      margin-bottom: 14px;
+    }
+    .passo-num {
+      font-family: 'VT323', monospace;
+      font-size: 2rem; line-height: 1; color: var(--lime);
+      flex-shrink: 0; padding-top: 2px;
+      min-width: 32px;
+    }
+    .passo-titulo {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.05rem; font-weight: 900;
+      line-height: 1.2; text-transform: uppercase;
+      padding-top: 6px;
+    }
+    .passo-titulo .accent { color: var(--lime); }
+
+    /* Descrição */
+    .passo-desc {
+      font-size: 0.88rem; color: var(--muted); line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .passo-desc p + p { margin-top: 10px; }
+    .passo-desc strong { color: var(--white); }
+
+    /* Imagem do passo */
+    .passo-img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    /* Bloco de código */
+    .code-block {
+      background: var(--code-bg);
+      border: 1px solid rgba(149,208,52,0.15);
+      border-left: 3px solid var(--green);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .code-label {
+      font-family: 'VT323', monospace;
+      font-size: 0.78rem; letter-spacing: 1px;
+      color: var(--green); opacity: 0.6;
+      margin-bottom: 8px; display: block;
+    }
+    .code-block code {
+      font-family: 'VT323', monospace;
+      font-size: 1.05rem; letter-spacing: 0.5px;
+      color: var(--lime); line-height: 1.6;
+      white-space: pre;
+    }
+
+    /* Copy button */
+    .code-wrap { position: relative; }
+    .btn-copy {
+      position: absolute; top: 10px; right: 10px;
+      font-family: 'VT323', monospace;
+      font-size: 0.8rem; letter-spacing: 1px;
+      color: var(--muted);
+      background: rgba(149,208,52,0.05);
+      border: 1px solid rgba(149,208,52,0.15);
+      border-radius: 4px;
+      padding: 3px 8px;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .btn-copy:hover { color: var(--lime); border-color: var(--lime); }
+    .btn-copy.copied { color: var(--green); border-color: var(--green); }
+
+    /* Info box */
+    .info-box {
+      background: rgba(149,208,52,0.05);
+      border: 1px solid rgba(149,208,52,0.2);
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 0.82rem; color: var(--muted); line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .info-box strong { color: var(--lime); }
+
+    /* ════════════════════════════════
+       SEÇÃO RESUMO
+    ════════════════════════════════ */
+    .resumo {
+      padding: 28px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .resumo-label {
+      font-family: 'VT323', monospace;
+      font-size: 1rem; letter-spacing: 1.5px;
+      color: var(--lime); display: block;
+      margin-bottom: 14px;
+    }
+    .resumo-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .resumo-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 0.88rem; color: var(--muted); line-height: 1.5;
+    }
+    .resumo-list li::before {
+      content: '→';
+      font-family: 'VT323', monospace;
+      color: var(--green); font-size: 1.1rem;
+      flex-shrink: 0; padding-top: 1px;
+    }
+    .resumo-list li strong { color: var(--white); }
+
+    /* ════════════════════════════════
+       CTA FINAL
+    ════════════════════════════════ */
+    .cta-final {
+      padding: 36px 20px;
+      text-align: center;
+    }
+    .cta-final-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.1rem; font-weight: 800; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .cta-final-sub {
+      font-size: 0.82rem; color: var(--muted); line-height: 1.5;
+      margin-bottom: 22px;
+    }
+    .btn-share {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 24px;
+      background: var(--green); color: var(--ink);
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.95rem; font-weight: 800;
+      border: none; border-radius: 8px;
+      cursor: pointer; text-decoration: none;
+      margin-bottom: 16px; width: 100%;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+    .btn-share:hover { background: var(--lime); }
+
+    .btn-wa-final {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 24px;
+      background: #25D366; color: #fff;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.88rem; font-weight: 800;
+      border: none; border-radius: 8px;
+      cursor: pointer; text-decoration: none;
+      width: 100%; justify-content: center;
+      transition: background 0.15s;
+    }
+    .btn-wa-final:hover { background: #1da851; }
+
+    .cta-divider {
+      font-size: 0.7rem; color: rgba(240,250,224,0.2);
+      margin: 12px 0; display: block;
+    }
+
+    /* ── FOOTER ── */
+    .mat-footer {
+      padding: 20px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .mat-footer-txt {
+      font-size: 0.68rem; color: rgba(240,250,224,0.22);
+    }
+  </style>
+</head>
+<body>
+<div class="page" id="page">
+
+  <!-- ── NAV ── -->
+  <nav class="nav-bar">
+    <a href="/materiais" class="nav-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Voltar
+    </a>
+    <a href="/materiais" class="nav-logo">Start<em>.AI</em></a>
+    <button class="nav-share" onclick="compartilhar()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      Compartilhar
+    </button>
+  </nav>
+
+  <!-- conteúdo gerado pelo JS -->
+  <div id="content"></div>
+
+  <footer class="mat-footer">
+    <p class="mat-footer-txt">Start.AI · @lucas.zaccaro · Conteúdo gratuito</p>
+  </footer>
+
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   EDITE APENAS ESTE OBJETO — TUDO MAIS É AUTOMÁTICO
+
+   Estrutura de um passo:
+   {
+     titulo:  'TÍTULO DO PASSO',         // obrigatório
+     desc:    'Texto descritivo...',      // texto do passo (pode conter <strong>negrito</strong>)
+     imagem:  'imagens/arquivo.jpg',      // '' se não tiver
+     codigo:  'comando --aqui',           // '' se não tiver
+     info:    'Dica ou observação extra'  // '' se não tiver
+   }
+═══════════════════════════════════════════════════════════ */
+const MATERIAL = {
+  palavra:   'SETUP',
+  titulo:    'O comando que deixa seu Claude',
+  titulo_accent: 'muito mais forte',
+  subtitulo: 'Um comando. 30 segundos. Claude no modo profissional.',
+  intro:     'Se você usa Claude Code, tem um ajuste que a maioria não conhece. Ele ativa o modo de trabalho mais avançado do Claude — e leva menos de 1 minuto para configurar.',
+
+  // Link de ação do hero (pode ser um Google Doc, Notion, arquivo, etc.)
+  // Deixe '' para esconder o botão do hero
+  hero_link:  '',
+  hero_label: 'BAIXAR O ARQUIVO →',
+
+  passos: [
+    {
+      titulo:  'ABRA O CLAUDE CODE',
+      desc:    'Abra o terminal, navegue até o seu projeto e inicie o Claude Code. Qualquer pasta funciona.',
+      imagem:  '',
+      codigo:  'cd meu-projeto\nclaude',
+      info:    ''
+    },
+    {
+      titulo:  'RODE O COMANDO',
+      desc:    'Com o Claude Code aberto, cole este comando exato no chat:',
+      imagem:  '',
+      codigo:  '/setup --mode=expert',
+      info:    'O Claude vai pedir confirmação. Responde "sim" ou "s" para continuar.'
+    },
+    {
+      titulo:  'DEIXA ELE PROCESSAR TUDO',
+      desc:    'O Claude vai baixar as configurações e aplicar o setup completo. Isso leva alguns segundos. <strong>Não feche o terminal.</strong>',
+      imagem:  '',
+      codigo:  '',
+      info:    'Se aparecer algum erro de permissão, rode o comando como administrador.'
+    },
+    {
+      titulo:  'PRONTO! CLAUDE NO <span class="accent">MODO MAIS FORTE</span>',
+      desc:    'A partir de agora o Claude funciona com contexto expandido, respostas mais detalhadas e acesso a mais ferramentas. Testa pedindo pra ele analisar um arquivo do seu projeto.',
+      imagem:  '',
+      codigo:  '',
+      info:    ''
+    }
+  ],
+
+  // Resumo no final (pode deixar a lista vazia [] para não mostrar)
+  resumo_label: 'PASSO A PASSO, O RESUMO É:',
+  resumo: [
+    'Abre o Claude Code no terminal',
+    'Roda o comando <strong>/setup --mode=expert</strong>',
+    'Confirma e espera processar',
+    'Claude ativado no modo profissional'
+  ],
+
+  // CTAs finais
+  share_label: 'COMPARTILHAR COM ALGUÉM →',
+  wa_link:     'https://chat.whatsapp.com/F5000nSwSezL2sIER5dEtN',
+  wa_label:    'Mais materiais no grupo gratuito →'
+};
+/* ═══════════════════════════════════════════════════════════ */
+
+
+/* ── RENDER ── */
+(function() {
+  const m = MATERIAL;
+
+  // Page title
+  document.getElementById('pg-title').textContent =
+    m.titulo + (m.titulo_accent ? ' ' + m.titulo_accent : '') + ' — Start.AI';
+
+  let html = '';
+
+  /* ── HERO ── */
+  html +=
+    '<div class="hero">' +
+      '<span class="hero-keyword">' + esc(m.palavra) + '</span>' +
+      '<h1 class="hero-title">' +
+        esc(m.titulo) +
+        (m.titulo_accent ? '<br><span class="accent">' + esc(m.titulo_accent) + '</span>' : '') +
+      '</h1>' +
+      '<p class="hero-sub">' + esc(m.subtitulo) + '</p>';
+
+  if (m.hero_link) {
+    html +=
+      '<a class="btn-cta-hero" href="' + esc(m.hero_link) + '" target="_blank" rel="noopener">' +
+        esc(m.hero_label) +
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>' +
+      '</a>';
+  }
+
+  html += '</div>';
+
+  /* ── INTRO ── */
+  if (m.intro) {
+    html += '<div class="intro-block"><p>' + m.intro + '</p></div>';
+  }
+
+  /* ── PASSOS ── */
+  html += '<div class="passos">';
+  m.passos.forEach(function(p, i) {
+    html += '<div class="passo">';
+    html +=
+      '<div class="passo-header">' +
+        '<span class="passo-num">0' + (i + 1) + '.</span>' +
+        '<h2 class="passo-titulo">' + p.titulo + '</h2>' +
+      '</div>';
+
+    if (p.imagem) {
+      html += '<img class="passo-img" src="' + esc(p.imagem) + '" alt="' + esc(p.titulo) + '" loading="lazy">';
+    }
+
+    if (p.desc) {
+      html += '<div class="passo-desc"><p>' + p.desc + '</p></div>';
+    }
+
+    if (p.codigo) {
+      const id = 'code-' + i;
+      html +=
+        '<div class="code-wrap">' +
+          '<div class="code-block" id="' + id + '">' +
+            '<span class="code-label">$ TERMINAL</span>' +
+            '<code>' + esc(p.codigo) + '</code>' +
+          '</div>' +
+          '<button class="btn-copy" onclick="copiar(\'' + id + '\', this)">COPIAR</button>' +
+        '</div>';
+    }
+
+    if (p.info) {
+      html += '<div class="info-box"><strong>Atenção:</strong> ' + p.info + '</div>';
+    }
+
+    html += '</div>';
+  });
+  html += '</div>';
+
+  /* ── RESUMO ── */
+  if (m.resumo && m.resumo.length > 0) {
+    html += '<div class="resumo">';
+    html += '<span class="resumo-label">' + esc(m.resumo_label) + '</span>';
+    html += '<ul class="resumo-list">';
+    m.resumo.forEach(function(item) {
+      html += '<li>' + item + '</li>';
+    });
+    html += '</ul></div>';
+  }
+
+  /* ── CTA FINAL ── */
+  html +=
+    '<div class="cta-final">' +
+      '<p class="cta-final-title">Gostou do material?</p>' +
+      '<p class="cta-final-sub">Manda pra alguém que vai usar.</p>' +
+      '<button class="btn-share" onclick="compartilhar()">' +
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>' +
+        esc(m.share_label) +
+      '</button>' +
+      '<span class="cta-divider">— ou —</span>' +
+      '<a class="btn-wa-final" href="' + esc(m.wa_link) + '" target="_blank" rel="noopener">' +
+        '<svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.039 2.878 1.188 3.077.15.198 2.042 3.116 4.95 4.378.692.302 1.233.482 1.655.618.697.221 1.33.19 1.83.115.558-.083 1.758-.718 2.006-1.412.247-.695.247-1.29.172-1.412-.074-.121-.272-.196-.57-.345zM12.067.012c-6.626 0-12 5.373-12 12 0 2.112.548 4.17 1.594 5.98L0 24l6.19-1.625c1.763.96 3.746 1.465 5.763 1.467h.005c6.623 0 12-5.373 12-12 0-3.2-1.244-6.208-3.504-8.469C18.19 1.256 15.185.012 12.067.012z"/></svg>' +
+        esc(m.wa_label) +
+      '</a>' +
+    '</div>';
+
+  document.getElementById('content').innerHTML = html;
+})();
+
+/* ── COPIAR CÓDIGO ── */
+function copiar(id, btn) {
+  const el = document.getElementById(id).querySelector('code');
+  if (!el) return;
+  navigator.clipboard.writeText(el.textContent).then(function() {
+    btn.textContent = 'COPIADO!';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = 'COPIAR';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+/* ── COMPARTILHAR ── */
+function compartilhar() {
+  const url  = window.location.href;
+  const text = MATERIAL.titulo + (MATERIAL.titulo_accent ? ' ' + MATERIAL.titulo_accent : '') + ' — Start.AI';
+  if (navigator.share) {
+    navigator.share({ title: text, url: url });
+  } else {
+    navigator.clipboard.writeText(url).then(function() {
+      alert('Link copiado!');
+    });
+  }
+}
+
+/* ── ESCAPE HTML ── */
+function esc(s) {
+  if (!s) return '';
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+</script>
+</body>
+</html>

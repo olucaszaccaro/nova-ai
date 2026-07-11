@@ -50,6 +50,10 @@
     {
       "source": "/materiais",
       "destination": "/materiais/index.html"
+    },
+    {
+      "source": "/materiais/:slug",
+      "destination": "/materiais/:slug.html"
     }
   ]
 }
