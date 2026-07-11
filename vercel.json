@@ -23,6 +23,11 @@
   ],
   "rewrites": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "grupo.revolucao.school" }],
+      "destination": "/grupo/index.html"
+    },
+    {
       "source": "/startai",
       "destination": "/startai/index.html"
     },
@@ -30,9 +35,9 @@
       "source": "/curso",
       "destination": "/members/index.html"
     },
-        {
-                "source": "/grupo",
-                "destination": "/grupo/index.html"
-        }
+    {
+      "source": "/grupo",
+      "destination": "/grupo/index.html"
+    }
   ]
 }
