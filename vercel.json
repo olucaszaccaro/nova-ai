@@ -21,12 +21,15 @@
       ]
     }
   ],
-  "rewrites": [
+  "redirects": [
     {
       "source": "/",
       "has": [{ "type": "host", "value": "grupo.revolucao.school" }],
-      "destination": "/grupo/index.html"
-    },
+      "destination": "/grupo",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
     {
       "source": "/startai",
       "destination": "/startai/index.html"
