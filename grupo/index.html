@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comunidade Nova AI — Entre no Grupo</title>
+  <meta name="description" content="Entre na comunidade gratuita de IA na prática. Prompts, tutoriais e automações que não vão para o feed.">
+  <meta name="author" content="Lucas Zaccaro">
+
+  <!-- OG -->
+  <meta property="og:title" content="Comunidade Nova AI — Grupo WhatsApp Gratuito">
+  <meta property="og:description" content="Conteúdo que não vai para o feed. Prompts prontos, setups de Claude e automações práticas.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── TOKENS ── */
+    :root {
+      --ink:    #080D06;
+      --dg:     #1A2F0A;
+      --green:  #96D034;
+      --lime:   #C5F06A;
+      --white:  #F0FAE0;
+      --muted:  rgba(240,250,224,0.55);
+      --border: rgba(149,208,52,0.18);
+      --opt-bg: rgba(26,47,10,0.55);
+    }
+
+    /* ── BASE ── */
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      background: var(--ink);
+      color: var(--white);
+      min-height: 100dvh;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── AMBIENT GLOW ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 90% 50% at 50% -5%, rgba(149,208,52,0.14) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 110%, rgba(149,208,52,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* ── FUNNEL WRAPPER ── */
+    .funnel {
+      position: relative; z-index: 1;
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      padding: 0 16px 60px;
+    }
+
+    /* ── SCREENS ── */
+    .screen {
+      width: 100%; max-width: 500px;
+      display: none;
+    }
+    .screen.active {
+      display: block;
+      animation: fadeUp 0.3s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── TOP BAR (q screens + ty) ── */
+    .top-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 0 24px;
+    }
+    .logo-mark {
+      font-family: 'Raleway', sans-serif; font-weight: 800;
+      font-size: 1rem; color: var(--white); letter-spacing: -0.2px;
+    }
+    .logo-mark em { color: var(--lime); font-style: normal; }
+
+    /* ── STEP BAR ── */
+    .step-bar {
+      display: flex; gap: 6px; flex: none;
+    }
+    .step-seg {
+      width: 40px; height: 3px; border-radius: 2px;
+      background: var(--border);
+      transition: background 0.3s;
+    }
+    .step-seg.done   { background: var(--green); }
+    .step-seg.active { background: var(--lime); }
+
+    /* ════════════════════════════════
+       TELA 1 — HERO + FORM
+    ════════════════════════════════ */
+    #s1 { padding-top: 28px; }
+
+    .s1-toprow {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .s1-handle {
+      font-size: 0.72rem; color: var(--muted); font-weight: 500;
+    }
+
+    /* Illustration */
+    .hero-illo {
+      width: 100%;
+      max-height: 270px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 16px;
+      margin-bottom: 24px;
+      display: block;
+      filter: drop-shadow(0 0 32px rgba(149,208,52,0.22));
+    }
+
+    /* Live dot + label */
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 1.3px;
+      color: var(--lime); text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .live-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--lime);
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.4; transform: scale(0.65); }
+    }
+
+    /* Headline */
+    .s1-headline {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(1.75rem, 6.5vw, 2.15rem);
+      font-weight: 900; line-height: 1.1; letter-spacing: -0.5px;
+      margin-bottom: 14px;
+    }
+    .s1-headline em { color: var(--lime); font-style: normal; }
+
+    /* Social proof */
+    .social-proof {
+      display: flex; align-items: center; gap: 11px;
+      margin-bottom: 24px;
+    }
+    .sp-avatars { display: flex; }
+    .sp-av {
+      width: 30px; height: 30px; border-radius: 50%;
+      border: 2px solid var(--ink);
+      background: var(--dg);
+      font-size: 10px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--lime);
+      margin-right: -9px; flex-shrink: 0;
+    }
+    .sp-av:last-child { margin-right: 0; }
+    .sp-text {
+      font-size: 0.78rem; color: var(--muted); line-height: 1.35; padding-left: 4px;
+    }
+    .sp-text strong { color: var(--white); }
+
+    /* Form box */
+    .form-box {
+      background: rgba(26,47,10,0.4);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 18px;
+    }
+    .form-hint {
+      font-size: 0.73rem; color: var(--muted);
+      text-align: center; margin-bottom: 16px; line-height: 1.4;
+    }
+    .form-hint strong { color: var(--white); }
+
+    .field { margin-bottom: 12px; }
+    .field label {
+      display: block;
+      font-size: 0.68rem; font-weight: 700;
+      color: rgba(240,250,224,0.45);
+      margin-bottom: 5px; letter-spacing: 0.7px; text-transform: uppercase;
+    }
+    .field input {
+      width: 100%; padding: 12px 14px;
+      background: rgba(8,13,6,0.75);
+      border: 1px solid rgba(149,208,52,0.15);
+      border-radius: 8px;
+      color: var(--white);
+      font-size: 0.95rem;
+      font-family: 'Space Grotesk', sans-serif;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      -webkit-appearance: none;
+    }
+    .field input::placeholder { color: rgba(240,250,224,0.25); }
+    .field input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(149,208,52,0.1);
+    }
+    .field-error {
+      font-size: 0.68rem; color: #ff7070;
+      margin-top: 4px; min-height: 1em;
+    }
+
+    .btn-cta {
+      width: 100%; padding: 15px 20px;
+      background: var(--green); color: var(--ink);
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem; font-weight: 800;
+      border: none; border-radius: 8px;
+      cursor: pointer; letter-spacing: 0.3px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: background 0.15s, transform 0.1s;
+      margin-top: 4px;
+    }
+    .btn-cta:hover { background: var(--lime); }
+    .btn-cta:active { transform: scale(0.99); }
+
+    .form-privacy {
+      font-size: 0.62rem; color: rgba(240,250,224,0.25);
+      text-align: center; margin-top: 10px; line-height: 1.5;
+    }
+
+    /* ════════════════════════════════
+       TELAS 2-4 — PERGUNTAS
+    ════════════════════════════════ */
+    .q-counter {
+      font-size: 0.8rem; color: var(--muted); font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .q-counter strong { color: var(--lime); }
+
+    .q-headline {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(1.35rem, 5vw, 1.65rem);
+      font-weight: 800; line-height: 1.2;
+      letter-spacing: -0.3px;
+      margin-bottom: 20px;
+    }
+
+    .q-options { display: flex; flex-direction: column; gap: 10px; }
+
+    .q-option {
+      display: flex; align-items: center; gap: 13px;
+      padding: 13px 15px;
+      background: var(--opt-bg);
+      border: 1.5px solid rgba(149,208,52,0.15);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, transform 0.08s;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .q-option:hover {
+      border-color: var(--green);
+      background: rgba(26,63,10,0.75);
+    }
+    .q-option:active { transform: scale(0.99); }
+    .q-option.selected {
+      border-color: var(--lime);
+      background: rgba(149,208,52,0.1);
+    }
+
+    .q-opt-icon {
+      width: 38px; height: 38px; border-radius: 8px;
+      background: rgba(149,208,52,0.08);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .q-opt-text {
+      font-size: 0.88rem; font-weight: 700; color: var(--white); line-height: 1.3;
+    }
+    .q-opt-sub {
+      font-size: 0.7rem; color: var(--muted); margin-top: 2px; line-height: 1.3;
+    }
+
+    /* ════════════════════════════════
+       TELA 5 — ACESSO LIBERADO
+    ════════════════════════════════ */
+    #s5 { padding-top: 0; }
+
+    .ty-wrap { text-align: center; padding: 10px 0 20px; }
+
+    .ty-check-circle {
+      width: 74px; height: 74px; border-radius: 50%;
+      background: rgba(149,208,52,0.1);
+      border: 2px solid var(--green);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 18px;
+      animation: popIn 0.45s cubic-bezier(0.175,0.885,0.32,1.275);
+    }
+    @keyframes popIn {
+      from { transform: scale(0.4); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+
+    .ty-tag {
+      display: inline-block;
+      font-size: 0.65rem; font-weight: 800; letter-spacing: 1.8px;
+      color: var(--lime); text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .ty-headline {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(1.85rem, 7.5vw, 2.5rem);
+      font-weight: 900; line-height: 1.08;
+      letter-spacing: -0.6px; margin-bottom: 14px;
+    }
+    .ty-headline em { color: var(--lime); font-style: normal; }
+
+    .ty-desc {
+      font-size: 0.88rem; color: var(--muted); line-height: 1.65;
+      margin-bottom: 24px; max-width: 400px; margin-left: auto; margin-right: auto;
+    }
+
+    /* What's inside */
+    .ty-card {
+      background: rgba(26,47,10,0.45);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+    .ty-card-title {
+      font-size: 0.66rem; font-weight: 800; color: var(--lime);
+      text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 12px;
+    }
+    .ty-item {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 0.85rem; color: var(--white);
+      margin-bottom: 9px; line-height: 1.4;
+    }
+    .ty-item:last-child { margin-bottom: 0; }
+    .ty-check-ico { color: var(--lime); font-size: 0.9rem; flex-shrink: 0; margin-top: 1px; }
+
+    /* CTAs */
+    .btn-wa {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; padding: 16px 20px;
+      background: #25D366; color: #fff;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem; font-weight: 800; letter-spacing: 0.3px;
+      border: none; border-radius: 8px;
+      cursor: pointer; text-decoration: none;
+      transition: background 0.15s, transform 0.1s;
+      margin-bottom: 11px;
+    }
+    .btn-wa:hover { background: #1da851; }
+    .btn-wa:active { transform: scale(0.99); }
+
+    .btn-outline {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 13px 20px;
+      background: transparent; color: var(--muted);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem; font-weight: 600;
+      border: 1.5px solid rgba(149,208,52,0.2);
+      border-radius: 8px;
+      cursor: pointer; text-decoration: none;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-outline:hover { border-color: var(--green); color: var(--white); }
+
+    /* Claude badge */
+    .claude-badge {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-top: 28px; padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .claude-badge img {
+      width: 22px; height: 22px;
+      object-fit: contain; border-radius: 4px; opacity: 0.6;
+    }
+    .claude-badge-txt {
+      font-size: 0.65rem; color: rgba(240,250,224,0.28); font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+<div class="funnel">
+
+  <!-- ══════════════════════════════════
+       TELA 1 — HERO + FORM
+  ══════════════════════════════════ -->
+  <div class="screen active" id="s1">
+    <div class="s1-toprow">
+      <span class="logo-mark">Nova<em>.AI</em></span>
+      <span class="s1-handle">@lucas.zaccaro</span>
+    </div>
+
+    <img
+      class="hero-illo"
+      src="../Elementos%20Visuais/modelo5.png"
+      alt="Nova AI — IA na Prática"
+      loading="eager"
+      onerror="this.style.display='none'"
+    >
+
+    <div class="eyebrow">
+      <span class="live-dot"></span>
+      Grupo gratuito · Vagas abertas
+    </div>
+
+    <h1 class="s1-headline">
+      Entre na comunidade <em>gratuita</em><br>de IA na prática
+    </h1>
+
+    <div class="social-proof">
+      <div class="sp-avatars">
+        <div class="sp-av">LZ</div>
+        <div class="sp-av">AB</div>
+        <div class="sp-av">MR</div>
+        <div class="sp-av">+</div>
+      </div>
+      <div class="sp-text">
+        <strong>Prompts, setups de Claude e automações</strong><br>
+        que não aparecem no feed
+      </div>
+    </div>
+
+    <div class="form-box">
+      <p class="form-hint">Preenche pra entrar &mdash; leva <strong>10 segundos. &Eacute; de gra&ccedil;a.</strong></p>
+
+      <div class="field">
+        <label for="f-nome">Seu nome</label>
+        <input
+          type="text" id="f-nome"
+          placeholder="Como posso te chamar?"
+          autocomplete="given-name" autocorrect="off"
+        >
+        <p class="field-error" id="e-nome"></p>
+      </div>
+
+      <div class="field">
+        <label for="f-wp">WhatsApp</label>
+        <input
+          type="tel" id="f-wp"
+          placeholder="(11) 99999-9999"
+          autocomplete="tel" inputmode="numeric"
+        >
+        <p class="field-error" id="e-wp"></p>
+      </div>
+
+      <button class="btn-cta" id="btn-s1" onclick="submitS1()">
+        ENTRAR NA COMUNIDADE
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </button>
+
+      <p class="form-privacy">Sem spam. Seus dados ficam seguros e voc&ecirc; sai quando quiser.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       TELA 2 — PERGUNTA 1
+  ══════════════════════════════════ -->
+  <div class="screen" id="s2">
+    <div class="top-bar">
+      <span class="logo-mark">Nova<em>.AI</em></span>
+      <div class="step-bar">
+        <div class="step-seg active"></div>
+        <div class="step-seg"></div>
+        <div class="step-seg"></div>
+      </div>
+    </div>
+
+    <p class="q-counter"><strong>3 toques</strong> e o acesso &eacute; seu</p>
+    <h2 class="q-headline">Como voc&ecirc; usa IA hoje?</h2>
+
+    <div class="q-options">
+      <div class="q-option" onclick="selectQ(1,'Nunca usei de verdade')">
+        <div class="q-opt-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#96D034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div>
+          <div class="q-opt-text">Nunca usei de verdade</div>
+          <div class="q-opt-sub">Tenho curiosidade mas ainda n&atilde;o comecei</div>
+        </div>
+      </div>
+      <div class="q-option" onclick="selectQ(1,'Uso às vezes, no básico')">
+        <div class="q-opt-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#96D034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div>
+          <div class="q-opt-text">Uso &agrave;s vezes, no b&aacute;sico</div>
+          <div class="q-opt-sub">Pergunto coisas simples, redijo textos</div>
+        </div>
+      </div>
+      <div class="q-option" onclick="selectQ(1,'Uso todo dia, quero avançar')">
+        <div class="q-opt-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#96D034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div>
+          <div class="q-opt-text">Uso todo dia, quero avan&ccedil;ar</div>
+          <div class="q-opt-sub">J&aacute; &eacute; rotina, mas quero ir mais fundo</div>
+        </div>
+      </div>
+      <div class="q-option" onclick="selectQ(1,'Já crio automações e fluxos')">
+        <div class="q-opt-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#96D034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div>
+          <div class="q-opt-text">J&aacute; crio automa&ccedil;&otilde;es e fluxos</div>
+          <div class="q-opt-sub">Agentes, APIs, Claude Projects...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       TELA 3 — PERGUNTA 2
+  ══════════════════════════════════ -->
+  <div class="screen" id="s3">
+    <div class="top-bar">
+      <span class="logo-mark">Nova<em>.AI</em></span>
+      <div class="step-bar">
+        <div class="step-seg done"></div>
+        <div class="step-seg active"></div>
+        <div class="step-seg"></div>
+      </div>
+    </div>
+
+    <p class="q-counter"><strong>2 toques</strong> e o acesso &eacute; seu</p>
+    <h2 class="q-headline">O que voc&ecirc; quer fazer com IA?</h2>
+
+    <div class="q-options">
+      <div class="q-option" onclick="selectQ(2,'Economizar tempo no trabalho')">
+        <div class="q-opt-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#96D034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <div class="q-opt-text">Economizar tempo no trabalho</div>
+          <div class="q-opt-sub">Relat&oacute;rios, e-mails, an&aacute;lises mais r&aacute;pido</div>
+        </div>
+      </div>
+      <div class="q-option" onclick="selectQ(2,'Criar ferramentas e sites')">
+        <div class="q-opt-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#96D034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <div>
+          <div class="q-opt-text">Criar ferramentas e sites</div>
+          <div class="q-opt-sub">Sem precisar ser programador</div>
+        </div>
+      </div>
+      <div class="q-option" onclick="selectQ(2,'Crescer nas redes sociais')">
+        <div class="q-opt-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#96D034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        </div>
+        <div>
+          <div class="q-opt-text">Crescer nas redes sociais</div>
+          <div class="q-opt-sub">Conte&uacute;do, roteiros, carross&eacute;is com IA</div>
+        </div>
+      </div>
+      <div class="q-option" onclick="selectQ(2,'Empreender ou lançar produtos')">
+        <div class="q-opt-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#96D034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div>
+          <div class="q-opt-text">Empreender ou lan&ccedil;ar produtos</div>
+          <div class="q-opt-sub">Usar IA pra validar, criar e vender</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       TELA 4 — PERGUNTA 3
+  ══════════════════════════════════ -->
+  <div class="screen" id="s4">
+    <div class="top-bar">
+      <span class="logo-mark">Nova<em>.AI</em></span>
+      <div class="step-bar">
+        <div class="step-seg done"></div>
+        <div class="step-seg done"></div>
+        <div class="step-seg active"></div>
+      </div>
+    </div>
+
+    <p class="q-counter"><strong>1 toque</strong> e o acesso &eacute; seu</p>
+    <h2 class="q-headline">Qual &eacute; o seu perfil?</h2>
+
+    <div class="q-options">
+      <div class="q-option" onclick="selectQ(3,'Profissional de escritório')">
+        <div class="q-opt-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#96D034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div>
+          <div class="q-opt-text">Profissional de escrit&oacute;rio</div>
+          <div class="q-opt-sub">Empresa, gest&atilde;o, finan&ccedil;as, RH, marketing...</div>
+        </div>
+      </div>
+      <div class="q-option" onclick="selectQ(3,'Empreendedor ou freelancer')">
+        <div class="q-opt-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#96D034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        </div>
+        <div>
+          <div class="q-opt-text">Empreendedor ou freelancer</div>
+          <div class="q-opt-sub">Neg&oacute;cio pr&oacute;prio, consultoria, projetos</div>
+        </div>
+      </div>
+      <div class="q-option" onclick="selectQ(3,'Criador de conteúdo')">
+        <div class="q-opt-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#96D034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.845v6.309a1 1 0 0 1-1.447.894L15 14M3 8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/></svg>
+        </div>
+        <div>
+          <div class="q-opt-text">Criador de conte&uacute;do</div>
+          <div class="q-opt-sub">Instagram, TikTok, YouTube, podcasts</div>
+        </div>
+      </div>
+      <div class="q-option" onclick="selectQ(3,'Estudante ou em transição')">
+        <div class="q-opt-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#96D034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <div>
+          <div class="q-opt-text">Estudante ou em transi&ccedil;&atilde;o</div>
+          <div class="q-opt-sub">Aprendendo, mudando de &aacute;rea</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       TELA 5 — ACESSO LIBERADO
+  ══════════════════════════════════ -->
+  <div class="screen" id="s5">
+    <div class="top-bar">
+      <span class="logo-mark">Nova<em>.AI</em></span>
+    </div>
+
+    <div class="ty-wrap">
+      <div class="ty-check-circle">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#96D034" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+
+      <div class="ty-tag">&#10003; Acesso liberado</div>
+
+      <h2 class="ty-headline">
+        Bem-vindo &agrave;<br>comunidade <em>Nova AI</em>
+      </h2>
+
+      <p class="ty-desc">
+        O grupo tem conte&uacute;do que n&atilde;o vai para o feed: prompts prontos, setups de Claude e tutoriais pr&aacute;ticos. Clica no bot&atilde;o e j&aacute; entra.
+      </p>
+
+      <div class="ty-card">
+        <div class="ty-card-title">O que te espera no grupo</div>
+        <div class="ty-item">
+          <span class="ty-check-ico">&#10003;</span>
+          Prompts prontos pra usar no Claude hoje
+        </div>
+        <div class="ty-item">
+          <span class="ty-check-ico">&#10003;</span>
+          Ferramentas e automa&ccedil;&otilde;es criadas sem programar
+        </div>
+        <div class="ty-item">
+          <span class="ty-check-ico">&#10003;</span>
+          Tutoriais exclusivos antes de irem pro feed
+        </div>
+        <div class="ty-item">
+          <span class="ty-check-ico">&#10003;</span>
+          Comunidade ativa de pessoas aprendendo IA na pr&aacute;tica
+        </div>
+      </div>
+
+      <a
+        class="btn-wa"
+        href="https://chat.whatsapp.com/F5000nSwSezL2sIER5dEtN?s=cl&amp;p=i&amp;mlu=3"
+        target="_blank" rel="noopener noreferrer"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.039 2.878 1.188 3.077.15.198 2.042 3.116 4.95 4.378.692.302 1.233.482 1.655.618.697.221 1.33.19 1.83.115.558-.083 1.758-.718 2.006-1.412.247-.695.247-1.29.172-1.412-.074-.121-.272-.196-.57-.345zM12.067.012c-6.626 0-12 5.373-12 12 0 2.112.548 4.17 1.594 5.98L0 24l6.19-1.625c1.763.96 3.746 1.465 5.763 1.467h.005c6.623 0 12-5.373 12-12 0-3.2-1.244-6.208-3.504-8.469C18.19 1.256 15.185.012 12.067.012z"/>
+        </svg>
+        ENTRAR NO GRUPO DO WHATSAPP
+      </a>
+
+      <a class="btn-outline" href="https://revolucao.school" target="_blank" rel="noopener noreferrer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        Acessar o Start.ai gratuitamente
+      </a>
+
+      <div class="claude-badge">
+        <img
+          src="../Elementos%20Visuais/claudecode.webp"
+          alt="Claude"
+          onerror="this.style.display='none'"
+        >
+        <span class="claude-badge-txt">Powered by Claude &middot; Criado com IA, do jeito Nova AI</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  /* ── CONFIG ── */
+  const SUPABASE_URL = 'https://iwdvhgqnlgxfqsqsfhmz.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_tfU8VvGwJOFoi-oi-tKmgw_Gk_4cE2M';
+
+  /* ── LEAD DATA ── */
+  const lead = { nome: '', whatsapp: '', q1: '', q2: '', q3: '' };
+
+  /* ── SCREEN ── */
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById(id);
+    el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ── PHONE FORMAT ── */
+  const wpInput = document.getElementById('f-wp');
+  wpInput.addEventListener('input', function() {
+    const d = this.value.replace(/\D/g, '');
+    let fmt = d;
+    if (d.length > 2 && d.length <= 7)  fmt = '(' + d.slice(0,2) + ') ' + d.slice(2);
+    if (d.length > 7 && d.length <= 11) fmt = '(' + d.slice(0,2) + ') ' + d.slice(2,7) + '-' + d.slice(7);
+    if (d.length > 11) fmt = '(' + d.slice(0,2) + ') ' + d.slice(2,7) + '-' + d.slice(7,11);
+    this.value = fmt;
+  });
+
+  /* ── TELA 1 SUBMIT ── */
+  function submitS1() {
+    const nome = document.getElementById('f-nome').value.trim();
+    const wp   = document.getElementById('f-wp').value.trim();
+    let ok = true;
+
+    document.getElementById('e-nome').textContent = '';
+    document.getElementById('e-wp').textContent   = '';
+
+    if (nome.length < 2) {
+      document.getElementById('e-nome').textContent = 'Por favor, insira seu nome.';
+      ok = false;
+    }
+    const digits = wp.replace(/\D/g, '');
+    if (digits.length < 10) {
+      document.getElementById('e-wp').textContent = 'Por favor, insira um WhatsApp válido.';
+      ok = false;
+    }
+
+    if (!ok) return;
+
+    lead.nome     = nome;
+    lead.whatsapp = digits;
+
+    showScreen('s2');
+  }
+
+  /* ── QUESTION SELECT ── */
+  function selectQ(q, answer) {
+    lead['q' + q] = answer;
+
+    /* Visual highlight */
+    event.currentTarget.classList.add('selected');
+
+    setTimeout(function() {
+      if (q === 1) showScreen('s3');
+      else if (q === 2) showScreen('s4');
+      else {
+        saveLead();
+        showScreen('s5');
+      }
+    }, 180);
+  }
+
+  /* ── SAVE TO SUPABASE ── */
+  async function saveLead() {
+    try {
+      await fetch(SUPABASE_URL + '/rest/v1/leads_whatsapp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_KEY,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          nome:     lead.nome,
+          whatsapp: lead.whatsapp,
+          uso_ia:   lead.q1,
+          objetivo: lead.q2,
+          perfil:   lead.q3,
+          source:   'grupo-whatsapp'
+        })
+      });
+    } catch(e) {
+      console.warn('Supabase:', e.message);
+      // Fail silently — WhatsApp CTA ainda funciona
+    }
+  }
+
+  /* ── ENTER KEY ── */
+  document.getElementById('f-nome').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') document.getElementById('f-wp').focus();
+  });
+  document.getElementById('f-wp').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') submitS1();
+  });
+</script>
+</body>
+</html>
