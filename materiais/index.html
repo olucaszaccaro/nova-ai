@@ -350,6 +350,91 @@
     }
 
     /* ════════════════════════════════
+       MODAL / POPUP
+    ════════════════════════════════ */
+    .mat-modal {
+      display: none;
+      position: fixed; inset: 0; z-index: 200;
+    }
+    .mat-modal.open { display: flex; flex-direction: column; }
+
+    .modal-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(5,9,4,0.80);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .modal-sheet {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      top: 56px;              /* espaço para o header + fechar */
+      background: var(--ink);
+      border-radius: 16px 16px 0 0;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      box-shadow: 0 -8px 48px rgba(0,0,0,0.6);
+      animation: slide-up 0.28s cubic-bezier(.32,1,.52,1);
+    }
+    @keyframes slide-up {
+      from { transform: translateY(100%); opacity: 0; }
+      to   { transform: translateY(0);   opacity: 1; }
+    }
+
+    /* Desktop: sheet mais estreito e centrado */
+    @media (min-width: 780px) {
+      .modal-sheet {
+        top: 48px; bottom: 48px;
+        left: 50%; right: auto;
+        width: 520px;
+        transform: translateX(-50%);
+        border-radius: 16px;
+        animation: pop-in 0.24s cubic-bezier(.32,1,.52,1);
+      }
+      .mat-modal.open .modal-sheet {
+        transform: translateX(-50%);
+      }
+      @keyframes pop-in {
+        from { transform: translateX(-50%) scale(0.96); opacity: 0; }
+        to   { transform: translateX(-50%) scale(1);    opacity: 1; }
+      }
+    }
+
+    .modal-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8,13,6,0.95);
+      flex-shrink: 0;
+    }
+    .modal-title {
+      font-family: 'VT323', monospace;
+      font-size: 0.95rem; letter-spacing: 1.5px; color: var(--lime);
+    }
+    .modal-close {
+      display: flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px;
+      background: rgba(149,208,52,0.08);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      cursor: pointer; color: var(--muted);
+      transition: color 0.15s, border-color 0.15s;
+      flex-shrink: 0;
+    }
+    .modal-close:hover { color: var(--lime); border-color: rgba(149,208,52,0.4); }
+
+    .modal-iframe {
+      flex: 1;
+      border: none;
+      width: 100%; height: 100%;
+      display: block;
+      background: var(--ink);
+    }
+
+    /* Card inteiro clicável */
+    .mat-card { cursor: pointer; }
+
+    /* ════════════════════════════════
        FLOATING WA BUTTON
     ════════════════════════════════ */
     .wa-float {
@@ -464,6 +549,20 @@
 
 </div><!-- /page -->
 
+<!-- ── MODAL ── -->
+<div class="mat-modal" id="matModal" role="dialog" aria-modal="true" aria-label="Material">
+  <div class="modal-backdrop" onclick="fecharModal()"></div>
+  <div class="modal-sheet">
+    <div class="modal-bar">
+      <span class="modal-title" id="modalTitle">MATERIAL</span>
+      <button class="modal-close" onclick="fecharModal()" aria-label="Fechar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <iframe class="modal-iframe" id="modalIframe" src="" loading="lazy" title="Material"></iframe>
+  </div>
+</div>
+
 <!-- ── FLOATING WA ── -->
 <a
   class="wa-float"
@@ -506,32 +605,6 @@ const MATERIAIS = [
     link:      '/materiais/prompt'
   },
 
-  // ── EXEMPLO 1 ──────────────────────────────────────
-  {
-    titulo:    'Setup completo do Claude para trabalho',
-    descricao: 'O arquivo de configuração que uso todo dia. Cola no Claude e começa a usar em 2 minutos.',
-    palavra:   'SETUP',
-    imagem:    '', // coloca o caminho da imagem aqui: 'imagens/setup.jpg'
-    link:      '#'
-  },
-
-  // ── EXEMPLO 2 ──────────────────────────────────────
-  {
-    titulo:    'Prompt que viraliza no Instagram',
-    descricao: 'O prompt exato que usei para gerar posts com mais de 50k impressões. Funciona no Claude.',
-    palavra:   'VIRAL',
-    imagem:    '',
-    link:      '#'
-  },
-
-  // ── EXEMPLO 3 ──────────────────────────────────────
-  {
-    titulo:    'Automação para resumir reuniões',
-    descricao: 'Fluxo completo com Claude que transcreve, resume e cria action items de qualquer reunião.',
-    palavra:   'REUNIAO',
-    imagem:    '',
-    link:      '#'
-  },
 
 ];
 /* ═══════════════════════════════════════════════════════ */
@@ -573,21 +646,29 @@ function renderCards(lista) {
         '</div>';
     }
 
+    const linkAttr = m.link && m.link !== '#'
+      ? 'onclick="abrirModal(\'' + m.link.replace(/'/g, "\\'") + '\', \'' + m.palavra.replace(/'/g, "\\'") + '\')"'
+      : 'onclick="return false" style="opacity:.5;cursor:default"';
+
+    card.setAttribute('onclick', m.link && m.link !== '#'
+      ? 'abrirModal(\'' + m.link.replace(/'/g, "\\'") + '\', \'' + m.palavra.replace(/'/g, "\\'") + '\')'
+      : '');
+
     card.innerHTML =
       '<div class="card-img-wrap">' +
         imgHTML +
         '<span class="card-keyword">' + escapar(m.palavra) + '</span>' +
         '<div class="card-overlay">' +
-          '<a class="overlay-btn" href="' + escapar(m.link) + '" target="_blank" rel="noopener">RESGATAR MATERIAL</a>' +
+          '<span class="overlay-btn">ABRIR MATERIAL</span>' +
         '</div>' +
       '</div>' +
       '<div class="card-body">' +
         '<h3 class="card-title">' + escapar(m.titulo) + '</h3>' +
         '<p class="card-desc">' + escapar(m.descricao) + '</p>' +
-        '<a class="card-link" href="' + escapar(m.link) + '" target="_blank" rel="noopener">' +
-          'RESGATAR MATERIAL' +
+        '<span class="card-link">' +
+          'VER PASSO A PASSO' +
           '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>' +
-        '</a>' +
+        '</span>' +
       '</div>';
 
     grid.appendChild(card);
@@ -624,6 +705,30 @@ document.getElementById('search').addEventListener('keydown', function(e) {
 /* ── LIMPA BUSCA SE APAGAR TUDO ── */
 document.getElementById('search').addEventListener('input', function() {
   if (this.value.trim() === '') renderCards(MATERIAIS);
+});
+
+/* ── MODAL ── */
+function abrirModal(url, palavra) {
+  const modal   = document.getElementById('matModal');
+  const iframe  = document.getElementById('modalIframe');
+  const title   = document.getElementById('modalTitle');
+  iframe.src    = url;
+  title.textContent = palavra || 'MATERIAL';
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function fecharModal() {
+  const modal  = document.getElementById('matModal');
+  const iframe = document.getElementById('modalIframe');
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+  // limpar src depois da animação para parar o carregamento
+  setTimeout(function() { iframe.src = ''; }, 300);
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') fecharModal();
 });
 
 /* ── INIT ── */
