@@ -104,9 +104,10 @@
       setTimeout(() => { window.open(WPP_LINK, '_blank'); closeModal(); }, 2400);
     }
 
-    /* ── HERO CANVAS PARTICLES ── */
+    /* ── HERO CANVAS PARTICLES (disabled — replaced by hero video animation) ── */
     (function() {
       const canvas = document.getElementById('hero-canvas');
+      if (!canvas) return;
       const ctx    = canvas.getContext('2d');
       let   W, H, particles = [];
       let   mouse = { x: null, y: null };
