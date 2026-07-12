@@ -1,0 +1,22 @@
+# ── Pastas de estratégia e conteúdo (privadas, nunca commitar) ──
+01_Estrategia/
+02_Marca/
+03_Curso/
+06_Operacao/
+10_Conteudo/
+Elementos Visuais/
+redes-sociais/
+estrategia/
+curso/
+
+# ── Arquivos de contexto do projeto ──
+00_CONTEXTO.md
+*.plugin
+
+# ── SQL / scripts locais ──
+grupo/setup.sql
+
+# ── Sistema ──
+.DS_Store
+.claude/
+*.log
