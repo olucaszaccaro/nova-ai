@@ -15,56 +15,31 @@ const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
    COURSE DATA
 ═══════════════════════════════════════════════════════════ */
 const lessons = [
-  { day:1, pillar:'Entender', title:'Entender IA de verdade', duration:'~15 min', youtubeId:null,
-    description:'Descubra como a IA realmente funciona por dentro. Tokens, contexto, modelos, janela de atenção — e por que a forma como a maioria das pessoas usa IA desperdiça 90% do potencial. Sair dessa aula com um modelo mental correto muda tudo que vem depois.',
-    exercise:'Abra o Claude e faça o mesmo pedido duas vezes: uma com uma frase curta e sem contexto, e outra com contexto rico (quem você é, o que precisa, qual o formato esperado). Compare os resultados e guarde o prompt que funcionou melhor.',
-    resources:[{label:'Framework CRISP',url:'#',ready:false},{label:'Glossário de IA para não-técnicos',url:'#',ready:false},{label:'Comparativo de modelos',url:'#',ready:false}],
-    materials:[
-      {title:'Framework CRISP (PDF)',type:'PDF · Guia prático',url:'#',ready:false},
-      {title:'Glossário de IA para não-técnicos',type:'PDF · Referência rápida',url:'#',ready:false},
-      {title:'Comparativo de modelos 2025',type:'PDF · Tabela comparativa',url:'#',ready:false},
-      {title:'Prompt de diagnóstico de contexto',type:'Prompt · Copie e use',url:'#',ready:false}
-    ]},
-  { day:2, pillar:'Criar', title:'Criar qualquer coisa', duration:'~15 min', youtubeId:null,
-    description:'IA não é só um chat para conversar. É um estúdio criativo completo: textos, músicas, imagens, ferramentas digitais simples. Nessa aula você vai criar algo que antes parecia impossível sem anos de estudo — em menos de 10 minutos.',
-    exercise:'Escolha UMA coisa para criar agora: uma música no Suno, uma imagem no Ideogram, ou uma ferramenta simples no Claude. Poste o resultado na comunidade do WhatsApp.',
-    resources:[{label:'Prompts de criação por tipo',url:'#',ready:false},{label:'Lista de ferramentas criativas',url:'#',ready:false},{label:'Tutorial: Suno para iniciantes',url:'#',ready:false}],
-    materials:[
-      {title:'50 prompts de criação por categoria',type:'PDF · Biblioteca de prompts',url:'#',ready:false},
-      {title:'Lista de ferramentas criativas com IA',type:'PDF · 30+ ferramentas comentadas',url:'#',ready:false},
-      {title:'Tutorial: Suno para iniciantes',type:'PDF · Passo a passo',url:'#',ready:false},
-      {title:'Prompt: crie um post viral em 3 formatos',type:'Prompt · Copie e use',url:'#',ready:false}
-    ]},
-  { day:3, pillar:'Resolver', title:'Resolver problemas', duration:'~15 min', youtubeId:null,
-    description:'O poder real da IA está em resolver problemas que você tem agora — do trabalho, da vida pessoal, do dia a dia. Nessa aula você aprende a usar a IA como um colaborador que pensa com você, não só como um gerador de texto.',
-    exercise:'Pegue um problema real que você está enfrentando hoje. Descreva o problema para o Claude em detalhes e peça uma solução. Adapte a resposta para o seu contexto específico.',
-    resources:[{label:'Biblioteca de prompts por situação',url:'#',ready:false},{label:'Templates de tomada de decisão',url:'#',ready:false},{label:'Roteiro: como descrever problemas',url:'#',ready:false}],
-    materials:[
-      {title:'Biblioteca de prompts por situação (60+)',type:'PDF · Referência prática',url:'#',ready:false},
-      {title:'Templates de tomada de decisão com IA',type:'PDF · 5 modelos prontos',url:'#',ready:false},
-      {title:'Roteiro: como descrever problemas para a IA',type:'PDF · Método passo a passo',url:'#',ready:false},
-      {title:'Prompt: analise meu problema e me dê 3 soluções',type:'Prompt · Copie e use',url:'#',ready:false}
-    ]},
-  { day:4, pillar:'Automatizar', title:'Automatizar sua rotina', duration:'~15 min', youtubeId:null,
-    description:'Toda semana você faz dezenas de tarefas repetitivas. E se metade delas acontecessem sozinhas? Nessa aula você vai identificar suas maiores oportunidades de automação e montar o rascunho do seu AI Playbook pessoal.',
-    exercise:'Liste 5 tarefas que você repete toda semana. Escolha a que consome mais tempo e crie um fluxo com a IA para automatizá-la. Documente em 3 linhas como funciona.',
-    resources:[{label:'Template: AI Playbook pessoal',url:'#',ready:false},{label:'Checklist de automação com Claude',url:'#',ready:false},{label:'Exemplos por perfil',url:'#',ready:false}],
-    materials:[
-      {title:'Template: AI Playbook pessoal',type:'PDF · Template editável',url:'#',ready:false},
-      {title:'Checklist de automação com Claude',type:'PDF · 20 tarefas prontas',url:'#',ready:false},
-      {title:'Exemplos de automação por perfil profissional',type:'PDF · 10 perfis + exemplos',url:'#',ready:false},
-      {title:'Prompt: mapeie minha rotina e sugira automações',type:'Prompt · Copie e use',url:'#',ready:false}
-    ]},
-  { day:5, pillar:'Sistema', title:'Seu sistema de IA', duration:'~15 min', youtubeId:null,
-    description:'O último dia é sobre integração. Tudo que você aprendeu vira um sistema coerente. Você sai com seu mapa pessoal de IA e um plano claro para o que vem depois.',
-    exercise:'Monte o mapa completo do seu sistema de IA: quais ferramentas você vai usar, para quê, e quais são os 3 próximos hábitos que você vai adotar. Compartilhe na comunidade.',
-    resources:[{label:'Template: mapa do sistema de IA',url:'#',ready:false},{label:'Guia: o que vem depois do Start.AI',url:'#',ready:false},{label:'Rise.ai — o próximo nível',url:'#',ready:false}],
-    materials:[
-      {title:'Template: mapa do sistema de IA pessoal',type:'PDF · Template editável',url:'#',ready:false},
-      {title:'Guia: o que vem depois do Start.AI',type:'PDF · Próximos passos',url:'#',ready:false},
-      {title:'Rise.ai — conheça a formação completa',type:'Link · Próximo nível',url:'https://rise.ai',ready:true},
-      {title:'Prompt: monte meu sistema de IA em 10 minutos',type:'Prompt · Copie e use',url:'#',ready:false}
-    ]}
+  { day:1, pillar:'Entender', title:'Entender IA de verdade', duration:'Live + prática', youtubeId:null,
+    description:'Entenda por que contexto, critérios e iteração mudam a resposta do Claude. O objetivo não é decorar termos técnicos: é aprender a perceber quando um pedido está incompleto e saber como melhorá-lo.',
+    exercise:'Escolha uma tarefa real. Faça primeiro um pedido curto ao Claude; depois acrescente contexto, resultado esperado e critérios. Compare as duas respostas e registre o que mudou.',
+    resources:[{label:'Diagnóstico dos 5%',url:'/materiais/diagnostico',ready:true}],
+    materials:[{title:'Diagnóstico dos 5%',type:'Ferramenta interativa · Descubra seu próximo passo',url:'/materiais/diagnostico',ready:true}]},
+  { day:2, pillar:'Criar', title:'Criar algo real', duration:'Live + prática', youtubeId:null,
+    description:'Use Claude para transformar uma ideia em uma primeira versão utilizável. Você vai aprender a dividir o projeto, construir por etapas e revisar a entrega com critérios claros.',
+    exercise:'Escolha uma entrega pequena que você realmente possa usar ou compartilhar. Construa a primeira versão com Claude e publique o resultado na comunidade.',
+    resources:[{label:'Roteiro de primeiro projeto',url:'#',ready:false}],
+    materials:[{title:'Roteiro de primeiro projeto',type:'Template prático · Em construção com a comunidade',url:'#',ready:false}]},
+  { day:3, pillar:'Resolver', title:'Resolver um problema', duration:'Live + prática', youtubeId:null,
+    description:'Use Claude como parceiro de raciocínio para organizar um problema, explicitar critérios e comparar caminhos — mantendo a decisão final com você.',
+    exercise:'Aplique o canvas a um problema real: descreva contexto, objetivo, opções, critérios e o menor teste possível. Compartilhe seu próximo passo.',
+    resources:[{label:'Canvas de resolução',url:'#',ready:false}],
+    materials:[{title:'Canvas de resolução',type:'Template prático · Em construção com a comunidade',url:'#',ready:false}]},
+  { day:4, pillar:'Automatizar', title:'Automatizar uma rotina', duration:'Live + prática', youtubeId:null,
+    description:'Identifique uma rotina repetitiva, transforme-a em etapas e defina onde Claude ajuda, onde uma ferramenta executa e onde a revisão humana continua necessária.',
+    exercise:'Mapeie uma rotina que você repete. Descreva entrada, etapas, saída, exceções e ponto de revisão humana antes de pensar em ferramentas.',
+    resources:[{label:'Mapa de automação',url:'#',ready:false}],
+    materials:[{title:'Mapa de automação',type:'Template prático · Em construção com a comunidade',url:'#',ready:false}]},
+  { day:5, pillar:'Construir', title:'Construir meu sistema', duration:'Live + prática', youtubeId:null,
+    description:'Organize o que funcionou em um sistema pessoal: prompts, critérios, rotinas e aprendizados. O resultado é um AI Playbook simples que evolui com o uso.',
+    exercise:'Monte seu AI Playbook inicial e escolha três hábitos para os próximos 30 dias. Compartilhe uma regra que você quer manter.',
+    resources:[{label:'AI Playbook pessoal',url:'#',ready:false}],
+    materials:[{title:'AI Playbook pessoal',type:'Template prático · Em construção com a comunidade',url:'#',ready:false}]}
 ];
 
 /* ═══════════════════════════════════════════════════════════
@@ -850,8 +825,8 @@ function showCompletionScreen() {
 }
 
 document.getElementById('btnBackFromCompletion').addEventListener('click', goHome);
-document.getElementById('btnRise').addEventListener('click', () => {
-  window.open('https://rise.ai', '_blank', 'noopener');
+document.getElementById('btnCommunity').addEventListener('click', () => {
+  window.open('https://chat.whatsapp.com/F5000nSwSezL2sIER5dEtN', '_blank', 'noopener');
 });
 document.getElementById('btnShareProgress').addEventListener('click', () => {
   document.getElementById('shareCardName').textContent = state.user?.name || 'Aluno';

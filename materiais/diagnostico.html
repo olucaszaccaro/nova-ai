@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Descubra como você usa IA hoje e qual é o próximo passo para começar a criar com Claude.">
+  <meta name="theme-color" content="#080d06">
+  <title>Diagnóstico dos 5% — Start.AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #080d06;
+      --panel: #0f190c;
+      --panel-2: #14220f;
+      --white: #f0fae0;
+      --muted: rgba(240, 250, 224, .62);
+      --green: #96d034;
+      --lime: #c5f06a;
+      --coral: #d97757;
+      --border: rgba(149, 208, 52, .2);
+      --soft: rgba(149, 208, 52, .09);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      background:
+        radial-gradient(circle at 12% 5%, rgba(149, 208, 52, .13), transparent 30rem),
+        radial-gradient(circle at 90% 70%, rgba(217, 119, 87, .08), transparent 25rem),
+        var(--ink);
+      color: var(--white);
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, a { font: inherit; }
+    button { color: inherit; }
+    .shell { width: min(760px, calc(100% - 32px)); margin: 0 auto; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8, 13, 6, .88);
+      backdrop-filter: blur(14px);
+    }
+    .nav-inner {
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .back, .brand { color: var(--muted); text-decoration: none; font-size: .82rem; font-weight: 700; }
+    .back:hover, .brand:hover { color: var(--lime); }
+    .brand { color: var(--white); font-family: "Raleway", sans-serif; }
+    .brand span { color: var(--lime); }
+
+    main { padding: 54px 0 72px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--lime);
+      border: 1px solid var(--border);
+      background: var(--soft);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-family: "VT323", monospace;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 14px var(--green); }
+    h1, h2, h3 { font-family: "Raleway", sans-serif; }
+    h1 {
+      margin: 20px 0 16px;
+      max-width: 690px;
+      font-size: clamp(2.2rem, 8vw, 4.7rem);
+      line-height: .96;
+      letter-spacing: -.05em;
+      text-transform: uppercase;
+    }
+    h1 span { color: var(--lime); }
+    .lead { max-width: 650px; margin: 0; color: var(--muted); font-size: clamp(1rem, 2.5vw, 1.14rem); line-height: 1.7; }
+    .note { margin-top: 18px; font-size: .78rem; color: rgba(240, 250, 224, .42); line-height: 1.55; }
+
+    .start-card, .quiz-card, .result-card {
+      margin-top: 34px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(150deg, rgba(20, 34, 15, .96), rgba(10, 18, 8, .97));
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .28);
+      overflow: hidden;
+    }
+    .start-card { padding: 26px; }
+    .start-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 22px 0 26px; }
+    .start-item { border: 1px solid rgba(240, 250, 224, .08); background: rgba(255, 255, 255, .025); border-radius: 12px; padding: 16px; }
+    .start-item strong { display: block; color: var(--lime); font-size: 1.1rem; }
+    .start-item span { display: block; margin-top: 4px; color: var(--muted); font-size: .8rem; line-height: 1.4; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--green);
+      color: var(--ink);
+      font-family: "Raleway", sans-serif;
+      font-weight: 900;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .btn:hover { background: var(--lime); transform: translateY(-1px); }
+    .btn:focus-visible, .option:focus-within { outline: 3px solid rgba(197, 240, 106, .45); outline-offset: 3px; }
+    .btn-secondary { color: var(--white); background: transparent; border: 1px solid var(--border); }
+    .btn-secondary:hover { color: var(--lime); background: var(--soft); }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .quiz-card, .result-card { display: none; }
+    .quiz-card.active, .result-card.active { display: block; animation: reveal .3s ease both; }
+    @keyframes reveal { from { opacity: 0; transform: translateY(8px); } }
+
+    .progress-wrap { padding: 20px 24px 0; }
+    .progress-meta { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 10px; color: var(--muted); font-size: .78rem; }
+    .progress { height: 7px; background: rgba(255, 255, 255, .06); border-radius: 99px; overflow: hidden; }
+    .progress > span { display: block; height: 100%; width: 10%; background: linear-gradient(90deg, var(--green), var(--lime)); border-radius: inherit; transition: width .3s ease; }
+    .question { padding: 28px 24px 24px; }
+    .pillar { color: var(--coral); font-family: "VT323", monospace; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; }
+    .question h2 { margin: 10px 0 8px; font-size: clamp(1.35rem, 4vw, 2rem); line-height: 1.18; }
+    .question-help { margin: 0 0 22px; color: var(--muted); font-size: .88rem; line-height: 1.55; }
+    .options { display: grid; gap: 9px; }
+    .option { position: relative; display: block; }
+    .option input { position: absolute; opacity: 0; pointer-events: none; }
+    .option span {
+      display: flex;
+      align-items: center;
+      min-height: 52px;
+      padding: 13px 16px;
+      border: 1px solid rgba(240, 250, 224, .1);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .025);
+      color: rgba(240, 250, 224, .78);
+      cursor: pointer;
+      transition: border-color .15s ease, background .15s ease, color .15s ease;
+    }
+    .option span::before { content: ""; width: 15px; height: 15px; margin-right: 12px; border: 1px solid rgba(240, 250, 224, .3); border-radius: 50%; flex: 0 0 auto; }
+    .option input:checked + span { border-color: var(--green); color: var(--white); background: var(--soft); }
+    .option input:checked + span::before { border: 4px solid var(--panel-2); background: var(--lime); box-shadow: 0 0 0 1px var(--lime); }
+    .quiz-actions { display: flex; justify-content: space-between; gap: 12px; padding: 0 24px 24px; }
+    .quiz-actions .btn { min-width: 120px; }
+    .error { min-height: 20px; padding: 0 24px 8px; color: #ffad94; font-size: .78rem; }
+
+    .result-head { padding: 30px 26px 25px; border-bottom: 1px solid var(--border); }
+    .result-kicker { color: var(--muted); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; }
+    .result-level { margin: 8px 0 4px; color: var(--lime); font-size: clamp(2rem, 8vw, 4rem); line-height: 1; text-transform: uppercase; }
+    .result-summary { margin: 12px 0 0; max-width: 620px; color: var(--muted); line-height: 1.65; }
+    .result-body { padding: 26px; }
+    .score-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+    .score-main { font-family: "VT323", monospace; color: var(--white); font-size: 1.25rem; }
+    .score-main strong { color: var(--lime); font-size: 1.9rem; }
+    .score-caption { color: var(--muted); font-size: .76rem; text-align: right; }
+    .pillars { display: grid; gap: 12px; margin: 24px 0; }
+    .pillar-row { display: grid; grid-template-columns: 112px 1fr 34px; gap: 12px; align-items: center; font-size: .82rem; }
+    .pillar-bar { height: 8px; border-radius: 99px; background: rgba(255, 255, 255, .06); overflow: hidden; }
+    .pillar-bar span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--coral), var(--lime)); }
+    .next-box { margin-top: 26px; padding: 20px; border: 1px solid rgba(217, 119, 87, .28); background: rgba(217, 119, 87, .07); border-radius: 12px; }
+    .next-box h3 { margin: 0 0 8px; font-size: 1rem; }
+    .next-box p { margin: 0; color: var(--muted); line-height: 1.6; font-size: .88rem; }
+    .next-box ol { margin: 14px 0 0; padding-left: 20px; color: rgba(240, 250, 224, .84); font-size: .87rem; line-height: 1.65; }
+
+    .prompt-box { margin-top: 24px; }
+    .prompt-box h3 { margin: 0 0 10px; font-size: 1rem; }
+    .prompt-box pre { margin: 0; padding: 18px; border: 1px solid var(--border); border-radius: 12px; background: #071005; color: var(--lime); white-space: pre-wrap; font-family: "VT323", monospace; font-size: 1rem; line-height: 1.55; }
+    .prompt-actions { margin-top: 10px; }
+    .result-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+    .community { margin-top: 24px; padding: 22px; border-radius: 14px; background: var(--green); color: var(--ink); }
+    .community h3 { margin: 0 0 7px; font-size: 1.1rem; }
+    .community p { margin: 0 0 16px; line-height: 1.55; font-size: .88rem; }
+    .community .btn { background: var(--ink); color: var(--white); }
+    .community .btn:hover { color: var(--lime); }
+    footer { padding: 28px 0; color: rgba(240, 250, 224, .35); font-size: .75rem; text-align: center; }
+
+    @media (max-width: 620px) {
+      main { padding-top: 38px; }
+      .start-grid { grid-template-columns: 1fr; }
+      .start-card, .question, .result-body, .result-head { padding-left: 18px; padding-right: 18px; }
+      .progress-wrap, .quiz-actions, .error { padding-left: 18px; padding-right: 18px; }
+      .pillar-row { grid-template-columns: 94px 1fr 30px; gap: 8px; }
+      .btn { width: 100%; }
+      .quiz-actions .btn { width: auto; flex: 1; min-width: 0; }
+      .score-row { align-items: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="shell nav-inner">
+      <a class="back" href="/materiais">← Materiais</a>
+      <a class="brand" href="/startai">Start<span>.AI</span></a>
+    </div>
+  </nav>
+
+  <main class="shell">
+    <section id="intro">
+      <span class="eyebrow">Diagnóstico dos 5%</span>
+      <h1>Você usa IA.<br><span>Mas o que já constrói com ela?</span></h1>
+      <p class="lead">Em dez perguntas, você vai enxergar onde já avançou, qual etapa ainda limita seu uso e o próximo exercício que vale fazer com Claude.</p>
+      <p class="note">“5%” é uma provocação de posicionamento, não uma medição científica do potencial da IA. O diagnóstico é uma ferramenta de reflexão prática.</p>
+
+      <div class="start-card">
+        <div class="start-grid">
+          <div class="start-item"><strong>10</strong><span>perguntas rápidas</span></div>
+          <div class="start-item"><strong>5</strong><span>dimensões do Start.AI</span></div>
+          <div class="start-item"><strong>1</strong><span>próximo passo personalizado</span></div>
+        </div>
+        <button class="btn" id="startBtn" type="button">Começar o diagnóstico →</button>
+      </div>
+    </section>
+
+    <section class="quiz-card" id="quiz" aria-live="polite">
+      <div class="progress-wrap">
+        <div class="progress-meta"><span id="progressLabel">Pergunta 1 de 10</span><span id="progressPercent">10%</span></div>
+        <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+      </div>
+      <form id="quizForm">
+        <div class="question" id="questionArea"></div>
+        <div class="error" id="error" role="alert"></div>
+        <div class="quiz-actions">
+          <button class="btn btn-secondary" id="prevBtn" type="button">Voltar</button>
+          <button class="btn" id="nextBtn" type="button">Continuar</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="result-card" id="result" aria-live="polite">
+      <div class="result-head">
+        <div class="result-kicker">Seu momento atual</div>
+        <h2 class="result-level" id="resultLevel"></h2>
+        <p class="result-summary" id="resultSummary"></p>
+      </div>
+      <div class="result-body">
+        <div class="score-row">
+          <div class="score-main"><strong id="scoreValue"></strong> / 30</div>
+          <div class="score-caption">Este número é um mapa de hábitos,<br>não uma nota sobre você.</div>
+        </div>
+        <div class="pillars" id="pillarScores"></div>
+
+        <div class="next-box">
+          <h3 id="nextTitle"></h3>
+          <p id="nextText"></p>
+          <ol id="nextActions"></ol>
+        </div>
+
+        <div class="prompt-box">
+          <h3>Prompt para seu próximo passo</h3>
+          <pre id="promptText"></pre>
+          <div class="prompt-actions"><button class="btn btn-secondary" id="copyBtn" type="button">Copiar prompt</button></div>
+        </div>
+
+        <div class="community">
+          <h3>Quer transformar o diagnóstico em prática?</h3>
+          <p>Entre na comunidade gratuita do Start.AI para receber as próximas lives, materiais e participar da construção do curso.</p>
+          <a class="btn" href="https://chat.whatsapp.com/F5000nSwSezL2sIER5dEtN" target="_blank" rel="noopener">Entrar na comunidade →</a>
+        </div>
+
+        <div class="result-actions">
+          <button class="btn btn-secondary" id="shareBtn" type="button">Compartilhar resultado</button>
+          <button class="btn btn-secondary" id="restartBtn" type="button">Refazer diagnóstico</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell">Start.AI · Claude na prática, do jeito certo.</footer>
+
+  <script>
+    const questions = [
+      { pillar: 'Entender', text: 'Quando uma resposta do Claude vem fraca, você consegue identificar o que faltou no pedido?', help: 'Pense em contexto, objetivo, critérios e exemplos.' },
+      { pillar: 'Entender', text: 'Você costuma revisar suposições e informações importantes antes de usar uma resposta?', help: 'IA pode errar, omitir ou inventar detalhes.' },
+      { pillar: 'Criar', text: 'Você já usou Claude para produzir algo que realmente foi usado ou compartilhado?', help: 'Por exemplo: documento, página, proposta, análise, roteiro ou ferramenta.' },
+      { pillar: 'Criar', text: 'Você consegue dividir uma ideia em etapas e construir uma primeira versão com IA?', help: 'Vale uma versão pequena; não precisa estar perfeita.' },
+      { pillar: 'Resolver', text: 'Você usa Claude para organizar problemas, comparar opções e explicitar critérios?', help: 'A decisão continua sendo sua.' },
+      { pillar: 'Resolver', text: 'Você transforma a resposta em um próximo passo ou teste concreto?', help: 'Uma boa conversa precisa terminar em ação verificável.' },
+      { pillar: 'Automatizar', text: 'Você já mapeou alguma tarefa repetitiva em entrada, etapas, saída e exceções?', help: 'Mapear vem antes de escolher ferramentas.' },
+      { pillar: 'Automatizar', text: 'Você tem pelo menos um fluxo repetível com IA e um ponto claro de revisão humana?', help: 'Pode ser manual, sem integrações complexas.' },
+      { pillar: 'Construir', text: 'Você guarda e melhora prompts, critérios e processos que funcionaram?', help: 'A ideia é acumular aprendizado, não colecionar prompts aleatórios.' },
+      { pillar: 'Construir', text: 'Você tem hábitos definidos para usar IA de forma consistente nas próximas semanas?', help: 'Por exemplo: revisar uma rotina, testar um projeto ou registrar aprendizados.' }
+    ];
+
+    const options = [
+      { value: 0, label: 'Ainda não' },
+      { value: 1, label: 'Às vezes, sem um processo claro' },
+      { value: 2, label: 'Frequentemente' },
+      { value: 3, label: 'Sim, já faz parte do meu jeito de trabalhar' }
+    ];
+
+    const pillarGuides = {
+      Entender: {
+        text: 'Seu maior ganho agora vem de melhorar pedidos e revisar respostas com método.',
+        actions: ['Escolha uma tarefa real que costuma gerar respostas genéricas.', 'Refaça o pedido com resultado, contexto e critérios.', 'Compare as versões e anote o que mudou.'],
+        prompt: 'Quero melhorar a forma como peço ajuda ao Claude. Minha tarefa real é: [descreva]. Antes de responder, identifique quais informações estão faltando e faça até 5 perguntas. Depois crie uma versão melhor do meu pedido, explicando por que cada parte importa.'
+      },
+      Criar: {
+        text: 'Você não precisa de mais ideias; precisa fechar uma primeira versão pequena e utilizável.',
+        actions: ['Escolha uma entrega que possa usar nesta semana.', 'Defina público, formato e critérios mínimos.', 'Construa uma primeira versão e peça uma revisão crítica.'],
+        prompt: 'Quero transformar esta ideia em uma primeira versão utilizável: [ideia]. Ajude-me a definir o menor escopo que ainda gera valor. Faça até 5 perguntas e depois proponha etapas, critérios de pronto e uma primeira versão para eu revisar.'
+      },
+      Resolver: {
+        text: 'Use Claude para deixar o problema mais claro antes de buscar uma resposta rápida.',
+        actions: ['Descreva a situação sem pedir uma solução imediata.', 'Liste objetivo, restrições e critérios de decisão.', 'Escolha um teste pequeno antes de assumir um caminho.'],
+        prompt: 'Ajude-me a organizar este problema sem decidir por mim: [problema]. Separe fatos, suposições, restrições e perguntas abertas. Depois proponha opções com critérios, riscos e o menor teste possível para reduzir a incerteza.'
+      },
+      Automatizar: {
+        text: 'Comece pelo fluxo e pelos riscos; a ferramenta vem depois.',
+        actions: ['Escolha uma rotina repetitiva e de baixo risco.', 'Mapeie entrada, etapas, saída, exceções e revisão humana.', 'Teste manualmente o fluxo uma vez antes de automatizar.'],
+        prompt: 'Quero mapear esta rotina repetitiva: [rotina]. Ajude-me a documentar entrada, etapas, decisões, saída, exceções e revisão humana. Só depois sugira o que Claude pode apoiar e o que não deve ser automatizado.'
+      },
+      Construir: {
+        text: 'Transforme experiências isoladas em um sistema que melhora com o uso.',
+        actions: ['Reúna três usos de IA que já funcionaram.', 'Registre prompt, critérios, revisão e aprendizado.', 'Escolha três hábitos simples para os próximos 30 dias.'],
+        prompt: 'Ajude-me a criar um AI Playbook pessoal. Meus usos atuais de IA são: [liste]. Faça perguntas sobre objetivos, critérios, riscos e frequência. Depois organize um playbook enxuto com prompts-base, checklist de revisão e três hábitos para 30 dias.'
+      }
+    };
+
+    const profiles = [
+      { max: 7, level: 'Conversador', summary: 'Você já abriu a porta, mas ainda usa IA principalmente para perguntar e receber. Seu avanço não depende de mais ferramentas: depende de transformar uma conversa em uma tarefa real, com contexto, critérios e revisão.' },
+      { max: 15, level: 'Explorador', summary: 'Você já experimenta usos diferentes e começa a perceber o que funciona. O próximo salto é abandonar testes soltos e repetir um processo até ele gerar uma entrega útil.' },
+      { max: 23, level: 'Criador', summary: 'Você já transforma IA em entregas e decisões melhores. Seu próximo ganho está em tornar os bons usos repetíveis, mais seguros e fáceis de melhorar.' },
+      { max: 30, level: 'Construtor', summary: 'Você já trabalha com IA como parte de um sistema. Agora vale documentar, medir e aperfeiçoar seus processos sem perder revisão humana e senso crítico.' }
+    ];
+
+    let current = 0;
+    let answers = Array(questions.length).fill(null);
+
+    const intro = document.getElementById('intro');
+    const quiz = document.getElementById('quiz');
+    const result = document.getElementById('result');
+    const questionArea = document.getElementById('questionArea');
+    const error = document.getElementById('error');
+
+    function startQuiz() {
+      intro.style.display = 'none';
+      result.classList.remove('active');
+      quiz.classList.add('active');
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderQuestion() {
+      const q = questions[current];
+      const percent = Math.round(((current + 1) / questions.length) * 100);
+      document.getElementById('progressLabel').textContent = `Pergunta ${current + 1} de ${questions.length}`;
+      document.getElementById('progressPercent').textContent = `${percent}%`;
+      document.getElementById('progressBar').style.width = `${percent}%`;
+      document.getElementById('prevBtn').disabled = current === 0;
+      document.getElementById('prevBtn').style.opacity = current === 0 ? '.35' : '1';
+      document.getElementById('nextBtn').textContent = current === questions.length - 1 ? 'Ver meu resultado →' : 'Continuar';
+      error.textContent = '';
+
+      questionArea.innerHTML = `
+        <div class="pillar">${q.pillar}</div>
+        <h2 id="questionTitle">${q.text}</h2>
+        <p class="question-help">${q.help}</p>
+        <fieldset class="options" aria-labelledby="questionTitle" style="border:0;padding:0;margin:0">
+          ${options.map((o) => `
+            <label class="option">
+              <input type="radio" name="answer" value="${o.value}" ${answers[current] === o.value ? 'checked' : ''}>
+              <span>${o.label}</span>
+            </label>`).join('')}
+        </fieldset>`;
+    }
+
+    function readAnswer() {
+      const selected = questionArea.querySelector('input[name="answer"]:checked');
+      if (!selected) {
+        error.textContent = 'Escolha a opção que mais se aproxima do seu momento atual.';
+        return false;
+      }
+      answers[current] = Number(selected.value);
+      localStorage.setItem('startai_diagnostico_answers', JSON.stringify(answers));
+      return true;
+    }
+
+    function showResult() {
+      const total = answers.reduce((sum, value) => sum + value, 0);
+      const profile = profiles.find((p) => total <= p.max);
+      const scores = {};
+      questions.forEach((q, index) => { scores[q.pillar] = (scores[q.pillar] || 0) + answers[index]; });
+      const weakest = Object.entries(scores).sort((a, b) => a[1] - b[1])[0][0];
+      const guide = pillarGuides[weakest];
+
+      document.getElementById('resultLevel').textContent = profile.level;
+      document.getElementById('resultSummary').textContent = profile.summary;
+      document.getElementById('scoreValue').textContent = total;
+      document.getElementById('pillarScores').innerHTML = Object.entries(scores).map(([pillar, score]) => `
+        <div class="pillar-row">
+          <span>${pillar}</span>
+          <div class="pillar-bar"><span style="width:${Math.round((score / 6) * 100)}%"></span></div>
+          <strong>${score}/6</strong>
+        </div>`).join('');
+      document.getElementById('nextTitle').textContent = `Seu próximo foco: ${weakest}`;
+      document.getElementById('nextText').textContent = guide.text;
+      document.getElementById('nextActions').innerHTML = guide.actions.map((item) => `<li>${item}</li>`).join('');
+      document.getElementById('promptText').textContent = guide.prompt;
+      result.dataset.share = `Meu resultado no Diagnóstico dos 5% do Start.AI: ${profile.level}. Próximo foco: ${weakest}.`;
+
+      quiz.classList.remove('active');
+      result.classList.add('active');
+      localStorage.setItem('startai_diagnostico_result', JSON.stringify({ total, profile: profile.level, weakest }));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.getElementById('startBtn').addEventListener('click', startQuiz);
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (!readAnswer()) return;
+      if (current < questions.length - 1) { current += 1; renderQuestion(); }
+      else showResult();
+    });
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (current > 0) { current -= 1; renderQuestion(); }
+    });
+    document.getElementById('copyBtn').addEventListener('click', async (event) => {
+      await navigator.clipboard.writeText(document.getElementById('promptText').textContent);
+      const button = event.currentTarget;
+      button.textContent = 'Prompt copiado ✓';
+      setTimeout(() => { button.textContent = 'Copiar prompt'; }, 1800);
+    });
+    document.getElementById('shareBtn').addEventListener('click', async () => {
+      const text = `${result.dataset.share} Faça o seu: https://www.revolucao.school/materiais/diagnostico`;
+      if (navigator.share) await navigator.share({ title: 'Diagnóstico dos 5% — Start.AI', text });
+      else {
+        await navigator.clipboard.writeText(text);
+        document.getElementById('shareBtn').textContent = 'Resultado copiado ✓';
+      }
+    });
+    document.getElementById('restartBtn').addEventListener('click', () => {
+      current = 0;
+      answers = Array(questions.length).fill(null);
+      localStorage.removeItem('startai_diagnostico_answers');
+      startQuiz();
+    });
+
+    try {
+      const saved = JSON.parse(localStorage.getItem('startai_diagnostico_answers') || 'null');
+      if (Array.isArray(saved) && saved.length === questions.length) answers = saved;
+    } catch (_) {}
+  </script>
+</body>
+</html>

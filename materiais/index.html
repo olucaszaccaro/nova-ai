@@ -596,10 +596,20 @@
 ═══════════════════════════════════════════════════════ */
 const MATERIAIS = [
 
+  // ── DIAGNÓSTICO DOS 5% ─────────────────────────────
+  {
+    titulo:    'Diagnóstico dos 5%',
+    descricao: 'Descubra como você usa IA hoje, onde está seu principal bloqueio e qual exercício fazer com Claude agora.',
+    palavra:   '5PORCENTO',
+    visual:    '5%',
+    imagem:    '',
+    link:      '/materiais/diagnostico'
+  },
+
   // ── PROMPT ──────────────────────────────────────────
   {
-    titulo:    'A estrutura de prompt que funciona em qualquer tarefa',
-    descricao: 'A fórmula de 3 partes (Papel + Tarefa + Contexto) que transforma a qualidade das respostas do Claude.',
+    titulo:    'O prompt que faz o Claude entender antes de responder',
+    descricao: 'Um roteiro para definir resultado, contexto e critérios — e fazer o Claude perguntar antes de assumir.',
     palavra:   'PROMPT',
     imagem:    '/materiais/imagens/lucas-headshot.png',
     link:      '/materiais/prompt'
@@ -642,7 +652,7 @@ function renderCards(lista) {
           '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#96D034" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
             '<path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.845v6.309a1 1 0 0 1-1.447.894L15 14M3 8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/>' +
           '</svg>' +
-          '<span>REEL_THUMBNAIL</span>' +
+          '<span>' + escapar(m.visual || m.palavra || 'START.AI') + '</span>' +
         '</div>';
     }
 

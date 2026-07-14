@@ -372,59 +372,59 @@
 ═══════════════════════════════════════════════════════════ */
 const MATERIAL = {
   palavra:        'PROMPT',
-  titulo:         'A estrutura de prompt que',
-  titulo_accent:  'funciona em qualquer tarefa',
-  subtitulo:      'A fórmula de 3 partes que transforma a qualidade das respostas do Claude.',
-  intro:          'A maioria das pessoas usa IA como um buscador — faz perguntas curtas e recebe respostas mediocres. A diferença entre um prompt fraco e um forte é simples: <strong>contexto, papel e objetivo claros</strong>. Esse material te ensina a estrutura que uso em tudo.',
+  titulo:         'O prompt que faz o Claude',
+  titulo_accent:  'entender antes de responder',
+  subtitulo:      'Um roteiro simples para sair da pergunta solta e construir uma resposta que cabe no seu contexto.',
+  intro:          'Não existe fórmula mágica que garanta uma resposta perfeita. Existe um processo melhor: <strong>deixar claro o resultado, oferecer o contexto que muda a decisão, definir critérios e revisar a primeira versão</strong>. Use este roteiro para tarefas importantes — e verifique informações sensíveis antes de agir.',
 
   hero_link:  '',
   hero_label: 'ACESSAR O MATERIAL →',
 
   passos: [
     {
-      titulo:  'ENTENDA: O CLAUDE NÃO É UM BUSCADOR',
-      desc:    'O Claude não devolve resultados — ele <strong>colabora</strong>. Quanto mais contexto você der, melhor a resposta. Não é sobre digitar a palavra certa, é sobre construir a conversa certa.<br><br>Exemplo fraco: "Me explica marketing"<br>Exemplo forte: "Você é professor de marketing digital. Explica em 3 parágrafos, pra alguém que nunca trabalhou na área, o que é CAC e por que importa."',
+      titulo:  'COMECE PELO RESULTADO, NÃO PELO PAPEL',
+      desc:    'Antes de pedir que o Claude “seja um especialista”, diga <strong>o que você precisa conseguir ao final</strong>.<br><br>Pedido solto: “Me explica marketing.”<br>Pedido útil: “Quero entender CAC para decidir se minha campanha está sustentável. Explique para alguém sem experiência financeira e use um exemplo numérico simples.”',
       imagem:  '',
       codigo:  '',
-      info:    'A qualidade da resposta é proporcional à qualidade do prompt. Sempre.'
+      info:    'Um papel pode ajudar, mas objetivo, contexto e critérios costumam mudar mais a resposta.'
     },
     {
-      titulo:  'USE A FÓRMULA: PAPEL + TAREFA + CONTEXTO',
-      desc:    'Todo prompt bom tem 3 partes:<br><br><strong>Papel:</strong> quem você quer que o Claude seja<br><strong>Tarefa:</strong> o que você precisa que ele faça<br><strong>Contexto:</strong> as informações relevantes para fazer bem<br><br>Você não precisa das três em toda mensagem. Mas quando a resposta for importante, use as três.',
+      titulo:  'DÊ O CONTEXTO QUE MUDA A DECISÃO',
+      desc:    'Contexto não é contar sua vida inteira. Inclua apenas o que faria uma pessoa competente responder de outro jeito: <strong>quem vai usar, situação atual, tentativas anteriores, restrições e exemplos relevantes</strong>.',
       imagem:  '',
-      codigo:  'Você é [papel].\nPreciso que você [tarefa].\nContexto: [informação relevante]',
+      codigo:  'Quero alcançar [resultado].\nMeu contexto: [informações que mudam a resposta].\nJá tentei: [o que aconteceu].',
       info:    ''
     },
     {
-      titulo:  'SEJA ESPECÍFICO NO OUTPUT',
-      desc:    'Diga o formato que você quer receber. O Claude pode responder em tópicos, em parágrafos, em tabela, em e-mail, em código. Se você não pedir, ele vai escolher — e raramente é o que você precisava.',
+      titulo:  'DEFINA CRITÉRIOS E FORMATO',
+      desc:    'Explique como reconhecer uma boa entrega. Você pode indicar tom, nível de detalhe, público, limites, formato e itens obrigatórios. Isso dá ao Claude um alvo mais claro para revisar a própria resposta.',
       imagem:  '',
-      codigo:  '... Responda em [formato].\nMáximo [X] palavras/linhas.',
-      info:    'Exemplos de formato: lista com 5 tópicos, e-mail formal, tabela comparativa, passo a passo numerado, resposta em um parágrafo.'
+      codigo:  'Um bom resultado precisa:\n- [critério 1]\n- [critério 2]\n- [critério 3]\nEntregue em [formato].',
+      info:    'Exemplos: linguagem simples, riscos explícitos, tabela comparativa, próximos passos ou no máximo uma página.'
     },
     {
-      titulo:  'ITERE: NÃO REESCREVA, CORRIJA',
-      desc:    'O Claude mantém o contexto da conversa inteira. Se a resposta não foi boa, <strong>não comece do zero</strong>. Diga o que estava errado e ajuste:<br><br>"Muito longo. Reduz pela metade."<br>"Usa linguagem mais simples, como se fosse pra um adolescente."<br>"Adiciona um exemplo prático no final."<br><br>Cada ajuste te aproxima do resultado que precisa.',
+      titulo:  'PEÇA PERGUNTAS ANTES DA RESPOSTA',
+      desc:    'Quando faltam informações, uma resposta imediata costuma vir cheia de suposições. Convide o Claude a <strong>parar, perguntar e só depois produzir</strong>. Isso é especialmente útil em planejamento, diagnóstico e decisões.',
       imagem:  '',
-      codigo:  '',
-      info:    ''
+      codigo:  'Antes de responder, faça até 5 perguntas que realmente mudariam sua recomendação. Não assuma informações que eu não forneci.',
+      info:    'Se a tarefa for simples, pule esta etapa. Use perguntas quando o custo de errar for maior.'
     },
     {
       titulo:  'TESTE AGORA COM ESTE MODELO',
-      desc:    'Copia esse modelo, substitui os colchetes e testa no Claude ainda hoje. É o ponto de partida para qualquer tarefa.',
+      desc:    'Copie, substitua os colchetes e use em uma tarefa real. Depois avalie a primeira versão, aponte o que precisa mudar e peça uma nova rodada.',
       imagem:  '',
-      codigo:  'Você é um especialista em [sua área].\nPreciso de um [tipo de texto] sobre [tema].\nContexto: [3 informações relevantes].\nFormato: [como quer receber].\nMáximo [X] palavras.',
-      info:    'Guarda esse modelo. Você vai usar ele mais do que imagina.'
+      codigo:  'Quero sua ajuda para [resultado].\n\nMeu contexto: [informações que mudam a resposta].\nRestrições: [limites, prazo, recursos ou regras].\n\nUm bom resultado precisa:\n- [critério 1]\n- [critério 2]\n- [critério 3]\n\nAntes de responder, faça até 5 perguntas importantes. Depois proponha uma primeira versão em [formato] e indique o que eu deveria verificar antes de usar.',
+      info:    'Claude pode errar ou inventar detalhes. Confira dados, fontes e decisões importantes.'
     }
   ],
 
   resumo_label: 'O PASSO A PASSO, RESUMIDO:',
   resumo: [
-    'Claude colabora, não busca — <strong>contexto é tudo</strong>',
-    'Fórmula base: <strong>Papel + Tarefa + Contexto</strong>',
-    'Especifique sempre o formato e o tamanho do output',
-    'Itere na mesma conversa — não recomece do zero',
-    'Use o modelo do Passo 5 como ponto de partida'
+    'Comece pelo <strong>resultado que precisa alcançar</strong>',
+    'Inclua apenas o <strong>contexto que muda a resposta</strong>',
+    'Defina critérios claros para reconhecer uma boa entrega',
+    'Peça perguntas quando houver lacunas importantes',
+    'Revise, verifique e itere na mesma conversa'
   ],
 
   share_label: 'COMPARTILHAR COM ALGUÉM →',
